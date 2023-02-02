@@ -947,7 +947,7 @@
                                 <div class="item">
                                     <div class="fcrse_1 mb-20">
                                         <div class="tutor_img">
-                                            <a href="instructor_profile_view.html"><img src="images/left-imgs/img-8.jpg" alt="" /></a>
+                                            <a href="instructor_profile_view.html"><img src="{{ asset("assets/images/left-imgs/img-8.jpg") }}" alt="" /></a>
                                         </div>
                                         <div class="tutor_content_dt">
                                             <div class="tutor150">
@@ -981,7 +981,7 @@
                                 <div class="item">
                                     <div class="fcrse_1 mb-20">
                                         <div class="tutor_img">
-                                            <a href="instructor_profile_view.html"><img src="images/left-imgs/img-6.jpg" alt="" /></a>
+                                            <a href="instructor_profile_view.html"><img src="{{ asset("assets/images/left-imgs/img-6.jpg") }}" alt="" /></a>
                                         </div>
                                         <div class="tutor_content_dt">
                                             <div class="tutor150">
@@ -1020,7 +1020,7 @@
                     <div class="right_side">
                         <div class="fcrse_2 mb-30">
                             <div class="tutor_img">
-                                <a href="my_instructor_profile_view.html"><img src="images/left-imgs/img-10.jpg" alt="" /></a>
+                                <a href="my_instructor_profile_view.html"><img src="{{ asset("assets/images/left-imgs/img-10.jpg") }}" alt="" /></a>
                             </div>
                             <div class="tutor_content_dt">
                                 <div class="tutor150">
@@ -1119,7 +1119,7 @@
                                         </div>
                                         <div class="st_group">
                                             <div class="stud_img">
-                                                <img src="images/left-imgs/img-4.jpg" alt="" />
+                                                <img src="{{ asset("assets/images/left-imgs/img-4.jpg") }}" alt="" />
                                             </div>
                                             <h4>Jassica William</h4>
                                         </div>
@@ -1132,7 +1132,7 @@
                                         </div>
                                         <div class="st_group">
                                             <div class="stud_img">
-                                                <img src="images/left-imgs/img-1.jpg" alt="" />
+                                                <img src="{{ asset("assets/images/left-imgs/img-1.jpg") }}" alt="" />
                                             </div>
                                             <h4>Rock Smith</h4>
                                         </div>
@@ -1145,7 +1145,7 @@
                                         </div>
                                         <div class="st_group">
                                             <div class="stud_img">
-                                                <img src="images/left-imgs/img-7.jpg" alt="" />
+                                                <img src="{{ asset("assets/images/left-imgs/img-7.jpg") }}" alt="" />
                                             </div>
                                             <h4>Luoci Marchant</h4>
                                         </div>
@@ -1158,7 +1158,7 @@
                                         </div>
                                         <div class="st_group">
                                             <div class="stud_img">
-                                                <img src="images/left-imgs/img-6.jpg" alt="" />
+                                                <img src="{{ asset("assets/images/left-imgs/img-6.jpg") }}" alt="" />
                                             </div>
                                             <h4>Poonam Sharma</h4>
                                         </div>
@@ -1171,7 +1171,7 @@
                                         </div>
                                         <div class="st_group">
                                             <div class="stud_img">
-                                                <img src="images/left-imgs/img-3.jpg" alt="" />
+                                                <img src="{{ asset("assets/images/left-imgs/img-3.jpg") }}" alt="" />
                                             </div>
                                             <h4>Davinder Singh</h4>
                                         </div>

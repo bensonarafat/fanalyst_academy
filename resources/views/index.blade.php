@@ -12,8 +12,8 @@
 {{--
     Main Page
 --}}
-@auth
+@guest
     @include("main")
-@endauth
+@endguest
 
 @endsection
