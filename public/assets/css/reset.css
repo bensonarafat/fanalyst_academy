@@ -1,0 +1,11 @@
+.header_right .nav__other{
+    padding-left: 15px;
+}
+.header_right .nav__other a{
+    text-decoration:none;
+    color: #686f7a;
+}
+
+.header_right .nav__last{
+    margin-right:20px;
+}

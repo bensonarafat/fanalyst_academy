@@ -19,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [PagesController::class, "index"])->name("home");
+Route::get("/about", [PagesController::class, "about"])->name("about");
+Route::get("/contact", [PagesController::class, "contact"])->name("contact");
+Route::get("/students", [PagesController::class, "students"])->name("students");
+Route::get("/lectures",[PagesController::class, "lectures"])->name("lectures");
