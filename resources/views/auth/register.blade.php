@@ -59,7 +59,7 @@
                             </div>
                             <div class="ui search focus mt-15">
                                 <div class="ui left icon input swdh11 swdh19">
-                                    <input class="prompt srch_explore" type="password" name="confirm_password" value="" id="id_password" required="" maxlength="64" placeholder="Confirm Password" />
+                                    <input class="prompt srch_explore" type="password" name="password_confirmation" value="" id="id_password" required="" maxlength="64" placeholder="Confirm Password" />
                                 </div>
                             </div>
                             <button class="login-btn" type="submit">Register</button>

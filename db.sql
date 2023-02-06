@@ -1,8 +1,8 @@
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `type` varchar(255) NOT NULL,
-  `roleid` int(11) DEFAULT NULL,
+  `type` varchar(255) NOT NULL DEFAULT 'student',
+  `roleid` int(11) DEFAULT NULL DEFAULT 3,
   `fullname` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL UNIQUE,
   `mobile` varchar(255) DEFAULT NULL,
