@@ -42,9 +42,10 @@
             @endauth
 
             <div class="main_logo" id="logo">
-                <a href="/"><img src="{{ asset("assets/images/logo.svg") }}" alt="" /></a>
-                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/ct_logo.svg") }}" alt="" /></a>
+                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" /></a>
+                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/ct_logo.png") }}" alt="" /></a>
             </div>
+            @auth
             <div class="top-category">
                 <div class="ui compact menu cate-dpdwn">
                     <div class="ui simple dropdown item">
@@ -67,10 +68,11 @@
                     </div>
                 </div>
             </div>
+            @endauth
             <div class="search120">
                 <div class="ui search">
                     <div class="ui left icon input swdh10">
-                        <input class="prompt srch10" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more.." />
+                        <input class="prompt srch10" type="text" placeholder="Search for Videos, Tutors, and lectures.." />
                         <i class="uil uil-search-alt icon icon1"></i>
                     </div>
                 </div>

@@ -38,7 +38,7 @@
                                 <li>
                                     <a href="index.html">
                                         <div class="footer_logo">
-                                            <img src="{{ asset("assets/images/logo1.svg") }}" alt="" />
+                                            <img src="{{ asset("assets/images/logo1.png") }}" alt="" />
                                         </div>
                                     </a>
                                 </li>

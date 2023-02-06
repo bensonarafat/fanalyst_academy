@@ -1,45 +1,20 @@
 <div class="wrapper _bg4586 _new89">
 
-    <div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" style="height:350px;object-fit:cover;" src="{{ asset("assets/images/about/team.jpg") }}" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" style="height:350px;object-fit:cover;" src="{{ asset("assets/images/about/team.jpg") }}" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" style="height:350px;object-fit:cover;" src="{{ asset("assets/images/about/team.jpg") }}" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                </div>
-              </div>
+    <section class="rc-HeroBannerRedesign css-rpf906">
+        <div class="css-1vhr7ec">
+            <div class="css-je23cs">
+                <h1 class="cds-33 css-i3qo6r cds-35">Learn without limits</h1>
+                <p class="cds-33 css-16ln3yv cds-35">Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.</p>
+
+                <button data-track="true" data-track-app="front_page" data-track-page="front_page_story" data-track-action="click" data-track-component="banner_cta" data-e2e="enroll-button" class="cds-30 cds-1 cds-3 css-1lpvapa cds-12 cds-button-disableElevation" tabindex="0" role="button" aria-disabled="false" data-elementtiming="frontpage.banner.cta" type="button"><span class="cds-2 cds-button-label">Join for Free</span></button>
+                <a href="" class="cds-30 cds-1 cds-3 enterprise-cta-double-blue css-1mjixri cds-12 cds-button-disableElevation"><span class="cds-2 cds-button-label">Explore over 100+ courses</span></a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-    </div>
+            <div class="css-1xtmpjy">
+                <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/5CFC8u8XiXcbSOlVv6JZQx/4e6f898f57f9d798437b3aa22026e30b/CourseraLearners_C_Composition_Hillary_copy__3_.png?auto=format%2Ccompress&amp;dpr=1&amp;w=459&amp;h=497&amp;q=40" class="css-12519x1" style="max-width:459px;max-height:497px;margin-left:auto;margin-right:auto;width:100%" alt="">
+            </div>
+        </div>
+    </section>
+
     <div class="_215td5">
         <div class="container">
             <div class="row">
