@@ -37,10 +37,12 @@
                     <div class="sign_form">
                         <h2>Welcome Back</h2>
                         <p>Log In to Your {{ config("app.name") }} Account!</p>
-                        <form>
+                        @include('components.alert')
+                        <form action="{{ route('login') }}" method="POST">
+                            @csrf
                             <div class="ui search focus mt-15">
                                 <div class="ui left icon input swdh95">
-                                    <input class="prompt srch_explore" type="email" name="emailaddress" value="" id="id_email" required="" maxlength="64" placeholder="Email Address" />
+                                    <input class="prompt srch_explore" type="email" name="email" value="" id="id_email" required="" maxlength="64" placeholder="Email Address" />
                                     <i class="uil uil-envelope icon icon2"></i>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-9 col-lg-8">
-                    <div class="section3125 mt-50">
+                    <div class="section3125 mt-30">
                         <h4 class="item_title">Featured Courses</h4>
                         <a href="#" class="see150">See all</a>
                         <div class="la5lo1">
@@ -95,28 +95,6 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="fcrse_content">
-                                            <div class="eps_dots more_dropdown">
-                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
-                                                <div class="dropdown-content">
-                                                    <span><i class="uil uil-share-alt"></i>Share</span>
-                                                    <span><i class="uil uil-heart"></i>Save</span>
-                                                    <span><i class="uil uil-ban"></i>Not Interested</span>
-                                                    <span><i class="uil uil-windsock"></i>Report</span>
-                                                </div>
-                                            </div>
-                                            <div class="vdtodt">
-                                                <span class="vdt14">1M views</span>
-                                                <span class="vdt14">18 days ago</span>
-                                            </div>
-                                            <a href="course_detail_view.html" class="crse14s">Beginning C++ Programming - From Beginner to Beyond</a>
-                                            <a href="#" class="crse-cate">Development | C++</a>
-                                            <div class="auth1lnkprce">
-                                                <p class="cr1fot">By <a href="#">Joginder Singh</a></p>
-                                                <div class="prce142">$13</div>
-                                                <button class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="item">
@@ -929,73 +907,31 @@
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="right_side">
+                        @if(auth()->user()->instructor_status != 'approved')
                         <div class="strttech120">
                             <h4>Become an Instructor</h4>
-                            <p>Top instructors from around the world teach millions of students on Cursus. We provide the tools and skills to teach what you love.</p>
-                            <button class="Get_btn" onclick="window.location.href = '#';">Start Teaching</button>
+                            <p>Top instructors from around the world teach millions of students on {{ config('app.name') }}. We provide the tools and skills to teach what you love.</p>
+                            @if(auth()->user()->instructor_status == 'pending')
+                                <button class="Get_btn"> Pending</button>
+                            @endif
+                            @if(auth()->user()->instructor_status == 'unapplied')
+                                <button class="Get_btn" onclick="window.location.href = '/users/instructor-application';">Start Teaching</button>
+                            @endif
+                            @if(auth()->user()->instructor_status == 'declined')
+                                <button class="Get_btn" onclick="window.location.href = '/users/instructor-application';">Declined</button>
+                            @endif
                         </div>
-                        <div class="fcrse_2 mb-30">
-                            <div class="tutor_img">
-                                <a href="my_instructor_profile_view.html"><img src="{{ asset("assets/images/left-imgs/img-10.jpg") }}" alt="" /></a>
-                            </div>
-                            <div class="tutor_content_dt">
-                                <div class="tutor150">
-                                    <a href="my_instructor_profile_view.html" class="tutor_name">Joginder Singh</a>
-                                    <div class="mef78" title="Verify">
-                                        <i class="uil uil-check-circle"></i>
-                                    </div>
-                                </div>
-                                <div class="tutor_cate">Web Developer, Designer, and Teacher</div>
-                                <ul class="tutor_social_links">
-                                    <li>
-                                        <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="tw"><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="ln"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="yu"><i class="fab fa-youtube"></i></a>
-                                    </li>
-                                </ul>
-                                <div class="tut1250">
-                                    <span class="vdt15">615K Students</span>
-                                    <span class="vdt15">12 Courses</span>
-                                </div>
-                                <a href="my_instructor_profile_view.html" class="prfle12link">Go To Profile</a>
-                            </div>
-                        </div>
+                        @endif
                         <div class="fcrse_3">
                             <div class="cater_ttle">
                                 <h4>Top Categories</h4>
                             </div>
                             <ul class="allcate15">
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-arrow"></i>Development</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-graph-bar"></i>Business</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-monitor"></i>IT and Software</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-ruler"></i>Design</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-chart-line"></i>Marketing</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-book-open"></i>Personal Development</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-camera"></i>Photography</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="ct_item"><i class="uil uil-music"></i>Music</a>
-                                </li>
+                                @foreach (appCategories(8) as $row)
+                                    <li>
+                                        <a href="/category/cat/{{ $row->id }}" class="ct_item">{{ $row->name }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

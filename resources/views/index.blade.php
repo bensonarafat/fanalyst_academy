@@ -6,7 +6,11 @@
     Dashboard Index
 --}}
 @auth
-    @include("dashboard.index")
+    @if(auth()->user()->type == "admin" || auth()->user()->type == "instructor")
+        @include("dashboard.instructor")
+    @else
+        @include("dashboard.student")
+    @endif
 @endauth
 
 {{--

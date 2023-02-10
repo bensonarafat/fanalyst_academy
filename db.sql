@@ -8,14 +8,39 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mobile` varchar(255) DEFAULT NULL,
   `gender` varchar(50) DEFAULT NULL,
   `photo` text DEFAULT NULL,
+  `town` varchar(255) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
+  `about_me` text NULL DEFAULT NULL,
+  `job_title` varchar(255) NULL DEFAULT NULL,
+  `skills` text NULL DEFAULT NULL,
+  `school_name` varchar(255) NULL DEFAULT NULL,
+  `degree` varchar(255) NULL DEFAULT NULL,
+  `employment_title` varchar(255) NULL DEFAULT NULL,
+  `employment_company` varchar(255) NULL DEFAULT NULL,
+  `account_name` varchar(255) NULL DEFAULT NULL,
+  `account_number` varchar(255) NULL DEFAULT NULL,
+  `bank_name` varchar(255) NULL DEFAULT NULL,
+  `cv` varchar(255) NULL DEFAULT NULL,
+  `certificate` varchar(255) NULL DEFAULT NULL,
+  `instructor_status` enum('unapplied', 'pending', 'approved', 'declined') NOT NULL DEFAULT 'unapplied',
+  `twitter_url` varchar(255) NULL DEFAULT NULL,
+  `facebook_url` varchar(255) NULL DEFAULT NULL,
+  `linkedin_url` varchar(255) NULL DEFAULT NULL,
+  `youtube_url` varchar(255) NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+INSERT INTO `users` (`id`, `type`, `roleid`, `fullname`, `email`, `mobile`, `gender`, `photo`, `address`, `email_verified_at`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 1, 'Admin', 'admin@gmail.com', NULL, NULL, NULL, NULL, NULL, '$2y$10$E05vG7R7UqUTeCKFm594Yebn1NcoIKwJrv5NejHC0KupnTt6kAk7.', NULL, 1, '2023-02-08 12:09:17', '2023-02-08 12:09:17');
+
 
 CREATE TABLE IF NOT EXISTS `courses` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
