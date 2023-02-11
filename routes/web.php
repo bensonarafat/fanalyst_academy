@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::group(['prefix' => 'courses'], function(){
         Route::get('/', [PagesController::class, 'courses'])->name('courses');
         Route::get('/create', [PagesController::class, 'createCourse'])->name('create.course');
+        Route::post('/store', [CourseController::class, 'storeCourse'])->name('store.course');
     });
 
     Route::group(['prefix' => 'notifications'], function(){

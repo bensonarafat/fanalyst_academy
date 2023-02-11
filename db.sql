@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS `curriculum_lecture` (
     `media_video` varchar(255) NOT NULL,
     `media_type` varchar(255) NOT NULL,
     `media_thumbnail` varchar(255) NULL DEFAULT NULL,
-    `video_runtime` time NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
