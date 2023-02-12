@@ -37,50 +37,18 @@
                                 </div>
                                 <div class="_215b05">
                                     <div class="crse_reviews mr-2"><i class="uil uil-star"></i>4.5</div>
-                                    (81,665 ratings)
+                                    ({{ $course->ratings }} ratings)
                                 </div>
                                 <div class="_215b05">
-                                    114,521 students enrolled
+                                    {{ $course->enrolled }} students enrolled
                                 </div>
-                                <div class="_215b06">
-                                    <div class="_215b07">
-                                        <span><i class="uil uil-comment"></i></span>
-                                        English
-                                    </div>
-                                    <div class="_215b08">
-                                        <span><i class="uil uil-closed-captioning"></i></span>
-                                        <span>
-                                            English, Dutch
-                                            <span class="caption_tooltip">
-                                                12 more
-                                                <span class="caption-content">
-                                                    <span>French</span>
-                                                    <span>Hindi</span>
-                                                    <span>German [Auto-generated]</span>
-                                                    <span>Indonesian [Auto-generated]</span>
-                                                    <span>Italian [Auto-generated]</span>
-                                                    <span>Japanese [Auto-generated]</span>
-                                                    <span>Korean</span>
-                                                    <span>Polish</span>
-                                                    <span>Portuguese [Auto-generated]</span>
-                                                    <span>Spanish [Auto-generated]</span>
-                                                    <span>Traditional Chinese</span>
-                                                    <span>Turkish [Auto-generated]</span>
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
+
                                 <div class="_215b05">
-                                    Last updated 1/2020
+                                    Last updated {{ \Carbon\Carbon::parse($course->updated_at)->format('d-m-y') }}
                                 </div>
                                 <ul class="_215b31">
                                     <li><button class="btn_adcart">Add to Cart</button></li>
-                                    <li><button class="btn_buy">Buy Now</button></li>
                                 </ul>
-                                <div class="_215fgt1">
-                                    30-Day Money-Back Guarantee
-                                </div>
                             </div>
                         </div>
                     </div>

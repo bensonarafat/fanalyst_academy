@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
     `media_thumbnail` varchar(255) NULL DEFAULT NULL,
     `likes` int(11) NOT NULL DEFAULT 0,
     `enrolled` int(11) NOT NULL DEFAULT 0,
+    `ratings` int(11) NOT NULL DEFAULT 0,
     `status` varchar(255) NOT NULL DEFAULT 'pending',
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
