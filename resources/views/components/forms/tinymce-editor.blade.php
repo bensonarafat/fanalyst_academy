@@ -1,3 +1,3 @@
 <div>
-    <textarea id="myeditorinstance"></textarea>
+    <textarea id="myeditorinstance" name="description" required></textarea>
 </div>

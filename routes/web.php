@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/', [PagesController::class, 'courses'])->name('courses');
         Route::get('/create', [PagesController::class, 'createCourse'])->name('create.course');
         Route::post('/store', [CourseController::class, 'storeCourse'])->name('store.course');
+        Route::get('/course/{id}', [PagesController::class, 'viewCourse'])->name('view.course');
     });
 
     Route::group(['prefix' => 'notifications'], function(){

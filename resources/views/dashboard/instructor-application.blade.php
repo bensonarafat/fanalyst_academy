@@ -20,7 +20,7 @@
                         @include("components.alert")
 
                         <div class="course_tabs_1">
-                            <div id="add-course-tab" class="step-app">
+                            <div id="add-instructor-tab" class="step-app">
                                 <ul class="step-steps">
                                     <li class="active">
                                         <a href="#tab_step1">

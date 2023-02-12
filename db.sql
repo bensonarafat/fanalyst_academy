@@ -44,12 +44,11 @@ INSERT INTO `users` (`id`, `type`, `roleid`, `fullname`, `email`, `mobile`, `gen
 
 CREATE TABLE IF NOT EXISTS `courses` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `name` varchar(255) NOT NULL,
+    `title` varchar(255) NOT NULL,
     `short_description` text NOT NULL,
     `description` text NOT NULL,
     `instructor` int(11) NOT NULL,
     `category` int(11) NOT NULL,
-    `course_level` int(11) NOT NULL,
     `will_learn` text NOT NULL,
     `prerequisites` text NOT NULL,
     `is_free` tinyint(1) NOT NULL DEFAULT 1,
@@ -62,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
     `media_thumbnail` varchar(255) NULL DEFAULT NULL,
     `likes` int(11) NOT NULL DEFAULT 0,
     `enrolled` int(11) NOT NULL DEFAULT 0,
+    `status` varchar(255) NOT NULL DEFAULT 'pending',
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `name` varchar(255) NOT NULL,
     `parentid` int(11) NULL DEFAULT NULL,
-    `description` varchar(255) NOT NULL,
+    `description` varchar(255) NULL DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

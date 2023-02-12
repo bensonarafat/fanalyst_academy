@@ -1,7 +1,7 @@
 
 @if(Session::has("error"))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Error!</strong> {{ session::get("Error") }}.
+    <strong>Error!</strong> {{ session::get("error") }}.
   </div>
 @endif
 @if(Session::has("success"))

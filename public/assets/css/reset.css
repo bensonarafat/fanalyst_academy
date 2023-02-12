@@ -199,3 +199,6 @@ element.style {
     text-decoration: none;
     width: 100%;
 }
+.x-hidden{
+    display:none;
+}

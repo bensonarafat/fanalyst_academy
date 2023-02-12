@@ -368,9 +368,15 @@
         <script src="{{ asset("assets/js/night-mode.js") }}"></script>
         <script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
         <script>
-            $("#add-course-tab").steps({
+            $("#add-instructor-tab").steps({
                 onFinish: function () {
                     $('#instructor-application').submit();
+                },
+            });
+
+            $("#add-course-tab").steps({
+                onFinish: function () {
+                    $('#course-submittion').submit();
                 },
             });
         </script>

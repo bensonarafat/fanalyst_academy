@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Course;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -61,6 +62,11 @@ class PagesController extends Controller
     public function createCourse(){
         $categories = Category::latest()->get();
         return view('dashboard.courses.create', compact('categories'));
+    }
+
+    public function viewCourse($id){
+        $course = Course::find($id);
+        return view('dashboard.courses.view', compact('course'));
     }
 
     public function notifications(){
