@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Rating;
 use App\Models\Category;
+use App\Models\Curriculum;
+use App\Models\CurriculumLecture;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -56,7 +59,8 @@ class PagesController extends Controller
     }
 
     public function courses(){
-        return view('dashboard.courses.index');
+        $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+        return view('dashboard.courses.index', compact('courses'));
     }
 
     public function createCourse(){
@@ -66,7 +70,36 @@ class PagesController extends Controller
 
     public function viewCourse($id){
         $course = Course::find($id);
-        return view('dashboard.courses.view', compact('course'));
+        $instructor = User::find($course->instructor);
+        $rate = Rating::where('courseid', $course->id)->avg('vote');
+        $ratings = Rating::where('courseid', $course->id)->get();
+        $curriculum = Curriculum::where('courseid', $course->id)->get();
+
+        return view('dashboard.courses.view', compact('course', 'instructor', 'rate', 'ratings', 'curriculum'));
+    }
+
+    public function editCourse($id){
+        $course = Course::find($id);
+        $categories = Category::latest()->get();
+        return view('dashboard.courses.edit', compact('categories', 'course'));
+    }
+
+    public function editCurriculum($id){
+        $curriculum = Curriculum::find($id);
+        return view('dashboard.courses.curriculum.edit', compact('curriculum'));
+    }
+
+    public function addLecture($id){
+        $curriculum = Curriculum::where('id', $id)->first();
+        $lectures = CurriculumLecture::where('curriculumid', $id)->latest()->get();
+        $curriculumid = $id;
+        $courseid = $curriculum->courseid;
+        return view('dashboard.courses.curriculum.lectures.add', compact('lectures', 'curriculumid', 'courseid'));
+    }
+
+    public function editLecture($id){
+        $lecture = CurriculumLecture::find($id);
+        return view('dashboard.courses.curriculum.lectures.edit', compact('lecture'));
     }
 
     public function notifications(){
@@ -109,6 +142,13 @@ class PagesController extends Controller
 
     public function instructorApplication(){
         return view('dashboard.instructor-application');
+    }
+
+    public function stream($courseid, $curriculumid, $lectureid){
+        $course = Course::find($courseid);
+        $instructor = User::find($course->instructor);
+
+        return view('dashboard.courses.stream', compact('course','instructor'));
     }
 }
 

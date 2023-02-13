@@ -1,33 +1,11 @@
-<footer class="footer mt-20">
-    <div class="container">
+<footer class="footer mt-40">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="item_f1">
-                    <a href="about_us.html">About</a>
-                    <a href="our_blog.html">Blog</a>
-                    <a href="career.html">Careers</a>
-                    <a href="press.html">Press</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="item_f1">
-                    <a href="help.html">Help</a>
-                    <a href="coming_soon.html">Advertise</a>
-                    <a href="coming_soon.html">Developers</a>
-                    <a href="contact_us.html">Contact Us</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
+            <div class="col-lg-12">
                 <div class="item_f1">
                     <a href="terms_of_use.html">Copyright Policy</a>
                     <a href="terms_of_use.html">Terms</a>
                     <a href="terms_of_use.html">Privacy Policy</a>
-                    <a href="sitemap.html">Sitemap</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="item_f3">
-                    <a href="#" class="btn1542">Teach on Cursus</a>
                 </div>
             </div>
             <div class="col-lg-12">
@@ -36,14 +14,14 @@
                         <div class="col-md-6">
                             <ul class="fotb_left">
                                 <li>
-                                    <a href="">
+                                    <a href="index.html">
                                         <div class="footer_logo">
-                                            <img src="{{ asset("assets/images/logo1.png") }}" alt="">
+                                            <img src="images/logo1.svg" alt="" />
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <p>© {!! date("Y") !!} <strong>{!! config("app.name") !!}</strong>. All Rights Reserved.</p>
+                                    <p>© 2020 <strong>Cursus</strong>. All Rights Reserved.</p>
                                 </li>
                             </ul>
                         </div>

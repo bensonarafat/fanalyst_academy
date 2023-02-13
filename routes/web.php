@@ -48,6 +48,27 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/create', [PagesController::class, 'createCourse'])->name('create.course');
         Route::post('/store', [CourseController::class, 'storeCourse'])->name('store.course');
         Route::get('/course/{id}', [PagesController::class, 'viewCourse'])->name('view.course');
+        Route::get('/edit-course/{id}', [PagesController::class, 'editCourse'])->name('edit.course');
+        Route::post('/update-course', [CourseController::class, 'updateCourse'])->name('update.course');
+        Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete.course');
+        Route::get('/stream/{courseid}/{curriculumid}/{lectureid}', [PagesController::class, 'stream'])->name('stream');
+
+        Route::group(['prefix' => 'curriculum'], function(){
+            Route::post('/', [CourseController::class, 'newCurriculum'])->name('store.curriculum');
+            Route::post('/', [CourseController::class, 'newCurriculum'])->name('store.curriculum');
+            Route::get('/edit/{id}', [PagesController::class, 'editCurriculum'])->name('edit.curriculum');
+            Route::post('/update', [CourseController::class, 'updateCurriculum'])->name('update.curriculum');
+            Route::get('/delete/{id}/{courseid}', [CourseController::class, 'deleteCurriculum']);
+
+            Route::group(['prefix' => 'lecture'], function(){
+                Route::get('/add/{id}',[PagesController::class, 'addLecture'])->name('add.lectures');
+                Route::post('/store', [CourseController::class, 'storeLecture'])->name('store.lecture');
+                Route::get('/delete/{id}', [CourseController::class, 'deleteLecture'])->name('delete.lecture');
+                Route::get('/edit/{id}', [PagesController::class, 'editLecture'])->name('edit.lecture');
+                Route::post('/update', [CourseController::class, 'updateLecture'])->name('update.lecture');
+            });
+        });
+
     });
 
     Route::group(['prefix' => 'notifications'], function(){

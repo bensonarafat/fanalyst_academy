@@ -137,7 +137,7 @@
                                                         <div class="row">
                                                             <div class="col-lg-5 col-md-12">
                                                                 <label for="">Video (mp4)</label><br/>
-                                                                <input type="file" name="courseVideo" id="courseVideo" class="courseVideo"/>
+                                                                <input type="file" accept="video/mp4,video/x-m4v,video/*" name="courseVideo" id="courseVideo" class="courseVideo"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -170,7 +170,7 @@
                                                         <label class="label25 text-left">Course thumbnail*</label>
                                                         <div class="thumb-item">
                                                             <label for="">Thumbnail (jpg,png)</label> <br/>
-                                                            <input type="file" name="courseThumbnail" id="courseThumbnail" class="courseThumbnail"/>
+                                                            <input type="file" accept="image/*" name="courseThumbnail" id="courseThumbnail" class="courseThumbnail"/>
                                                         </div>
                                                     </div>
                                                 </div>
