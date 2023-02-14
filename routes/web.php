@@ -43,6 +43,11 @@ Route::group(['middleware' => 'auth'], function (){
     });
 
 
+    Route::group(['prefix' => 'cart'], function(){
+        Route::get('/', [PagesController::class, "cart"])->name('cart');
+    });
+
+
     Route::group(['prefix' => 'courses'], function(){
         Route::get('/', [PagesController::class, 'courses'])->name('courses');
         Route::get('/create', [PagesController::class, 'createCourse'])->name('create.course');
@@ -53,6 +58,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete.course');
         Route::get('/stream/{courseid}/{curriculumid}/{lectureid}', [PagesController::class, 'stream'])->name('stream');
 
+        Route::post('/update-course-status', [CourseController::class, 'updateCourseStatus'])->name('update.course.status');
         Route::group(['prefix' => 'curriculum'], function(){
             Route::post('/', [CourseController::class, 'newCurriculum'])->name('store.curriculum');
             Route::post('/', [CourseController::class, 'newCurriculum'])->name('store.curriculum');
@@ -110,7 +116,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::post('/update-category', [CategoryController::class, 'update'])->name('update.category');
         Route::get('/edit-category/{id}', [PagesController::class, 'editCategory'])->name('edit.category');
         Route::get('/delete-category/{id}', [CategoryController::class, 'delete'])->name('delete.category');
-        Route::get('/category/cat/{id}', [PagesController::class, 'viewCategory']);
+        Route::get('/cat/{id}', [PagesController::class, 'viewCategory']);
     });
 
     //settings

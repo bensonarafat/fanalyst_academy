@@ -9,7 +9,25 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="modal-body">
-                <iframe src="https://www.youtube.com/embed/Ohe_JzKksvA" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                @if($course->media_type == 'mp4')
+                <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="{{ asset($course->media_thumbnail) }}" data-setup="{}">
+                    <source src="{{ asset($course->media_video) }}" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+                @elseif($course->media_type == 'youtube')
+                    <iframe src="{{ $course->media_video }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                @elseif($course->media_type == 'url')
+                <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="{{ asset($course->media_thumbnail) }}" data-setup="{}">
+                    <source src="{{ $course->media_video }}" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+                @endif
             </div>
         </div>
     </div>
@@ -33,11 +51,13 @@
                                         </div>
                                     </a>
                                 </div>
+                                {{-- @if(auth()->user()->id != $course->instructor)
                                 <div class="_215b10">
                                     <a href="#" class="_215b11">
                                         <span><i class="uil uil-heart"></i></span>Save
                                     </a>
                                 </div>
+                                @endif --}}
                             </div>
                             <div class="col-xl-8 col-lg-7 col-md-6">
                                 <div class="_215b03">
@@ -121,6 +141,7 @@
                                     @include("components.alert")
                                     <div class="row">
                                         <div class="col-lg-4 col-md-12">
+
                                             <div class="top_countries">
                                                 <div class="top_countries_title">
                                                     <h2>Add new Curriculum</h2>
@@ -143,7 +164,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
                                             </div>
                                         </div>
                                         <div class="col-lg-8 col-md-1">
@@ -210,7 +230,7 @@
                                         <div class="_112456">
                                             <ul class="accordion-expand-holder">
                                                 <li><span class="accordion-expand-all _d1452">Expand all</span></li>
-                                                <li><span class="_fgr123"> 402 lectures</span></li>
+                                                <li><span class="_fgr123"> {{ count($curriculum) }} lectures</span></li>
                                             </ul>
                                         </div>
                                         <div id="accordion" class="ui-accordion ui-widget ui-helper-reset">
@@ -239,7 +259,11 @@
                                                             </div>
                                                         </div>
                                                         <div class="details">
-                                                            <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
+                                                            @if(auth()->user()->id == $course->instructor)
+                                                                <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
+                                                            @else
+                                                                <a href="javascript:void(0)" class="preview-text">--</a>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                    @endforeach
@@ -293,5 +317,9 @@
     </div>
     @include('components.other_footer')
 </div>
-
+<style>
+    #my-video{
+        width: 100% !important;
+    }
+</style>
 @endsection

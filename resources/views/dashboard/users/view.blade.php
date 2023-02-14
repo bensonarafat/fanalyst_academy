@@ -333,7 +333,6 @@
                                                         <div class="auth1lnkprce">
                                                             <p class="cr1fot">By <a href="#">John Doe</a></p>
                                                             <div class="prce142">$10</div>
-                                                            <button class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>

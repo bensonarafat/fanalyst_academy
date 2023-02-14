@@ -29,7 +29,7 @@
         <link href="{{ asset("assets/vendor/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{{ asset("assets/vendor/semantic/semantic.min.css") }}" />
         <link rel="stylesheet" href="{{ asset("assets/css/reset.css") }}">
-
+        <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
         <x-head.tinymce-config/>
     </head>
 
@@ -124,42 +124,10 @@
 
                     @auth
                         <li>
-                            <a href="shopping_cart.html" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">2</span></a>
+                            <a href="{{ route('cart') }}" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">2</span></a>
                         </li>
                         <li class="ui dropdown">
-                            <a href="#" class="option_links" title="Notifications"><i class="uil uil-bell"></i><span class="noti_count">3</span></a>
-                            <div class="menu dropdown_mn">
-                                <a href="#" class="channel_my item">
-                                    <div class="profile_link">
-                                        <img src="{{ asset("assets/images/left-imgs/img-1.jpg") }}" alt="" />
-                                        <div class="pd_content">
-                                            <h6>Rock William</h6>
-                                            <p>Like Your Comment On Video <strong>How to create sidebar menu</strong>.</p>
-                                            <span class="nm_time">2 min ago</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="channel_my item">
-                                    <div class="profile_link">
-                                        <img src="{{ asset("assets/images/left-imgs/img-2.jpg") }}" alt="" />
-                                        <div class="pd_content">
-                                            <h6>Jassica Smith</h6>
-                                            <p>Added New Review In Video <strong>Full Stack PHP Developer</strong>.</p>
-                                            <span class="nm_time">12 min ago</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="channel_my item">
-                                    <div class="profile_link">
-                                        <img src="{{ asset("assets/images/left-imgs/img-9.jpg") }}" alt="" />
-                                        <div class="pd_content">
-                                            <p>Your Membership Approved <strong>Upload Video</strong>.</p>
-                                            <span class="nm_time">20 min ago</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="vbm_btn" href="instructor_notifications.html">View All <i class="uil uil-arrow-right"></i></a>
-                            </div>
+                            <a href="{{ route('notifications') }}" class="option_links" title="Notifications"><i class="uil uil-bell"></i><span class="noti_count">3</span></a>
                         </li>
                         <li class="ui dropdown">
                             <a href="#" class="opts_account" title="Account">
@@ -260,12 +228,12 @@
                                 </ul>
                             </li>
 
-                            <li class="menu--item">
+                            {{-- <li class="menu--item">
                                 <a href="{{ route('saved') }}" class="menu--link" title="Saved Courses">
                                     <i class="uil uil-heart-alt menu--icon"></i>
                                     <span class="menu--label">Saved Courses</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="menu--item">
                                 <a href="{{ route('notifications') }}" class="menu--link" title="Notifications">
@@ -338,11 +306,7 @@
                     <div class="left_footer">
                         <ul>
                             <li><a href="about_us.html">About</a></li>
-                            <li><a href="press.html">Press</a></li>
                             <li><a href="contact_us.html">Contact Us</a></li>
-                            <li><a href="coming_soon.html">Advertise</a></li>
-                            <li><a href="coming_soon.html">Developers</a></li>
-                            <li><a href="terms_of_use.html">Copyright</a></li>
                             <li><a href="terms_of_use.html">Privacy Policy</a></li>
                             <li><a href="terms_of_use.html">Terms</a></li>
                         </ul>
@@ -367,8 +331,9 @@
         <script src="{{ asset('assets/js/custom1.js') }}"></script>
         <script src="{{ asset("assets/js/night-mode.js") }}"></script>
         <script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
+        <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
         <script>
-            $("#add-instructor-tab").steps({
+            $(".add-instructor-tab").steps({
                 onFinish: function () {
                     $('#instructor-application').submit();
                 },

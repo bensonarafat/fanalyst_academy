@@ -22,4 +22,8 @@ function InstructorBadge($status){
 }
 
 
+function naira(){
+    return '&#8358;';
+}
+
 ?>

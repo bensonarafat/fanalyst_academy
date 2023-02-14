@@ -200,6 +200,16 @@ class CourseController extends Controller
         }
     }
 
+    public function updateCourseStatus(Request $request){
+        try {
+            Course::where('id' , $request->id)->update(['status' => $request->status]);
+            return redirect()->back()->with(["success" => "Course Status Updated"]);
+        } catch (Exception $e) {
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+
+        }
+    }
+
     public function newCurriculum(Request $request){
         $request->validate([
             'id' => 'required',

@@ -7,13 +7,34 @@ use App\Models\Course;
 use App\Models\Rating;
 use App\Models\Category;
 use App\Models\Curriculum;
-use App\Models\CurriculumLecture;
 use Illuminate\Http\Request;
+use App\Models\CurriculumLecture;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
     public function index(){
-        return view("index");
+        $totalSales = 0;
+        $totalEnroll = 0;
+        $totalCourse = 0;
+        $totalStudents = 0;
+        $courses = null;
+        $instructors = null;
+        $featured = null;
+        if(Auth::check()){
+            if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
+                $totalSales = 0;
+                $totalEnroll  = 0;
+                $totalCourse  = Course::where('instructor',auth()->user()->id)->count();
+                $totalStudents = User::where('type', 'student')->count();
+                $courses = Course::where(['instructor' => auth()->user()->id, 'status' => 'active'])->latest()->limit(5)->get();
+            }else{
+                $courses = Course::where('status', 'active')->latest()->limit(5)->get();
+                $featured = Course::where('status', 'active')->orderBy('created_at', 'asc')->limit(5)->get();
+                $instructors = User::where('type', 'instructor')->latest()->limit(5)->get();
+            }
+        }
+        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured'));
     }
 
     public function about(){
@@ -44,10 +65,12 @@ class PagesController extends Controller
 
     public function viewCategory($id){
         $category = Category::find($id);
-        return view('dashboard.category.view', compact('category'));
+        $courses = Course::where(['category' => $id, 'status' => 'active'])->latest()->get();
+        return view('dashboard.category.view', compact('category', 'courses'));
     }
     public function explore(){
-        return  view('dashboard.explore.index');
+        $courses = Course::where('status', 'active')->latest()->get();
+        return  view('dashboard.explore.index', compact('courses'));
     }
 
     public function saved(){
@@ -55,11 +78,21 @@ class PagesController extends Controller
     }
 
     public function analysis(){
-        return view('dashboard.analysis.index');
+        $courses = Course::where(['status' => 'active', 'instructor' => auth()->user()->id])->latest()->get();
+        return view('dashboard.analysis.index', compact('courses'));
     }
 
+    public function cart(){
+        return  view('dashboard.cart');
+    }
+
+
     public function courses(){
-        $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+        if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
+            $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+        }else{
+            $courses = Course::where('status', 'active')->latest()->get();
+        }
         return view('dashboard.courses.index', compact('courses'));
     }
 
@@ -147,8 +180,8 @@ class PagesController extends Controller
     public function stream($courseid, $curriculumid, $lectureid){
         $course = Course::find($courseid);
         $instructor = User::find($course->instructor);
-
-        return view('dashboard.courses.stream', compact('course','instructor'));
+        $lecture = CurriculumLecture::find($lectureid);
+        return view('dashboard.courses.stream', compact('course','instructor', 'lecture'));
     }
 }
 

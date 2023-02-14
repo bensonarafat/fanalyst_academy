@@ -117,3 +117,38 @@ CREATE TABLE IF NOT EXISTS `ratings` (
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `transactions` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `courseid`  int(11) NOT NULL,
+    `reference` varchar(255) NOT NULL,
+    `amount` decimal(25,2) NOT NULL DEFAULT 0.00,
+    `discount` decimal(25,2) NOT NULL DEFAULT 0.00,
+    `total` decimal(25,2) NOT NULL DEFAULT 0.00,
+    `status` varchar(255) NOT NULL DEFAULT 'pending',
+    `payment_method` varchar(255) NOT NULL ,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `enrolled` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `courseid`  int(11) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `notifications` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `courseid`  int(11)  NULL DEFAULT NULL,
+    `message` text  NULL DEFAULT NULL,
+    `seen` tinyint(1) NOT NULL DEFAULT 0,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
