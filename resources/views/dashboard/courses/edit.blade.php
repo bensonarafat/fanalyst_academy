@@ -278,7 +278,7 @@
             </div>
         </div>
     </div>
-    @include('components.main_footer')
+    @include('components.footer')
 </div>
 
 <script src="{{ asset("assets/js/jquery-3.3.1.min.js") }}"></script>

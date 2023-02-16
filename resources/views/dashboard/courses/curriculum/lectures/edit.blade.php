@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    @include('components.other_footer')
+    @include('components.footer')
 </div>
 
 @endsection

@@ -15,7 +15,7 @@
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
                                             <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                                <img src="{{ asset($row->media_thumbnail) }}" alt="" />
+                                                <img style="width:100%;height:200px;object-fit:cover;" src="{{ asset($row->media_thumbnail) }}" alt="" />
                                                 <div class="course-overlay">
                                                 </div>
                                             </a>
@@ -26,7 +26,13 @@
                                                 <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
                                                 <div class="auth1lnkprce">
                                                     <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
-                                                    <div class="prce142">{!! naira() . number_format($row->amount, 2) !!}</div>
+                                                    <div class="prce142">
+                                                        @if(!$row->is_free)
+                                                            FREE
+                                                        @else
+                                                            {!! naira() . number_format($row->amount, 2) !!}
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -47,7 +53,7 @@
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
                                             <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                                <img src="{{ asset($row->media_thumbnail) }}" alt="" />
+                                                <img style="width:100%;height:200px;object-fit:cover;" src="{{ asset($row->media_thumbnail) }}" alt="" />
                                                 <div class="course-overlay">
                                                 </div>
                                             </a>
@@ -60,7 +66,13 @@
 
                                                 <div class="auth1lnkprce">
                                                     <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
-                                                    <div class="prce142">{!! naira() . number_format($row->amount, 2) !!}</div>
+                                                    <div class="prce142">
+                                                        @if(!$row->is_free)
+                                                            FREE
+                                                        @else
+                                                            {!! naira() . number_format($row->amount, 2) !!}
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,5 +211,5 @@
             </div>
         </div>
     </div>
-    @include('components.other_footer')
+    @include('components.footer')
 </div>

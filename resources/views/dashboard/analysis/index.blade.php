@@ -20,18 +20,24 @@
                                     <th class="cell-ta" scope="col">Thumbnail</th>
                                     <th class="cell-ta" scope="col">Title</th>
                                     <th class="text-center" scope="col">Purchases</th>
+                                    <th class="text-center" scope="col">Enrolled</th>
                                     <th class="text-center" scope="col">Likes</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($courses as $row)
+                                @php
+                                    $transactionCount = \App\Models\Transaction::where(['courseid' => $row->id, 'status' =>  'success'])->count();
+                                    $enrolledCount = \App\Models\Enrolled::where(['courseid' => $row->id])->count();
+                                @endphp
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="cell-ta">
-                                        <div class="thumb_img"><img src="{{ asset($row->media_thumbnail) }}" alt="{{ $row->title }}" /></div>
+                                        <div class="thumb_img"><img style="width:80px;height:50px;object-fit:cover;" src="{{ asset($row->media_thumbnail) }}" alt="{{ $row->title }}" /></div>
                                     </td>
                                     <td class="cell-ta">{{ $row->title }}</td>
-                                    <td class="text-center">86</td>
+                                    <td class="text-center">{{ $transactionCount }}</td>
+                                    <td class="text-center">{{ $enrolledCount }}</td>
                                     <td class="text-center">{{ $row->likes }}</td>
                                 </tr>
                                 @endforeach
@@ -43,7 +49,7 @@
             </div>
         </div>
     </div>
-    @include('components.other_footer')
+    @include('components.footer')
 </div>
 
 @endsection

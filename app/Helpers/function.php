@@ -26,4 +26,24 @@ function naira(){
     return '&#8358;';
 }
 
+
+function inCart($id){
+    $cart =  session()->get('cart');
+    if($cart == null) return false;
+    if(in_array($id, $cart)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function countInCart(){
+    $cart =  session()->get('cart');
+    if($cart == null) return 0;
+    return count($cart);
+}
+
+function getCart(){
+    return session()->get('cart');
+}
 ?>

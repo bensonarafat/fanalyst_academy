@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,15 @@ Route::get("/about", [PagesController::class, "about"])->name("about");
 Route::get("/contact", [PagesController::class, "contact"])->name("contact");
 Route::get("/students", [PagesController::class, "students"])->name("students");
 Route::get("/lectures",[PagesController::class, "lectures"])->name("lectures");
+Route::get('/copyright', [PagesController::class, 'copyright'])->name('copyright');
+Route::get('/instructor-agreement', [PagesController::class, 'instructorAgreement'])->name('instructor.agreement');
 
 Route::group(['middleware' => 'auth'], function (){
 
+    Route::post('/add-to-cart', [CheckoutController::class, 'addToCart'])->name('add.cart');
+    Route::post('/remove-from-cart', [CheckoutController::class, 'removeFromCart'])->name('remove.cart');
+
+    Route::get('/remove-line-cart/{id}', [CheckoutController::class, 'removeInlineCart'])->name('remove.inline.cart');
 
     Route::group(['prefix' => 'explore'], function(){
         Route::get('/', [PagesController::class, 'explore'])->name('explore');
@@ -75,6 +83,8 @@ Route::group(['middleware' => 'auth'], function (){
             });
         });
 
+        Route::post('/enroll', [CourseController::class, 'enrollFree'])->name('enroll.free');
+        Route::get('/like-course/{id}/{status}', [CourseController::class, 'likeCourse'])->name('like.course');
     });
 
     Route::group(['prefix' => 'notifications'], function(){
@@ -106,6 +116,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/instructor-application', [PagesController::class, 'instructorApplication'])->name('instructor.application');
         Route::post('/instructor-application', [UserController::class, 'instructorApplication'])->name('store.instructor.application');
         Route::get('/view/{id}', [PagesController::class, 'viewUser'])->name('view.user');
+        Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
         Route::post('/update-instructor-status', [UserController::class, 'updateInstructorStatus'])->name('update.instructor.status');
     });
 
@@ -123,4 +134,10 @@ Route::group(['middleware' => 'auth'], function (){
     Route::group(['prefix' => 'settings'], function(){
         Route::get('/', [PagesController::class, 'settings'])->name('settings');
     });
+
+    Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+
+    Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
+
+    Route::get('/purchased/{status}', [PagesController::class, 'purchased'])->name('purchased');
 });

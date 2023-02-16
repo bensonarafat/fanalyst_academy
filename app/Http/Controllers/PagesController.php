@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\Curriculum;
 use Illuminate\Http\Request;
 use App\Models\CurriculumLecture;
+use App\Models\Enrolled;
+use App\Models\Like;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
@@ -23,8 +26,11 @@ class PagesController extends Controller
         $featured = null;
         if(Auth::check()){
             if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
-                $totalSales = 0;
-                $totalEnroll  = 0;
+                $instructorCourses = Course::where('instructor', auth()->user()->id)->get();
+                foreach ($instructorCourses as $row) {
+                    $totalSales += Transaction::where(['courseid' => $row->id, 'status' => 'success'])->count();
+                    $totalEnroll += Enrolled::where(['courseid' => $row->id])->count();
+                }
                 $totalCourse  = Course::where('instructor',auth()->user()->id)->count();
                 $totalStudents = User::where('type', 'student')->count();
                 $courses = Course::where(['instructor' => auth()->user()->id, 'status' => 'active'])->latest()->limit(5)->get();
@@ -53,6 +59,13 @@ class PagesController extends Controller
         return view("lectures");
     }
 
+    public function copyright(){
+        return view('copyright');
+    }
+
+    public function instructorAgreement(){
+        return view('instructor-agreement');
+    }
 
     public function addCategory(){
         return view('dashboard.category.add');
@@ -108,7 +121,15 @@ class PagesController extends Controller
         $ratings = Rating::where('courseid', $course->id)->get();
         $curriculum = Curriculum::where('courseid', $course->id)->get();
 
-        return view('dashboard.courses.view', compact('course', 'instructor', 'rate', 'ratings', 'curriculum'));
+        $enrolled = Enrolled::where([ 'courseid' => $id])->count();
+        $isLike = Like::where(['userid' => auth()->user()->id, 'courseid' =>  $id])->count();
+        if($isLike == 0){
+            $like = 'like';
+        }else{
+            $like = 'unlike';
+        }
+        $students = Enrolled::where([ 'courseid' => $id])->latest()->get();
+        return view('dashboard.courses.view', compact('course', 'instructor', 'rate', 'ratings', 'curriculum', 'enrolled', 'like', 'students'));
     }
 
     public function editCourse($id){
@@ -167,7 +188,12 @@ class PagesController extends Controller
 
     public function viewUser($id){
         $user = User::find($id);
-        return view('dashboard.users.view', compact('user'));
+        if(auth()->user()->type == 'student'){
+            $courses = Enrolled::where('userid', auth()->user()->id)->latest()->get();
+        }else{
+            $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+        }
+        return view('dashboard.users.view', compact('user', 'courses'));
     }
     public function settings(){
         return view('dashboard.settings.index');
@@ -182,6 +208,10 @@ class PagesController extends Controller
         $instructor = User::find($course->instructor);
         $lecture = CurriculumLecture::find($lectureid);
         return view('dashboard.courses.stream', compact('course','instructor', 'lecture'));
+    }
+
+    public function purchased($status){
+        return view('dashboard.purchased', compact('status'));
     }
 }
 

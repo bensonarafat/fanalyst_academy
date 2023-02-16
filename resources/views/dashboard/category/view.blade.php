@@ -28,7 +28,7 @@
                             <div class="col-lg-3 col-md-4">
                                 <div class="fcrse_1 mt-30">
                                     <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                        <img src="{{ asset($row->media_thumbnail) }}" alt="" />
+                                        <img style="width:100%;height:150px;object-fit:cover;" src="{{ asset($row->media_thumbnail) }}" alt="" />
                                         <div class="course-overlay">
 
                                         </div>
@@ -55,6 +55,6 @@
             </div>
         </div>
     </div>
-    @include('components.other_footer')
+    @include('components.footer')
 </div>
 @endsection

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Like;
 use App\Models\Course;
+use App\Models\Enrolled;
 use App\Models\Curriculum;
 use Illuminate\Http\Request;
-use App\Http\Classes\SystemFileManager;
 use App\Models\CurriculumLecture;
+use App\Http\Classes\SystemFileManager;
 
 class CourseController extends Controller
 {
@@ -55,6 +57,7 @@ class CourseController extends Controller
             $amount = 0.00;
             $discount = 0.00;
             $isFree = 0;
+
             if($request->is_free){
                 $amount = $request->amount;
                 $discount = $request->discount;
@@ -378,6 +381,37 @@ class CourseController extends Controller
             CurriculumLecture::where('id',$id)->delete();
             return redirect()->back()->with(['success' => 'Lecture deleted']);
         } catch (Exception $e) {
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+        }
+    }
+
+    public function enrollFree(Request $request){
+        try {
+            Enrolled::create([
+                'userid' => auth()->user()->id,
+                'courseid' => $request->id,
+                'is_free' => 1,
+            ]);
+            //increment course enrolled
+            Course::find($request->id)->increment('enrolled');
+            return redirect()->back()->with(['success' => 'Course Enrolled Successful']);
+        } catch (Exception $e) {
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+        }
+    }
+
+    public function likeCourse($id, $status){
+        try{
+            if($status == 'like'){
+                Like::create(['courseid' => $id, 'userid' => auth()->user()->id]);
+                Course::find($id)->increment('likes');
+            }else{
+                Course::find($id)->decrement('likes');
+                Like::where(['courseid' => $id, 'userid' => auth()->user()->id])->delete();
+            }
+            return redirect()->back()->with(['success' => "You $status course"]);
+        }catch(Exception $e){
+            dd($e);
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }

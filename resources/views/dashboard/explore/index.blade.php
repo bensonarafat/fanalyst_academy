@@ -24,14 +24,13 @@
                             @foreach ($courses as $row)
                             @php
                                 $user = \App\Models\User::find($row->instructor);
-                                $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
+                                // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
                             @endphp
                             <div class="col-lg-3 col-md-4">
                                 <div class="fcrse_1 mt-30">
                                     <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                        <img src="{{ asset($row->media_thumbnail) }}" alt="" />
+                                        <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
                                         <div class="course-overlay">
-                                            <div class="crse_reviews"><i class="uil uil-star"></i>{{ $rate }}</div>
                                             <span class="play_btn1"><i class="uil uil-play"></i></span>
                                         </div>
                                     </a>
@@ -40,10 +39,16 @@
                                             <span class="vdt14">{{ $row->likes }} likes</span>
                                             <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
                                         </div>
-                                        <a href="course_detail_view.html" class="crse14s">{{ $row->title }}</a>
+                                        <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
                                         <div class="auth1lnkprce">
-                                            <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
-                                            <div class="prce142">{!! naira() . number_format($row->amount, 2) !!}</div>
+                                            <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
+                                            <div class="prce142">
+                                                @if(!$row->is_free)
+                                                    FREE
+                                                @else
+                                                    {!! naira() . number_format($row->amount, 2) !!}
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +60,7 @@
             </div>
         </div>
     </div>
-    @include('components.other_footer')
+    @include('components.footer')
 </div>
 
 @endsection

@@ -11,4 +11,13 @@ class Transaction extends Model
 
     protected $table = 'transactions';
 
+    protected $fillable = [
+        'userid',
+        'courseid',
+        'reference',
+        'amount',
+        'discount',
+        'total',
+        'payment_method',
+    ];
 }

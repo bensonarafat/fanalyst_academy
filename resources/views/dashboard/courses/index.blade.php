@@ -34,9 +34,10 @@
                                             <th class="text-center" scope="col">Item No.</th>
                                             <th>Title</th>
                                             <th class="text-center" scope="col">Publish Date</th>
-                                            <th class="text-center" scope="col">Sales</th>
                                             <th class="text-center" scope="col">Category</th>
                                             <th class="text-center" scope="col">Status</th>
+                                            <th class="text-center" scope="col">Purchases</th>
+                                            <th class="text-center" scope="col">Enrolled</th>
                                             @if(auth()->user()->type == 'admin')<th>Approve</th>@endif
                                             <th class="text-center" scope="col">Action</th>
                                         </tr>
@@ -45,14 +46,17 @@
                                         @foreach ($courses as $row)
                                         @php
                                             $category = \App\Models\Category::find($row->category);
+                                            $transactionCount = \App\Models\Transaction::where(['courseid' => $row->id, 'status' =>  'success'])->count();
+                                            $enrolledCount = \App\Models\Enrolled::where(['courseid' => $row->id])->count();
                                         @endphp
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td><a href="{{ route('view.course', $row->id) }}">{{ $row->title }}</a></td>
                                             <td class="text-center">{{ \Carbon\Carbon::parse($row->created_at)->format('d M, Y') }}</td>
-                                            <td class="text-center">15</td>
                                             <td class="text-center"><a href="/category/cat/{{ $category->id }}">{{ $category->name }}</a></td>
                                             <td class="text-center"><b class="course_active">{{ ucfirst($row->status) }}</b></td>
+                                            <td class="text-center"><b class="course_active">{{ $transactionCount }}</b></td>
+                                            <td class="text-center"><b class="course_active">{{ $enrolledCount }}</b></td>
                                             <td>
                                                 <form action="{{ route('update.course.status') }}" method="post">
                                                     @csrf
@@ -80,7 +84,7 @@
                 </div>
             </div>
         </div>
-        @include('components.other_footer')
+        @include('components.footer')
     </div>
 @else
 <div class="wrapper">
@@ -109,7 +113,7 @@
                             <div class="col-lg-3 col-md-4">
                                 <div class="fcrse_1 mt-30">
                                     <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                        <img src="{{ asset($row->media_thumbnail) }}" alt="" />
+                                        <img style="width:100%;height:150px;object-fit:cover;" src="{{ asset($row->media_thumbnail) }}" alt="" />
                                         <div class="course-overlay">
 
                                         </div>
@@ -122,7 +126,13 @@
                                         <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
                                         <div class="auth1lnkprce">
                                             <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
-                                            <div class="prce142">{!! naira() . number_format($row->amount, 2) !!}</div>
+                                            <div class="prce142">
+                                                @if(!$row->is_free)
+                                                    FREE
+                                                @else
+                                                    {!! naira() . number_format($row->amount, 2) !!}
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +146,7 @@
             </div>
         </div>
     </div>
-    @include('components.other_footer')
+    @include('components.footer')
 </div>
 @endif
 @endsection

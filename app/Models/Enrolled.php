@@ -10,4 +10,10 @@ class Enrolled extends Model
     use HasFactory;
 
     protected $table = 'enrolled';
+
+    protected $fillable = [
+        'userid',
+        'courseid',
+        'is_free',
+    ];
 }

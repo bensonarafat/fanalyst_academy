@@ -138,9 +138,20 @@ CREATE TABLE IF NOT EXISTS `enrolled` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userid` int(11) NOT NULL,
     `courseid`  int(11) NOT NULL,
+    `is_free` tinyint(1) NOT NULL DEFAULT 0,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `likes` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `courseid`  int(11) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 CREATE TABLE IF NOT EXISTS `notifications` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,

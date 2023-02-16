@@ -190,21 +190,21 @@
                                                                 <div class="price-require-dt">
                                                                     <div class="cogs-toggle mb-20">
                                                                         <label class="switch">
-                                                                            <input type="checkbox" name="is_free" id="is_free" value="" checked />
+                                                                            <input type="checkbox" name="is_free" id="is_free" value="1" checked />
                                                                             <span></span>
                                                                         </label>
-                                                                        <label for="require_login" class="lbl-quiz">Course is Paid</label>
+                                                                        <label for="is_free" class="lbl-quiz">Course is Paid</label>
                                                                     </div>
                                                                     <div class="cogs-toggle cogs-togglex  x-hidden">
                                                                         <label class="switch">
-                                                                            <input type="checkbox" id="require_login" value="" name="require_login" />
+                                                                            <input type="checkbox" id="require_login" value="1" name="require_login" />
                                                                             <span></span>
                                                                         </label>
                                                                         <label for="require_login" class="lbl-quiz">Require Log In</label>
                                                                     </div>
                                                                     <div class="cogs-toggle cogs-togglex mt-3 x-hidden">
                                                                         <label class="switch">
-                                                                            <input type="checkbox" id="require_enroll" value="" name="require_enroll" />
+                                                                            <input type="checkbox" id="require_enroll" value="1" name="require_enroll" />
                                                                             <span></span>
                                                                         </label>
                                                                         <label for="require_enroll" class="lbl-quiz">Require Enroll</label>
@@ -275,7 +275,7 @@
             </div>
         </div>
     </div>
-    @include('components.main_footer')
+    @include('components.footer')
 </div>
 
 <script src="{{ asset("assets/js/jquery-3.3.1.min.js") }}"></script>

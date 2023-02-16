@@ -87,12 +87,12 @@
                         <li class="nav__other">
                             <a href="{{ route("students") }}">Students</a>
                         </li>
-                        <li class="nav__other">
+                        <li class="nav__other nav__last">
                             <a href="{{ route("lectures") }}">Lectures</a>
                         </li>
-                        <li class="nav__other nav__last">
+                        {{-- <li class="nav__other nav__last">
                             <a href="{{ route("contact") }}" >Contact Us</a>
-                        </li>
+                        </li> --}}
                     @endguest
 
                     @auth
@@ -124,14 +124,14 @@
 
                     @auth
                         <li>
-                            <a href="{{ route('cart') }}" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">2</span></a>
+                            <a href="{{ route('cart') }}" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">{{ countInCart() }}</span></a>
                         </li>
-                        <li class="ui dropdown">
+                        {{-- <li class="ui dropdown">
                             <a href="{{ route('notifications') }}" class="option_links" title="Notifications"><i class="uil uil-bell"></i><span class="noti_count">3</span></a>
-                        </li>
+                        </li> --}}
                         <li class="ui dropdown">
                             <a href="#" class="opts_account" title="Account">
-                                <img src="{{ asset("assets/images/hd_dp.jpg") }}" alt="" />
+                                <img src="@if(auth()->user()->photo) {{ asset(auth()->user()->photo) }} @else {{ asset("assets/images/hd_dp.jpg") }} @endif" alt="" />
                             </a>
                             <div class="menu dropdown_account">
                                 <div class="channel_my">
@@ -235,55 +235,55 @@
                                 </a>
                             </li> --}}
 
-                            <li class="menu--item">
+                            {{-- <li class="menu--item">
                                 <a href="{{ route('notifications') }}" class="menu--link" title="Notifications">
                                     <i class="uil uil-bell menu--icon"></i>
                                     <span class="menu--label">Notifications</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
-                            @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
+                            {{-- @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
                                 <a href="{{ route('reviews') }}" class="menu--link" title="Reviews">
                                     <i class="uil uil-star menu--icon"></i>
                                     <span class="menu--label">Reviews</span>
                                 </a>
                             </li>
-                            @endif
-                            @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
+                            @endif --}}
+                            {{-- @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
                                 <a href="{{ route('earnings') }}" class="menu--link" title="Earning">
                                     <i class="uil uil-dollar-sign menu--icon"></i>
                                     <span class="menu--label">Earning</span>
                                 </a>
                             </li>
-                            @endif
-                            @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
+                            @endif --}}
+                            {{-- @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
                                 <a href="{{ route('payouts') }}" class="menu--link" title="Payout">
                                     <i class="uil uil-wallet menu--icon"></i>
                                     <span class="menu--label">Payout</span>
                                 </a>
                             </li>
-                            @endif
-                            @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
+                            @endif --}}
+                            {{-- @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
                                 <a href="{{ route('statements') }}" class="menu--link" title="Statements">
                                     <i class="uil uil-file-alt menu--icon"></i>
                                     <span class="menu--label">Statements</span>
                                 </a>
                             </li>
-                            @endif
+                            @endif --}}
 
 
-                            @if(auth()->user()->type == 'instructor')
+                            {{-- @if(auth()->user()->type == 'instructor')
                             <li class="menu--item">
                                 <a href="{{ route('verifications') }}" class="menu--link" title="Verification">
                                     <i class="uil uil-check-circle menu--icon"></i>
                                     <span class="menu--label">Verification</span>
                                 </a>
                             </li>
-                            @endif
+                            @endif --}}
 
                             @if(auth()->user()->type == 'admin')
                             <li class="menu--item">
@@ -305,10 +305,9 @@
 
                     <div class="left_footer">
                         <ul>
-                            <li><a href="about_us.html">About</a></li>
-                            <li><a href="contact_us.html">Contact Us</a></li>
-                            <li><a href="terms_of_use.html">Privacy Policy</a></li>
-                            <li><a href="terms_of_use.html">Terms</a></li>
+                            <a href="{{ route('copyright') }}">Copyright and Trademark Policy</a>
+                            <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a>
+                            <a href="#">Cookie Policy</a>
                         </ul>
                         <div class="left_footer_content">
                             <p>© {{ date('Y') }} <strong>{{ config("app.name") }}</strong>. All Rights Reserved.</p>

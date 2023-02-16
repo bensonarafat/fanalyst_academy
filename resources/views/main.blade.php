@@ -4,10 +4,10 @@
         <div class="css-1vhr7ec">
             <div class="css-je23cs">
                 <h1 class="cds-33 css-i3qo6r cds-35">Learn without limits</h1>
-                <p class="cds-33 css-16ln3yv cds-35">Start, switch, or advance your career with more than 5,400 courses, Professional Certificates, and degrees from world-class universities and companies.</p>
+                <p class="cds-33 css-16ln3yv cds-35">Start, switch, or advance your career with more than 5,400 courses.</p>
 
                 <button data-track="true" data-track-app="front_page" data-track-page="front_page_story" data-track-action="click" data-track-component="banner_cta" data-e2e="enroll-button" class="cds-30 cds-1 cds-3 css-1lpvapa cds-12 cds-button-disableElevation" tabindex="0" role="button" aria-disabled="false" data-elementtiming="frontpage.banner.cta" type="button"><span class="cds-2 cds-button-label">Join for Free</span></button>
-                <a href="" class="cds-30 cds-1 cds-3 enterprise-cta-double-blue css-1mjixri cds-12 cds-button-disableElevation"><span class="cds-2 cds-button-label">Explore over 100+ courses</span></a>
+                <a href="{{ route('login') }}" class="cds-30 cds-1 cds-3 enterprise-cta-double-blue css-1mjixri cds-12 cds-button-disableElevation"><span class="cds-2 cds-button-label">Explore over 100+ courses</span></a>
             </div>
             <div class="css-1xtmpjy">
                 <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/5CFC8u8XiXcbSOlVv6JZQx/4e6f898f57f9d798437b3aa22026e30b/CourseraLearners_C_Composition_Hillary_copy__3_.png?auto=format%2Ccompress&amp;dpr=1&amp;w=459&amp;h=497&amp;q=40" class="css-12519x1" style="max-width:459px;max-height:497px;margin-left:auto;margin-right:auto;width:100%" alt="">
@@ -61,13 +61,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="title478">
-                        <h2>Our Story</h2>
+                        <h2>About us</h2>
                         <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur vel dolor id ultrices. Proin a magna at mi pretium pulvinar in eu enim. Nulla vel lacus lectus. Donec at venenatis augue. Nam vitae
-                            purus placerat, hendrerit nisl id, finibus magna. Etiam pharetra gravida ornare. Donec sagittis, ipsum in egestas egestas, dui lorem sollicitudin justo, ut ullamcorper velit neque eu velit. Ut et
-                            fringilla elit. Mauris augue augue, auctor a blandit ac, convallis eget neque. Curabitur in ante ante. Nullam laoreet tempus erat at ornare. In nisl nisi, dapibus eget facilisis sit amet, commodo quis
-                            nibh.
+                            Fanalyst Academy is a dynamic and innovative provider of finance education and training. With a
+passion for empowering individuals and organizations to reach their full financial potential, we offer a
+range of tuition services and resources to help our students achieve their career and financial goals.
                         </p>
                     </div>
                 </div>
@@ -133,7 +132,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title589 text-center">
-                        <h2>Meet Our Team</h2>
+                        <h2>Meet Our Instructor</h2>
                         <p>A perfect blend of creativity and technical wizardry. The best people formula for great websites!</p>
                         <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
                     </div>
@@ -141,12 +140,23 @@
                 <div class="col-lg-6">
                     <div class="jmio125">
                         <p>
-                            Morbi eget elit eget turpis varius mollis eget vel massa. Donec porttitor, sapien eget commodo vulputate, erat felis aliquam dolor, non condimentum libero dolor vel ipsum. Sed porttitor nisi eget nulla
-                            ullamcorper eleifend. Fusce tristique sapien nisi, vel feugiat neque luctus sit amet. Quisque consequat quis turpis in mattis. Maecenas eget mollis nisl. Cras porta dapibus est, quis malesuada ex iaculis
-                            at. Vestibulum egestas tortor in urna tempor, in fermentum lectus bibendum. In leo leo, bibendum at pharetra at, tincidunt in nulla. In vel malesuada nulla, sed tincidunt neque. Phasellus at massa vel sem
-                            aliquet sodales non in magna. Ut tempus ipsum sagittis neque cursus euismod. Vivamus luctus elementum tortor, ac aliquet dolor vehicula et.
+                            Our online platform offers a flexible and convenient way to learn, with a variety of finance
+                            certification exams, including ACCA, CFA, ICAN, and FRM, as well as courses in personal finance,
+                            and corporate finance. Our experienced instructors and engaging curriculum ensure that students
+                            receive a high-quality education that is both comprehensive and accessible.
                         </p>
-                        <a href="#" class="crer_btn_link">Join Our Team</a>
+                        <p>
+                            But we don&#39;t stop there. Fanalyst Academy also provides extra live class sessions, giving students the
+opportunity to interact with their instructors and peers in real-time. This blended approach to learning
+provides the best of both worlds – the flexibility and convenience of online learning, combined with
+the engagement and support of in-person instruction.
+                        </p>
+                        <p>
+                            At Fanalyst Academy, we are committed to helping our students succeed. With our expert team,
+cutting-edge technology, and engaging curriculum, we provide the tools and support needed to
+achieve financial literacy and success. Join us today and take your financial future to the next level.
+                        </p>
+                        <a href="{{ route('login') }}" class="crer_btn_link">Join Our Team</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -158,5 +168,5 @@
         </div>
     </div>
 
-    @include("components.other_footer")
+    @include("components.footer")
 </div>

@@ -104,4 +104,45 @@ class UserController extends Controller
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
+
+    public function updateProfile(Request $request){
+        $request->validate([
+            'fullname' => 'required',
+            'mobile' => 'required',
+            'gender' => 'required',
+            'photo' => 'mimes:jpeg,png,jpg|max:4048',
+            'town' => 'required',
+            'dob' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+        ]);
+        try {
+            if($request->photo){
+                $photo = SystemFileManager::InternalUploader($request->photo, "photo");
+            }else{
+                $photo = $request->photospan;
+            }
+            User::where('id', auth()->user()->id)->update(
+                [
+                    "fullname" =>  $request->fullname,
+                    "mobile" => $request->mobile,
+                    "gender" => $request->gender,
+                    "photo" => $photo,
+                    "town" => $request->town,
+                    "dob" => $request->dob,
+                    "city" => $request->city,
+                    "address" => $request->address,
+                    'youtube_url' =>  $request->youtube_url,
+                    'twitter_url' => $request->twitter_url,
+                    'facebook_url' => $request->facebook_url,
+                    'linkedin_url' => $request->linkedin_url,
+                ]
+            );
+
+            return redirect()->back()->with(['success' => 'Account Updated']);
+        } catch (Exception $e) {
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+
+        }
+    }
 }

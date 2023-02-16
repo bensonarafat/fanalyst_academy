@@ -68,10 +68,13 @@
                         <div class="la5lo1">
                             <div class="owl-carousel courses_performance owl-theme">
                                 @foreach ($courses as $row)
+                                @php
+                                    $transactionCount = \App\Models\Transaction::where(['courseid' => $row->id, 'status' =>  'success'])->count();
+                                @endphp
                                 <div class="item">
                                     <div class="fcrse_1">
                                         <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                            <img src="{{ asset($row->media_thumbnail) }}" alt="" />
+                                            <img src="{{ asset($row->media_thumbnail) }}" alt="" style="width:100%;height:200px;object-fit:cover;"/>
                                             <div class="course-overlay"></div>
                                         </a>
                                         <div class="fcrse_content">
@@ -81,7 +84,7 @@
                                             <a href="{{ route('view.course', $row->id) }}" class="crsedt145">{{ $row->title }}</a>
                                             <div class="allvperf">
                                                 <div class="crse-perf-left">Purchased</div>
-                                                <div class="crse-perf-right">150</div>
+                                                <div class="crse-perf-right">{{ $transactionCount }}</div>
                                             </div>
                                             <div class="allvperf">
                                                 <div class="crse-perf-left">Total Like</div>
@@ -101,5 +104,5 @@
             </div>
         </div>
     </div>
-    @include("components.other_footer")
+    @include("components.footer")
 </div>
