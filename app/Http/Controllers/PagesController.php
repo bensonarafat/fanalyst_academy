@@ -24,6 +24,8 @@ class PagesController extends Controller
         $courses = null;
         $instructors = null;
         $featured = null;
+        $freeCourses = null;
+        $paidCourses = null;
         if(Auth::check()){
             if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
                 $instructorCourses = Course::where('instructor', auth()->user()->id)->get();
@@ -39,8 +41,11 @@ class PagesController extends Controller
                 $featured = Course::where('status', 'active')->orderBy('created_at', 'asc')->limit(5)->get();
                 $instructors = User::where('type', 'instructor')->latest()->limit(5)->get();
             }
+        }else{
+            $freeCourses = Course::where(['status' =>  'active', 'is_free' => 0])->latest()->limit(10)->get();
+            $paidCourses = Course::where(['status' =>  'active', 'is_free' => 1])->latest()->limit(10)->get();
         }
-        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured'));
+        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'freeCourses', 'paidCourses'));
     }
 
     public function about(){
@@ -59,12 +64,31 @@ class PagesController extends Controller
         return view("lectures");
     }
 
-    public function copyright(){
-        return view('copyright');
+    public function privacy_policy(){
+        return view('privacy_policy');
+    }
+    public function cookie(){
+        return view('cookie');
     }
 
     public function instructorAgreement(){
         return view('instructor-agreement');
+    }
+
+    public function terms(){
+        return view('terms');
+    }
+
+    public function faq(){
+        return view('faq');
+    }
+
+    public function courseSection(){
+        return view('course');
+    }
+
+    public function exploreView(){
+        return view('course-explore');
     }
 
     public function addCategory(){

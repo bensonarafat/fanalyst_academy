@@ -29,8 +29,8 @@
             <div class="row justify-content-lg-center justify-content-md-center">
                 <div class="col-lg-12">
                     <div class="main_logo25" id="logo">
-                        <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" /></a>
-                        <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/ct_logo.png") }}" alt="" /></a>
+                        <a href="/"><img src="{{ asset("assets/images/logo.png") }}" style="width:100px;" alt="" /></a>
+                        <a href="/"><img class="logo-inverse" style="width:100px;"  src="{{ asset("assets/images/logo.png") }}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-8">

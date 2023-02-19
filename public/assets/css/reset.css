@@ -202,3 +202,15 @@ element.style {
 .x-hidden{
     display:none;
 }
+
+.carousel-caption{
+    bottom: 35% !important;
+}
+.carousel-item .carousel-caption h2{
+    font-size: 60px;
+}
+
+.carousel-item .carousel-caption p{
+    font-size: 25px;
+    color: white;
+}

@@ -1,18 +1,39 @@
 <div class="wrapper _bg4586 _new89">
-
-    <section class="rc-HeroBannerRedesign css-rpf906">
-        <div class="css-1vhr7ec">
-            <div class="css-je23cs">
-                <h1 class="cds-33 css-i3qo6r cds-35">Learn without limits</h1>
-                <p class="cds-33 css-16ln3yv cds-35">Start, switch, or advance your career with more than 5,400 courses.</p>
-
-                <button data-track="true" data-track-app="front_page" data-track-page="front_page_story" data-track-action="click" data-track-component="banner_cta" data-e2e="enroll-button" class="cds-30 cds-1 cds-3 css-1lpvapa cds-12 cds-button-disableElevation" tabindex="0" role="button" aria-disabled="false" data-elementtiming="frontpage.banner.cta" type="button"><span class="cds-2 cds-button-label">Join for Free</span></button>
-                <a href="{{ route('login') }}" class="cds-30 cds-1 cds-3 enterprise-cta-double-blue css-1mjixri cds-12 cds-button-disableElevation"><span class="cds-2 cds-button-label">Explore over 100+ courses</span></a>
+    <section >
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner" >
+              <div class="carousel-item active">
+                <img class="d-block w-100" style="max-height:550px;object-fit:cover" src="{{ asset('assets/images/banner/1.jpg') }}" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>What I want on the first picture</h2>
+                    <p>Welcome to Fanalyst Academy</p>
+                    <p>We offer ACCA, ICAN, CFA, FRM, Corporate Finance and Personal Finance training services.</p>
+                    <a href="{{ route("login") }}" class="upload_btn" title="Enrol">Enrol Now</a>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" style="max-height:550px;object-fit:cover;" src="{{ asset('assets/images/banner/2.jpg') }}" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h2>What I want on the second picture</h2>
+                    <p>Quality contents and expert tutors.</p>
+                    <p>Sign up for our tuition and take the first step towards academic success</p>
+                    <a href="{{ route("login") }}" class="upload_btn" title="Enrol">Enrol Now</a>
+                  </div>
+              </div>
             </div>
-            <div class="css-1xtmpjy">
-                <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://images.ctfassets.net/wp1lcwdav1p1/5CFC8u8XiXcbSOlVv6JZQx/4e6f898f57f9d798437b3aa22026e30b/CourseraLearners_C_Composition_Hillary_copy__3_.png?auto=format%2Ccompress&amp;dpr=1&amp;w=459&amp;h=497&amp;q=40" class="css-12519x1" style="max-width:459px;max-height:497px;margin-left:auto;margin-right:auto;width:100%" alt="">
-            </div>
-        </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
     </section>
 
     <div class="_215td5">
@@ -20,59 +41,40 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title589 text-center">
-                        <h2>Our Features</h2>
-                        <p>On Cursus, you have access to:</p>
+                        <h2><strong>On {{ config('app.name') }},</strong> you have access to</h2>
                         <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <i class="uil uil-mobile-android-alt"></i>
-                        <h4>Mobile learning</h4>
-                        <p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                        <img src="{{ asset('assets/images/icons/1.png') }}" style="width:100px;"  alt="">
+                        <h4>Quality contents</h4>
+                        <p>We offer relevant and top-notch course materials that are regularly updated
+                            to ensure that our students.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <i class="uil uil-users-alt"></i>
-                        <h4>Academic & Technical Support</h4>
-                        <p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                        <img src="{{ asset('assets/images/icons/2.png') }}" style="width:100px;"  alt="">
+                        <h4>Support services</h4>
+                        <p>We provide ample support services, such as online tutoring, academic
+                            advising, and technical assistance.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <i class="uil uil-award"></i>
-                        <h4>Sharable Certificates</h4>
-                        <p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+                        <img src="{{ asset('assets/images/icons/3.png') }}" style="width:100px;"  alt="">
+                        <h4>Personalized learning</h4>
+                        <p>Our personalized and convenient learning
+                            approach offers students a tailored education that is accessible and flexible.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <i class="uil uil-globe"></i>
-                        <h4>An Inclusive Experience</h4>
-                        <p>Quisque nec volutpat sem. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="_215zd5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="title478">
-                        <h2>About us</h2>
-                        <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
-                        <p>
-                            Fanalyst Academy is a dynamic and innovative provider of finance education and training. With a
-passion for empowering individuals and organizations to reach their full financial potential, we offer a
-range of tuition services and resources to help our students achieve their career and financial goals.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="story125">
-                        <img src="{{ asset("assets/images/about/stroy_img.png") }}" alt="" />
+                        <img src="{{ asset('assets/images/icons/4.png') }}" style="width:100px;" alt="">
+                        <h4>Money back guarantee*</h4>
+                        <p>We stand behind our commitment to your success with our pass your
+                            exams or get your money back guarantee</p>
                     </div>
                 </div>
             </div>
@@ -80,93 +82,182 @@ range of tuition services and resources to help our students achieve their caree
     </div>
     <div class="_215td5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title589 text-center">
-                        <h2>Our Global Reach</h2>
-                        <p>Cursus is the leading global marketplace for teaching and learning, connecting millions of students to the skills they need to succeed.</p>
-                        <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
+            <div>
+
+                <div>
+                    <div class="component-margin">
+                        <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
+                            <div class="unit-title--title-container--2RfU_">
+                                <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-1152523765">Free Courses</h2>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="p__metric">
-                        25k
-                        <span>Instructors</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="p__metric">
-                        95k
-                        <span>Courses</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="p__metric">
-                        40M
-                        <span>Course enrollments</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="p__metric">
-                        50+
-                        <span>Languages</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="p__metric">
-                        595+
-                        <span>Membership Partners</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="p__metric">
-                        295
-                        <span>Countries</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="_215xd5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title589 text-center">
-                        <h2>Meet Our Instructor</h2>
-                        <p>A perfect blend of creativity and technical wizardry. The best people formula for great websites!</p>
-                        <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="jmio125">
-                        <p>
-                            Our online platform offers a flexible and convenient way to learn, with a variety of finance
-                            certification exams, including ACCA, CFA, ICAN, and FRM, as well as courses in personal finance,
-                            and corporate finance. Our experienced instructors and engaging curriculum ensure that students
-                            receive a high-quality education that is both comprehensive and accessible.
-                        </p>
-                        <p>
-                            But we don&#39;t stop there. Fanalyst Academy also provides extra live class sessions, giving students the
-opportunity to interact with their instructors and peers in real-time. This blended approach to learning
-provides the best of both worlds – the flexibility and convenience of online learning, combined with
-the engagement and support of in-person instruction.
-                        </p>
-                        <p>
-                            At Fanalyst Academy, we are committed to helping our students succeed. With our expert team,
-cutting-edge technology, and engaging curriculum, we provide the tools and support needed to
-achieve financial literacy and success. Join us today and take your financial future to the next level.
-                        </p>
-                        <a href="{{ route('login') }}" class="crer_btn_link">Join Our Team</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="jmio125">
-                        <img src="{{ asset("assets/images/about/team.jpg") }}" alt="" />
+                    <div class="col-md-12">
+                        <div class="_14d25">
+                            <div class="row">
+                                @foreach ($freeCourses as $row)
+                                     @php
+                                        $user = \App\Models\User::find($row->instructor);
+                                        // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
+                                    @endphp
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="fcrse_1 mt-30">
+                                            <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
+                                                <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                                                <div class="course-overlay">
+                                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                                </div>
+                                            </a>
+                                            <div class="fcrse_content">
+                                                <div class="vdtodt">
+                                                    <span class="vdt14">{{ $row->likes }} likes</span>
+                                                    <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
+                                                </div>
+                                                <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
+                                                <div class="auth1lnkprce">
+                                                    <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
+                                                    <div class="prce142">
+                                                        @if(!$row->is_free)
+                                                            FREE
+                                                        @else
+                                                            {!! naira() . number_format($row->amount, 2) !!}
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="_215td5">
+        <div class="container">
+            <div>
+                <div class="component-margin">
+                    <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
+                        <div class="unit-title--title-container--2RfU_">
+                            <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-1152523765">Paid Courses</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="_14d25">
+                        <div class="row">
+                            @foreach ($paidCourses as $row)
+                                 @php
+                                    $user = \App\Models\User::find($row->instructor);
+                                    // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
+                                @endphp
+                                <div class="col-lg-3 col-md-4">
+                                    <div class="fcrse_1 mt-30">
+                                        <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
+                                            <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                                            <div class="course-overlay">
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="vdtodt">
+                                                <span class="vdt14">{{ $row->likes }} likes</span>
+                                                <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
+                                            </div>
+                                            <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
+                                                <div class="prce142">
+                                                    @if(!$row->is_free)
+                                                        FREE
+                                                    @else
+                                                        {!! naira() . number_format($row->amount, 2) !!}
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+
+@media (min-width: 61.31em){
+.component-margin:last-of-type {
+    margin-bottom: 9.6rem;
+}
+}
+
+.unit-title--container--2Zy9z .unit-title--title-container--2RfU_ {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.unit-title--container--2Zy9z .unit-title--title--3KpMc {
+    max-width: 80rem;
+}
+
+.ud-heading-xl {
+    font-family: udemy sans,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.02rem;
+    font-size: 2.4rem;
+}
+
+.unit-title--container--2Zy9z.unit-title--has-title--ZqwQR {
+    margin-bottom: 1.6rem;
+}
+    @media (min-width: 61.31em){
+    .component-margin+.component-margin, .discovery-unit-empty-render+.component-margin {
+        margin-top: 6.4rem;
+    }
+}
+        .alternate-headline--title-no-margin--2B8yO {
+    margin: 0;
+    max-width: 100%;
+}
+
+.alternate-headline--secondary-text-small-margin--3aDFf {
+    margin: 1.6rem 0 0;
+    max-width: 80rem;
+}
+
+.headline__sub-text {
+    margin-top: 0.8rem;
+    max-width: 80rem;
+}
+
+.ud-text-lg {
+    font-family: udemy sans,sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 400;
+    line-height: 1.4;
+    font-size: 1.9rem;
+}
+
+@media (min-width: 61.31em){
+.headline__main-text {
+    max-width: 80rem;
+    font-family: SuisseWorks,Georgia,Times,times new roman,serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 700;
+    font-size: 3.2rem;
+    line-height: 1.25;
+    letter-spacing: -.05rem;
+}
+}
+.headline__main-text {
+    max-width: 80rem;
+}
+    </style>
     @include("components.footer")
 </div>

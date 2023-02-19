@@ -49,24 +49,26 @@
             @endauth
 
             <div class="main_logo" id="logo">
-                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" /></a>
-                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/ct_logo.png") }}" alt="" /></a>
+                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:150px;"/></a>
+                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:150px;" alt="" /></a>
             </div>
-            @auth
-            <div class="top-category">
-                <div class="ui compact menu cate-dpdwn">
-                    <div class="ui simple dropdown item">
-                        <a href="#" class="option_links p-0" title="categories"><i class="uil uil-apps"></i></a>
-                        <div class="menu dropdown_category5">
-                            @foreach (appcategories() as $row)
-                            <a href="/category/cat/{{ $row->id }}" class="item channel_item">{{ $row->name }}</a>
-                            @endforeach
 
+            @auth
+                <div class="top-category">
+                    <div class="ui compact menu cate-dpdwn">
+                        <div class="ui simple dropdown item">
+                            <a href="#" class="option_links p-0" title="categories"><i class="uil uil-apps"></i></a>
+                            <div class="menu dropdown_category5">
+                                @foreach (appcategories() as $row)
+                                <a href="/category/cat/{{ $row->id }}" class="item channel_item">{{ $row->name }}</a>
+                                @endforeach
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endauth
+
             <div class="search120">
                 <div class="ui search">
                     <div class="ui left icon input swdh10">
@@ -78,6 +80,12 @@
             <div class="header_right">
                 <ul>
                     @guest
+                    <li class="nav__other nav__last">
+                        <a href="{{ route('explore.view') }}"><strong>Explore</strong></a>
+                    </li>
+
+                    @endguest
+                    {{-- @guest
                         <li class="nav__other">
                             <a href="/">Home</a>
                         </li>
@@ -90,11 +98,11 @@
                         <li class="nav__other nav__last">
                             <a href="{{ route("lectures") }}">Lectures</a>
                         </li>
-                        {{-- <li class="nav__other nav__last">
+                       <li class="nav__other nav__last">
                             <a href="{{ route("contact") }}" >Contact Us</a>
-                        </li> --}}
+                        </li>
                     @endguest
-
+                    --}}
                     @auth
                         <li>
                            @if(auth()->user()->type == "student")
@@ -121,11 +129,11 @@
                             <a href="{{ route("register") }}" class="upload_btn" title="Register">Register</a>
                         </li>
                     @endguest
-
-                    @auth
                         <li>
                             <a href="{{ route('cart') }}" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">{{ countInCart() }}</span></a>
                         </li>
+                    @auth
+
                         {{-- <li class="ui dropdown">
                             <a href="{{ route('notifications') }}" class="option_links" title="Notifications"><i class="uil uil-bell"></i><span class="noti_count">3</span></a>
                         </li> --}}
@@ -305,9 +313,13 @@
 
                     <div class="left_footer">
                         <ul>
-                            <a href="{{ route('copyright') }}">Copyright and Trademark Policy</a>
-                            <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a>
-                            <a href="#">Cookie Policy</a>
+                            <a href="{{ route('about') }}">About</a>
+                            <a href="{{ route('course.section') }}">Courses</a>
+                            <a href="{{ route('privacy_policy') }}">Privacy Policy</a>
+                            {{-- <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a> --}}
+                            <a href="{{ route('cookie') }}">Cookie Policy</a>
+                            <a href="{{ route('terms') }}">Terms of use</a>
+                            <a href="{{ route('faq') }}">Q&A</a>
                         </ul>
                         <div class="left_footer_content">
                             <p>© {{ date('Y') }} <strong>{{ config("app.name") }}</strong>. All Rights Reserved.</p>

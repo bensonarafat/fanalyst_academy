@@ -3,9 +3,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="item_f1">
-                    <a href="{{ route('copyright') }}">Copyright and Trademark Policy</a>
-                    <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a>
-                    <a href="#">Cookie Policy</a>
+                    <a href="{{ route('about') }}">About</a>
+                    <a href="{{ route('course.section') }}">Courses</a>
+                    <a href="{{ route('privacy_policy') }}">Privacy Policy</a>
+                    {{-- <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a> --}}
+                    <a href="{{ route('cookie') }}">Cookie Policy</a>
+                    <a href="{{ route('terms') }}">Terms of use</a>
+                    <a href="{{ route('faq') }}">Q&A</a>
                 </div>
             </div>
             <div class="col-lg-12">
@@ -27,7 +31,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="edu_social_links">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=100089973412155&mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a>
                                 <a href="https://twitter.com/FanalystAcademy?t=JsmagNpS81tamFyVL0IYvA&s=08"><i class="fab fa-twitter"></i></a>
                                 <a href="https://www.linkedin.com/company/fanalyst-academy/"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="https://instagram.com/fanalystacademy?igshid=YmMyMTA2M2Y="><i class="fab fa-instagram"></i></a>

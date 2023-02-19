@@ -28,8 +28,13 @@ Route::get("/about", [PagesController::class, "about"])->name("about");
 Route::get("/contact", [PagesController::class, "contact"])->name("contact");
 Route::get("/students", [PagesController::class, "students"])->name("students");
 Route::get("/lectures",[PagesController::class, "lectures"])->name("lectures");
-Route::get('/copyright', [PagesController::class, 'copyright'])->name('copyright');
+Route::get('/privacy_policy', [PagesController::class, 'privacy_policy'])->name('privacy_policy');
+Route::get('/cookie', [PagesController::class, 'cookie'])->name('cookie');
 Route::get('/instructor-agreement', [PagesController::class, 'instructorAgreement'])->name('instructor.agreement');
+Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
+Route::get('/faq', [PagesController::class, 'faq'])->name('faq');
+Route::get('/courses-section', [PagesController::class, 'courseSection'])->name('course.section');
+Route::get('/explore-view', [PagesController::class, 'exploreView'])->name('explore.view');
 
 Route::group(['middleware' => 'auth'], function (){
 
