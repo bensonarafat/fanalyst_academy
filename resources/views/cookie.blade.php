@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('title', "Cookie Policy")
 @section('content')
+@section('description', 'Cookie Policy')
+@section('url', config('app.url') . '/cookie' )
+@section('image', asset('assets/images/logo.png') )
+
     <div class="wrapper _bg4586 _new89">
         <div class="_215b15">
             <div class="container">

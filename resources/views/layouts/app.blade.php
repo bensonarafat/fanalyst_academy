@@ -4,10 +4,26 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, shrink-to-fit=9" />
-        <meta name="description" content="Fanalyst Academy" />
-        <meta name="author" content="Benson Arafat" />
 
-        <title>@yield("title")</title>
+        <meta name="author" content="Obi Nnaekeka" />
+        <!-- Primary Meta Tags -->
+        <title>@yield('title')</title>
+        <meta name="title" content="@yield('title')">
+        <meta name="description" content="@yield('description')">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="@yield('url')">
+        <meta property="og:title" content="@yield('title')">
+        <meta property="og:description" content="@yield('description')">
+        <meta property="og:image" content="@yield('image')">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="@yield('url')">
+        <meta property="twitter:title" content="@yield('title')">
+        <meta property="twitter:description" content="@yield('description')">
+        <meta property="twitter:image" content="@yield('image')">
 
         <link rel="icon" type="image/png" href="{{ asset("assets/images/fav.png") }} " />
 
@@ -316,7 +332,7 @@
                             <a href="{{ route('about') }}">About</a>
                             <a href="{{ route('course.section') }}">Courses</a>
                             <a href="{{ route('privacy_policy') }}">Privacy Policy</a>
-                            {{-- <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a> --}}
+                            <a href="{{ route('contact') }}">Contact</a>
                             <a href="{{ route('cookie') }}">Cookie Policy</a>
                             <a href="{{ route('terms') }}">Terms of use</a>
                             <a href="{{ route('faq') }}">Q&A</a>

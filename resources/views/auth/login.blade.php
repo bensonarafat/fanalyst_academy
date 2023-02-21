@@ -4,9 +4,26 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, shrink-to-fit=9" />
-        <meta name="description" content="Gambolthemes" />
-        <meta name="author" content="Gambolthemes" />
+
+        <meta name="author" content="Obi Nnaekeka" />
+        <!-- Primary Meta Tags -->
         <title>Login</title>
+        <meta name="title" content="Login">
+        <meta name="description" content="Login Fanalyst">
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ config('app.url') . '/login' }}">
+        <meta property="og:title" content="Login">
+        <meta property="og:description" content="Login Fanalyst">
+        <meta property="og:image" content="{{ asset('assets/images/logo.png') }}">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="{{ config('app.url') . '/login' }}">
+        <meta property="twitter:title" content="Login">
+        <meta property="twitter:description" content="Login Fanalyst">
+        <meta property="twitter:image" content="{{asset('assets/images/logo.png') }}">
 
         <link rel="icon" type="image/png" href="{{ asset("assets/images/fav.png") }}" />
 

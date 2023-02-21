@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('title', "Terms")
+@section('description', 'Terms of Use')
+@section('url', config('app.url') .'/terms' )
+@section('image', asset('assets/images/logo.png') )
 @section('content')
+
     <div class="wrapper _bg4586 _new89">
         <div class="_215b15">
             <div class="container">

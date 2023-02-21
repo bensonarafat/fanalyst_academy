@@ -1,6 +1,10 @@
 @extends('layouts.main')
 @section('title', "Courses")
 @section('content')
+@section('description', 'Our online platform offers a flexible and convenient way to learn, with a variety of finance certification exams, including ACCA, CFA, ICAN, and FRM, as well as courses in personal finance, and corporate finance.')
+@section('url', config('app.url') . '/courses-section' )
+@section('image', asset('assets/images/logo.png') )
+
 
 <div class="wrapper _bg4586 _new89">
     <div class="_215zd5">

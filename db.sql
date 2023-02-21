@@ -163,3 +163,17 @@ CREATE TABLE IF NOT EXISTS `notifications` (
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+
+
+CREATE TABLE IF NOT EXISTS `contacts` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `email` varchar(255) NOT NULL,
+    `phone` varchar(255) NOT NULL,
+    `subject` varchar(255) NOT NULL,
+    `message` text  NULL DEFAULT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+

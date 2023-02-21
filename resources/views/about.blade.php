@@ -1,6 +1,11 @@
 @extends('layouts.main')
 @section('title', "About")
 @section('content')
+@section('description', 'About Us')
+@section('url', config('app.url') . '/about' )
+@section('image', asset('assets/images/logo.png') )
+
+@section('image', asset('assets/images/logo.png') )
     <div class="wrapper _bg4586 _new89">
 
         <div class="_215zd5">

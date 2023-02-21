@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('title', "Privacy Policy")
+@section('description', 'Privacy Policy')
+@section('url', config('app.url') .'/privacy_policy' )
+@section('image', asset('assets/images/logo.png') )
 @section('content')
     <div class="wrapper _bg4586 _new89">
         <div class="_215b15">

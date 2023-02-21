@@ -1,7 +1,9 @@
 @extends('layouts.main')
 @section('title', "Q&A")
 @section('content')
-
+@section('description', 'Question and Answer')
+@section('url', config('app.url') . '/faq' )
+@section('image', asset('assets/images/logo.png') )
 
 <div class="wrapper _bg4586 _new89">
     <div class="_215b15">

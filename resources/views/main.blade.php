@@ -7,19 +7,17 @@
             </ol>
             <div class="carousel-inner" >
               <div class="carousel-item active">
-                <img class="d-block w-100" style="max-height:550px;object-fit:cover" src="{{ asset('assets/images/banner/1.jpg') }}" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>What I want on the first picture</h2>
-                    <p>Welcome to Fanalyst Academy</p>
-                    <p>We offer ACCA, ICAN, CFA, FRM, Corporate Finance and Personal Finance training services.</p>
+                <img class="d-block w-100" style="height:550px;object-fit:cover" src="{{ asset('assets/images/banner/1.jpg') }}" alt="First slide">
+                <div class="carousel-caption d-md-block">
+                    <h2>Welcome to Fanalyst Academy</h2>
+                    <p>We offer ACCA, ICAN, CFA, FRM, Corporate Finance and Personal Finance training services</p>
                     <a href="{{ route("login") }}" class="upload_btn" title="Enrol">Enrol Now</a>
                   </div>
               </div>
               <div class="carousel-item">
-                <img class="d-block w-100" style="max-height:550px;object-fit:cover;" src="{{ asset('assets/images/banner/2.jpg') }}" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>What I want on the second picture</h2>
-                    <p>Quality contents and expert tutors.</p>
+                <img class="d-block w-100" style="height:550px;object-fit:cover;" src="{{ asset('assets/images/banner/2.jpg') }}" alt="Second slide">
+                <div class="carousel-caption d-md-block">
+                    <h2>Quality contents and expert tutors</h2>
                     <p>Sign up for our tuition and take the first step towards academic success</p>
                     <a href="{{ route("login") }}" class="upload_btn" title="Enrol">Enrol Now</a>
                   </div>
@@ -47,7 +45,8 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <img src="{{ asset('assets/images/icons/1.png') }}" style="width:100px;"  alt="">
+                        <img src="{{ asset('assets/images/icons/3.png') }}" style="width:100px;"  alt="">
+
                         <h4>Quality contents</h4>
                         <p>We offer relevant and top-notch course materials that are regularly updated
                             to ensure that our students.</p>
@@ -55,7 +54,8 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <img src="{{ asset('assets/images/icons/2.png') }}" style="width:100px;"  alt="">
+                        <img src="{{ asset('assets/images/icons/1.png') }}" style="width:100px;"  alt="">
+
                         <h4>Support services</h4>
                         <p>We provide ample support services, such as online tutoring, academic
                             advising, and technical assistance.</p>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
-                        <img src="{{ asset('assets/images/icons/3.png') }}" style="width:100px;"  alt="">
+                        <img src="{{ asset('assets/images/icons/2.png') }}" style="width:100px;"  alt="">
                         <h4>Personalized learning</h4>
                         <p>Our personalized and convenient learning
                             approach offers students a tailored education that is accessible and flexible.</p>
@@ -192,9 +192,9 @@
     <style>
 
 @media (min-width: 61.31em){
-.component-margin:last-of-type {
-    margin-bottom: 9.6rem;
-}
+    .component-margin:last-of-type {
+        margin-bottom: 9.6rem;
+    }
 }
 
 .unit-title--container--2Zy9z .unit-title--title-container--2RfU_ {
@@ -218,7 +218,7 @@
 .unit-title--container--2Zy9z.unit-title--has-title--ZqwQR {
     margin-bottom: 1.6rem;
 }
-    @media (min-width: 61.31em){
+@media (min-width: 61.31em){
     .component-margin+.component-margin, .discovery-unit-empty-render+.component-margin {
         margin-top: 6.4rem;
     }
@@ -258,6 +258,34 @@
 .headline__main-text {
     max-width: 80rem;
 }
+
+.carousel-item .upload_btn{
+    font-size: 15px !important;
+    padding: 15px 25px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .carousel-item img{
+        height: 200px !important;
+    }
+    .carousel-item .carousel-caption h2{
+        font-size: 16px !important;
+    }
+
+    .carousel-item .carousel-caption p{
+        font-size: 12px !important;
+        line-height: 15px;
+    }
+    .carousel-caption {
+        bottom: 10% !important;
+    }
+    .carousel-caption .upload_btn {
+        display: unset;
+        font-size: 12px !important;
+        padding: 6px 10px !important;
+    }
+}
+
     </style>
     @include("components.footer")
 </div>

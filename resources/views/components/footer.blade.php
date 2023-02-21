@@ -4,9 +4,9 @@
             <div class="col-lg-12">
                 <div class="item_f1">
                     <a href="{{ route('about') }}">About</a>
+                    <a href="{{ route('contact') }}">Contact</a>
                     <a href="{{ route('course.section') }}">Courses</a>
                     <a href="{{ route('privacy_policy') }}">Privacy Policy</a>
-                    {{-- <a href="{{ route('instructor.agreement') }}">Instructor Agreement</a> --}}
                     <a href="{{ route('cookie') }}">Cookie Policy</a>
                     <a href="{{ route('terms') }}">Terms of use</a>
                     <a href="{{ route('faq') }}">Q&A</a>

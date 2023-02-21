@@ -8,6 +8,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
 Route::get('/faq', [PagesController::class, 'faq'])->name('faq');
 Route::get('/courses-section', [PagesController::class, 'courseSection'])->name('course.section');
 Route::get('/explore-view', [PagesController::class, 'exploreView'])->name('explore.view');
+Route::post('/contact', [ContactController::class, 'contact'])->name('send.contact');
 
 Route::group(['middleware' => 'auth'], function (){
 
