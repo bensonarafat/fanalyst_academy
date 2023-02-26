@@ -45,15 +45,10 @@
                                                     <div class="mp4 video-box" style="display: block;">
                                                         <div class="new-section">
                                                             <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
+                                                                <div class="col-lg-12 col-md-12">
                                                                     <label for="">Video (mp4)</label><br/>
                                                                     <input type="file" accept="video/mp4,video/x-m4v,video/*" name="courseVideo"/>
                                                                     <input type="hidden" name="courseVideoSpan" value="{{ $lecture->media_video }}">
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    <label for="">Thumbnail (jpg,png)</label> <br/>
-                                                                    <input type="file" accept="image/*" name="courseThumbnail"/>
-                                                                    <input type="hidden" name="courseThumbnailSpan" value="{{ $lecture->media_thumbnail }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -77,6 +72,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <label for="">Thumbnail (jpg,png)</label> <br/>
+                                                        <input type="file" accept="image/*" name="courseThumbnail"/>
+                                                        <input type="hidden" name="courseThumbnailSpan" value="{{ $lecture->media_thumbnail }}">
                                                     </div>
                                                 </div>
                                             </div>

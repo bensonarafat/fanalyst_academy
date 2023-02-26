@@ -1311,7 +1311,7 @@ i.icon1 {
 }
 
 .vdtodt .vdt14::after {
-    content: 'â€¢';
+    content: '•';
     margin: 0 4px;
 }
 

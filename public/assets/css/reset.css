@@ -135,11 +135,11 @@ element.style {
 }
 
 @media screen and (max-width: 1350px){
-.css-1mjixri {
-    display: inline-block;
-    width: auto;
-    height: auto;
-}
+    .css-1mjixri {
+        display: inline-block;
+        width: auto;
+        height: auto;
+    }
 }
 
 .css-1mjixri {

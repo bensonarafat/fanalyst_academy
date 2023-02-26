@@ -53,7 +53,7 @@
 
     <body>
 
-        <header class="header clearfix">
+        <header class="header clearfix xheader">
             @auth
                 <button type="button" id="toggleMenu" class="toggle_menu">
                     <i class="uil uil-bars"></i>
@@ -96,10 +96,12 @@
             <div class="header_right">
                 <ul>
                     @guest
-                    <li class="nav__other nav__last">
+                    <li class="nav__other">
                         <a href="{{ route('explore.view') }}"><strong>Explore</strong></a>
                     </li>
-
+                    <li class="nav__other nav__last">
+                        <a href="{{ route('contact') }}"><strong>Contact</strong></a>
+                    </li>
                     @endguest
                     {{-- @guest
                         <li class="nav__other">
@@ -194,6 +196,57 @@
             </div>
         </header>
 
+        <header class="mobile_header header" style="display:none;">
+            <a href="{{ route('explore.view') }}" class="option_links text-center" title="cart">
+                <div class="d-flex flex-column">
+                    <i class="uil uil-bars"></i>
+                    <span style="font-size:11px;">Explore</span>
+                </div>
+            </a>
+            <a href="{{ route('login') }}" class="option_links text-center" title="cart">
+                <div class="d-flex flex-column">
+                    <i class="uil uil-user"></i>
+                    @auth
+                        <span style="font-size:11px;">Account</span>
+                    @endauth
+                    @guest
+                        <span style="font-size:11px;">Login</span>
+                    @endguest
+                </div>
+            </a>
+            <div class="main_logo" id="logo">
+                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:110px;"/></a>
+                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:110px;" alt="" /></a>
+            </div>
+            <a href="{{ route('contact') }}" class="option_links text-center" title="cart">
+                <div class="d-flex flex-column">
+                    <i class="uil uil-phone"></i>
+                    <span style="font-size:11px;">Contact</span>
+                </div>
+            </a>
+            <a href="{{ route('cart') }}" class="option_links text-center" title="cart">
+                <div class="d-flex flex-column">
+                    <i class="uil uil-shopping-cart-alt"></i><span class="noti_count">{{ countInCart() }}</span>
+                    <span style="font-size:11px;">Cart</span>
+                </div>
+            </a>
+        </header>
+
+        <style>
+            .mobile_header{
+                display: none !important;
+                justify-content: space-evenly;
+            }
+            @media only screen and (max-width: 768px) {
+                /* For mobile phones: */
+                .mobile_header {
+                   display: flex !important;
+                }
+                .xheader{
+                   display: none !important;
+                }
+            }
+        </style>
         @auth
             <nav class="vertical_nav">
                 <div class="left_section menu_left" id="js-menu">
@@ -359,6 +412,7 @@
         <script src="{{ asset("assets/js/night-mode.js") }}"></script>
         <script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
         <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+
         <script>
             $(".add-instructor-tab").steps({
                 onFinish: function () {
@@ -366,11 +420,7 @@
                 },
             });
 
-            $("#add-course-tab").steps({
-                onFinish: function () {
-                    $('#course-submittion').submit();
-                },
-            });
+
         </script>
         <script>
             $(function () {

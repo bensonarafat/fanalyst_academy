@@ -34,7 +34,6 @@
             <div class="row">
                 <div class="col-lg-6">
                         <div class="title126">
-                            <h2>Contact Us</h2>
                             <p>Send us a message and we'll get back to you very soon</p>
                         </div>
 
@@ -71,21 +70,17 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact_info">
-                        <div class="checkout_title">
-                            <h4>Contact Information</h4>
-                            <img src="{{ asset('assets/images/line.svg') }}" alt="" />
-                        </div>
                         <ul class="contact_list_info">
                             <li>
                                 <div class="txt_cntct">
-                                    <span class="cntct_895"><i class="uil uil-envelope"></i>Email Address :</span>
-                                    <p><a class="__cf_email__"  >info@fanalystacademy.org</p>
+                                    <span class="cntct_895"><i class="uil uil-envelope"></i>Email:</span>
+                                    <p><a class="mailto:support@fanalystacademy.org">support@fanalystacademy.org</p>
                                 </div>
                             </li>
                             <li>
                                 <div class="txt_cntct">
-                                    <span class="cntct_895"><i class="uil uil-mobile-android-alt"></i>Phone Number :</span>
-                                    <p>08089990192</p>
+                                    <span class="cntct_895"><i class="uil uil-mobile-android-alt"></i>Phone :</span>
+                                    <p><a href="tel:+2348089990192">08089990192</a></p>
                                 </div>
                             </li>
                         </ul>

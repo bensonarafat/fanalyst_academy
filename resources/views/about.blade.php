@@ -62,8 +62,9 @@
                         <div class="feature125">
                             <img src="{{ asset('assets/images/icons/1.png') }}" style="width:100px;"  alt="">
                             <h4>Quality contents</h4>
-                            <p>We offer relevant and top-notch course materials that are regularly updated
-                                to ensure that our students.</p>
+                            <p>
+                                Our high-quality and up-to-date course materials are designed to enhance our students success.
+                            </p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6">

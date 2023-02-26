@@ -18,7 +18,7 @@
                                     </p>
                                 </video>
                             @elseif($lecture->media_type == 'youtube')
-                                <iframe src="{{ $lecture->media_video }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe  width="640" height="264" src="{!! getYoutubeEmbedUrl($lecture->media_video) !!}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                             @elseif($lecture->media_type == 'url')
                                 <video id="my-video" class="video-js" controls preload="auto" width="640" height="264" poster="{{ asset($lecture->media_thumbnail) }}" data-setup="{}">
                                     <source src="{{ $lecture->media_video }}" type="video/mp4" />

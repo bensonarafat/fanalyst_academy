@@ -49,7 +49,43 @@
         <x-head.tinymce-config/>
     </head>
 
-    <header class="header clearfix">
+    <header class="mobile_header header" style="display:none;">
+        <a href="{{ route('explore.view') }}" class="option_links text-center" title="cart">
+            <div class="d-flex flex-column">
+                <i class="uil uil-bars"></i>
+                <span style="font-size:11px;">Explore</span>
+            </div>
+        </a>
+        <a href="{{ route('login') }}" class="option_links text-center" title="cart">
+            <div class="d-flex flex-column">
+                <i class="uil uil-user"></i>
+                @auth
+                    <span style="font-size:11px;">Account</span>
+                @endauth
+                @guest
+                    <span style="font-size:11px;">Login</span>
+                @endguest
+            </div>
+        </a>
+        <div class="main_logo" id="logo">
+            <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:110px;"/></a>
+            <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:110px;" alt="" /></a>
+        </div>
+        <a href="{{ route('contact') }}" class="option_links text-center" title="cart">
+            <div class="d-flex flex-column">
+                <i class="uil uil-phone"></i>
+                <span style="font-size:11px;">Contact</span>
+            </div>
+        </a>
+        <a href="{{ route('cart') }}" class="option_links text-center" title="cart">
+            <div class="d-flex flex-column">
+                <i class="uil uil-shopping-cart-alt"></i><span class="noti_count">{{ countInCart() }}</span>
+                <span style="font-size:11px;">Cart</span>
+            </div>
+        </a>
+    </header>
+
+    <header class="header clearfix xheader">
         @auth
             <button type="button" id="toggleMenu" class="toggle_menu">
                 <i class="uil uil-bars"></i>
@@ -90,10 +126,12 @@
         <div class="header_right">
             <ul>
                 @guest
-                    <li class="nav__other nav__last">
+                    <li class="nav__other">
                         <a href="{{ route('explore.view') }}"><strong>Explore</strong></a>
                     </li>
-
+                    <li class="nav__other nav__last">
+                        <a href="{{ route('contact') }}"><strong>Contact</strong></a>
+                    </li>
                 @endguest
                 @auth
                     <li>
@@ -170,6 +208,21 @@
         </div>
     </header>
 
+    <style>
+        .mobile_header{
+            display: none !important;
+            justify-content: space-evenly;
+        }
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .mobile_header {
+               display: flex !important;
+            }
+            .xheader{
+               display: none !important;
+            }
+        }
+    </style>
     @yield('content')
 
     <script data-cfasync="false" src="{{ asset("assets/cloudflare-static/email-decode.min.js") }}"></script>

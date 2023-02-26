@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    @include('components.alert')
+
                     <form action="{{ route('update.course') }}" enctype="multipart/form-data" id="course-submittion" method="post">
                         @csrf
                         <div class="course_tabs_1">
@@ -44,6 +44,12 @@
                                         </a>
                                     </li>
                                 </ul>
+                                {{-- error --}}
+                                <div class="alert alert-danger alert-dismissible fade hidden js_display_error" role="alert">
+                                    <strong>Error!</strong> Opps Something went wrong
+                                    <div class="error_append"></div>
+                                </div>
+                                {{--  --}}
                                 <div class="step-content">
                                     <div class="step-tab-panel step-tab-info active" id="tab_step1">
                                         <div class="tab-from-content">
@@ -57,7 +63,7 @@
                                                             <div class="ui search focus mt-30 lbel25">
                                                                 <label>Course Title*</label>
                                                                 <div class="ui left icon input swdh19">
-                                                                    <input class="prompt srch_explore" type="text" placeholder="Course title here" required name="title" data-purpose="edit-course-title" maxlength="60" id="main[title]" value="{{ $course->title }}" />
+                                                                    <input class="prompt srch_explore" type="text" placeholder="Course title here" required name="title" data-purpose="edit-course-title" maxlength="60" id="title" value="{{ $course->title }}" />
                                                                 </div>
                                                                 <div class="help-block">(Please make this a maximum of 100 characters and unique.)</div>
                                                             </div>
@@ -67,7 +73,7 @@
                                                                 <label>Short Description*</label>
                                                                 <div class="ui form swdh30">
                                                                     <div class="field">
-                                                                        <textarea rows="3" name="short_description" id="" required placeholder="Short description here...">{{ $course->short_description }}</textarea>
+                                                                        <textarea rows="3" name="short_description" id="short_description" required placeholder="Short description here...">{{ $course->short_description }}</textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="help-block">220 words</div>
@@ -78,7 +84,8 @@
                                                                 <label>Course Description*</label>
                                                                 <div class="ui form swdh30">
                                                                     <div class="field">
-                                                                        <textarea id="myeditorinstance" name="description" required>{{ $course->description }}</textarea>
+                                                                        <textarea rows="3" name="description" id="description" required placeholder="description here...">{{ $course->description }}</textarea>
+                                                                        {{-- <textarea id="myeditorinstance" name="description" required>{{ $course->description }}</textarea> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -110,7 +117,7 @@
                                                             <div class="mt-30 lbel25">
                                                                 <label>Course Category*</label>
                                                             </div>
-                                                            <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" required>
+                                                            <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category" required>
                                                                 <option value="">Select category</option>
                                                                 @foreach ($categories as $row)
                                                                     <option value="{{ $row->id }}" @if($row->id == $course->category) selected @endif>{{ $row->name }}</option>
@@ -130,15 +137,15 @@
                                             <div class="lecture-video-dt mb-30">
                                                 <span class="video-info">Intro Course overview provider type. (.mp4, YouTube)</span>
                                                 <div class="video-category">
-                                                    <label><input type="radio" name="courseMediaType" value="mp4" checked /><span>HTML5(mp4)</span></label>
-                                                    <label><input type="radio" name="courseMediaType" value="url" /><span>External URL</span></label>
-                                                    <label><input type="radio" name="courseMediaType" value="youtube" /><span>YouTube</span></label>
+                                                    <label><input type="radio" name="courseMediaType" id="mp4" value="mp4" checked /><span>HTML5(mp4)</span></label>
+                                                    <label><input type="radio" name="courseMediaType" id="url" value="url" /><span>External URL</span></label>
+                                                    <label><input type="radio" name="courseMediaType" id="youtube" value="youtube" /><span>YouTube</span></label>
                                                     <div class="mp4 intro-box" style="display: block;">
                                                         <div class="row">
                                                             <div class="col-lg-5 col-md-12">
                                                                 <label for="">Video (mp4)</label><br/>
                                                                 <input type="file" accept="video/mp4,video/x-m4v,video/*" name="courseVideo" id="courseVideo" class="courseVideo"/>
-                                                                <input type="hidden" name="courseVideoSpan" value="{{ $course->media_video }}">
+                                                                <input type="hidden" id="courseVideoSpan" name="courseVideoSpan" value="{{ $course->media_video }}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,7 +179,7 @@
                                                         <div class="thumb-item">
                                                             <label for="">Thumbnail (jpg,png)</label> <br/>
                                                             <input type="file" accept="image/*" name="courseThumbnail" id="courseThumbnail" class="courseThumbnail"/>
-                                                            <input type="hidden" name="courseThumbnailSpan" value="{{ $course->media_thumbnail }}">
+                                                            <input type="hidden" id="courseThumbnailSpan" name="courseThumbnailSpan" value="{{ $course->media_thumbnail }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -223,7 +230,7 @@
                                                                             <div class="col-lg-4 col-md-6 col-sm-6">
                                                                                 <div class="loc_group">
                                                                                     <div class="ui left icon input swdh19">
-                                                                                        <input class="prompt srch_explore" type="number" placeholder="&#8358;0" name="amount" id="amount" vale="{{ $course->amount }}" />
+                                                                                        <input class="prompt srch_explore" type="number" placeholder="&#8358;0" name="amount" id="amount" value="{{ $course->amount }}" />
                                                                                     </div>
                                                                                     <span class="slry-dt">&#8358;</span>
                                                                                 </div>
@@ -268,7 +275,7 @@
                                 <div class="step-footer step-tab-pager">
                                     <button data-direction="prev" class="btn btn-default steps_btn">PREVIOUS</button>
                                     <button data-direction="next" class="btn btn-default steps_btn">Next</button>
-                                    <input type="hidden" name="id" value="{{ $course->id }}">
+                                    <input type="hidden" name="course_id" id="course_id" value="{{ $course->id }}">
                                     <button data-direction="finish" style="submit" class="btn btn-default steps_btn">Update</button>
                                 </div>
                             </div>
@@ -281,7 +288,38 @@
     @include('components.footer')
 </div>
 
+<div id="loader-overlay">
+    <div class="child">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="">0%</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #loader-overlay{
+        display: none;
+        width: 100%;
+        height: 100vh;
+        background: #0000008a;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+
+    }
+    #loader-overlay .child {
+        width: 400px;
+        /* Center vertically and horizontally */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 <script src="{{ asset("assets/js/jquery-3.3.1.min.js") }}"></script>
+<script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
 <script>
     $('#is_free').on('change', function(){
         if($(this).is(':checked')){
@@ -292,6 +330,130 @@
             $('.cogs-togglec').addClass('x-hidden');
         }
     });
+    $("#add-course-tab").steps({
+        onFinish: function () {
+            // $('#course-submittion').submit();
+            let courseVideo = $('#courseVideo').prop('files')[0];
+            let courseThumbnail = $('#courseThumbnail').prop('files')[0];
+
+            let courseMediaType = '';
+            if($("#mp4").prop("checked")){
+                    courseMediaType = 'mp4';
+            }else if($("#url").prop("checked")){
+                    courseMediaType = 'url';
+            }else if($("#youtube").prop("checked")){
+                    courseMediaType = 'youtube';
+            }
+
+            let is_free = ($("#is_free").prop("checked") == true ? '1' : '0');
+            let require_login = ($("#require_login").prop("checked") == true ? '1' : '0');
+            let require_enroll = ($("#require_enroll").prop("checked") == true ? '1' : '0');
+
+            if(courseVideo === undefined) courseVideo = null;
+            if(courseThumbnail === undefined) courseThumbnail = null;
+
+            var data = new FormData();
+            data.append('courseVideo', courseVideo);
+            data.append('courseThumbnail', courseThumbnail);
+            data.append('title', $('#title').val());
+            data.append('short_description', $('#short_description').val());
+            data.append('description', $('#description').val());
+            data.append('will_learn', $('#will_learn').val());
+            data.append('prerequisites', $('#prerequisites').val());
+            data.append('category', $('#category').val());
+            data.append('courseURL', $('#courseURL').val());
+            data.append('courseYoutube', $('#courseYoutube').val());
+            data.append('amount', $('#amount').val());
+            data.append('discount', $('#discount').val());
+            data.append('courseMediaType', courseMediaType);
+            data.append('is_free', is_free);
+            data.append('id',  $('#course_id').val());
+            data.append('require_login', require_login);
+            data.append('require_enroll', require_enroll);
+            data.append('courseThumbnailSpan', $('#courseThumbnailSpan').val());
+            data.append('courseVideoSpan', $('#courseVideoSpan').val());
+
+            const BASE_URL = "{{ url('/') }}";
+            const REQUEST_URL = "<?=Request::url()?>";
+            let CSRF = "{{ csrf_token() }}";
+
+
+            $.ajax({
+                url: BASE_URL + "/api/courses/update-course",
+                method:"POST",
+                data:data,
+                contentType: false,
+                cache: false,
+                processData: false,
+                headers: {'X-CSRF-TOKEN': CSRF},
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+
+
+                    // Upload progress
+                    xhr.upload.addEventListener("progress", function(evt){
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            progressbar_process(percentComplete);
+                        }
+                }, false);
+
+
+                return xhr;
+                },
+                beforeSend:function()
+                {
+                    $('.error_append').html('');
+                    $('#loader-overlay').css('display', 'block');
+                    $('.js_display_error').removeClass('show');
+                    $('.js_display_error').addClass( 'hidden');
+                },
+                success:function(data){
+                    $('#loader-overlay').css('display', 'none');
+                    if(data.status){
+                        window.location.href = BASE_URL + '/courses/course/' + data.id;
+                    }else{
+                        let html = `<ul>
+                                        <li>${data.error}</li>
+                                    </ul>`;
+                        $('.error_append').html(html);
+                        $('.js_display_error').addClass('show');
+                        $('.js_display_error').removeClass('hidden');
+                    }
+
+                },
+                error: err =>{
+                    if(err.status == 422){
+                        let obj =  err.responseJSON;
+                        let html = `<ul>`;
+                        Object.entries(obj).forEach((item, index) => {
+                            html += `<li>${item[1][0]}</li>`;
+                        })
+                        html += `</ul>`;
+
+                        $('.error_append').html(html);
+                    }else{
+                        let html = `<ul>
+                                        <li>There seem to be an error try again letter</li>
+                                    </ul>`;
+                        $('.error_append').html(html);
+                    }
+                    $('.js_display_error').addClass('show');
+                    $('.js_display_error').removeClass('hidden');
+                    $('#loader-overlay').css('display', 'none');
+                    $('.progress-bar').css('width', '0%');
+                    $('.progress-bar').text('0%');
+                }
+            });
+        },
+        });
+
+        function progressbar_process(percentage){
+            let percent = Math.round(percentage * 100);
+            $('.progress-bar').css('width', percent + '%');
+            $('.progress-bar').text( percent + '%');
+
+        }
 </script>
 
 @endsection

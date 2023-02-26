@@ -39,7 +39,7 @@ class ContactController extends Controller
             ];
 
             Mail::to($request->email)->send(new SendMailUser($data));
-            Mail::to('info@fanalystacademy.org')->send(new SendMailAdmin($data));
+            Mail::to('support@fanalystacademy.org')->send(new SendMailAdmin($data));
 
             return redirect()->back()->with(["success" => "Message sent"]);
         } catch (Exception $e) {

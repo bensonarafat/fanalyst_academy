@@ -115,7 +115,13 @@ class PagesController extends Controller
     }
 
     public function analysis(){
-        $courses = Course::where(['status' => 'active', 'instructor' => auth()->user()->id])->latest()->get();
+
+        if(auth()->user()->type == "instructor"){
+            $courses = Course::where(['status' => 'active', 'instructor' => auth()->user()->id])->latest()->get();
+        }else{
+            $courses = Course::where('status' , 'active', )->latest()->get();
+        }
+
         return view('dashboard.analysis.index', compact('courses'));
     }
 
@@ -126,7 +132,11 @@ class PagesController extends Controller
 
     public function courses(){
         if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
-            $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+            if(auth()->user()->type == "instructor"){
+                $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+            }else{
+                $courses = Course::latest()->get();
+            }
         }else{
             $courses = Course::where('status', 'active')->latest()->get();
         }

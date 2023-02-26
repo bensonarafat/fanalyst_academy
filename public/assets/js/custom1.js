@@ -143,9 +143,9 @@ expandLink.click(function(){
     var isAllOpen = !$(this).data('isAllOpen');
     console.log({isAllOpen: isAllOpen, contentAreas: contentAreas})
     contentAreas[isAllOpen? 'slideDown': 'slideUp']();
-    
+
     expandLink.text(isAllOpen? 'Collapse All': 'Expand all')
-                .data('isAllOpen', isAllOpen);    
+                .data('isAllOpen', isAllOpen);
 });
 
 
@@ -158,7 +158,7 @@ $('input[name="paymentmethod"]').on('click', function () {
 
 // Right Click Disable
 window.oncontextmenu = function () {
-	return false;
+	return true;
 }
 $(document).keydown(function (event) {
 	if (event.keyCode == 123) {
