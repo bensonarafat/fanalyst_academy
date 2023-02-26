@@ -295,107 +295,149 @@ class CourseController extends Controller
     }
 
     public function storeLecture(Request $request){
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'mediaTypeRaido' => 'required',
-            'courseVideo' =>  'mimes:mp4,ogx,oga,ogv,ogg,webm',
-            'courseThumbnail' =>  'image|mimes:jpg,png,jpeg|max:2048',
-        ]);
+
+        $validator = validator($request->all(),
+            [
+                'title' => 'required',
+                'description' => 'required',
+                'courseThumbnail' =>  'required|image|mimes:jpg,png,jpeg|max:2048',
+            ]);
+
+        if($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
         try {
 
             $video = null;
 
-            if($request->mediaTypeRaido == 'mp4'){
-                if($request->courseVideo == null){
-                    return redirect()->back()->with(["error" => "You must provide a video"]);
+            if($request->courseMediaType == 'mp4'){
+                if($request->courseVideo == null || $request->courseVideo == 'null'){
+                    // return redirect()->back()->with(["error" => "You must provide a video"]);
+                    return response()->json(["status" => false, "error" => "You must provide a video"]);
                 }else{
+                    $validator = validator($request->all(),
+                                [
+                                    'courseVideo' =>  'mimes:mp4,ogx,oga,ogv,ogg,webm',
+                                ]
+                    );
+                    if($validator->fails()) {
+                        return response()->json($validator->errors(), 422);
+                    }
                     $video = SystemFileManager::InternalUploader($request->courseVideo, "videos");
                 }
-            }elseif($request->mediaTypeRaido == 'url'){
+            }elseif($request->courseMediaType == 'url'){
                 if($request->courseURL == null){
-                    return redirect()->back()->with(["error" => "You must provide a video url"]);
+                    return response()->json(["status" => false, "error" => "You must provide a video url"]);
+                    // return redirect()->back()->with(["error" => "You must provide a video url"]);
                 }else{
                     $video = $request->courseURL;
                 }
-            }else if($request->mediaTypeRaido == 'youtube'){
+            }else if($request->courseMediaType == 'youtube'){
                 if($request->courseYoutube == null){
-                    return redirect()->back()->with(["error" => "You must provide a youtube url"]);
+                    // return redirect()->back()->with(["error" => "You must provide a youtube url"]);
+                    return response()->json(["status" => false, "error" => "You must provide a youtube url"]);
                 }else{
                     $video = $request->courseYoutube;
                 }
             }else{
-                return redirect()->back()->with(["error" => "Oops, there was an error"]);
+                return response()->json(["status" => false, "error" => "Oops, there was an error"]);
+                // return redirect()->back()->with(["error" => "Oops, there was an error"]);
             }
             $thumbnail = null;
             if($request->courseThumbnail){
                 $thumbnail = SystemFileManager::InternalUploader($request->courseThumbnail, "thumbnails");
             }
 
-            CurriculumLecture::create(
+            $CurriculumLecture = CurriculumLecture::create(
                 [
                     'courseid' => $request->courseid,
                     'curriculumid' => $request->curriculumid,
                     'title' => $request->title,
                     'description' => $request->description,
                     'media_video' => $video,
-                    'media_type' => $request->mediaTypeRaido,
+                    'media_type' => $request->courseMediaType,
                     'media_thumbnail'=> $thumbnail,
                 ]
             );
-
-            return redirect()->back()->with(['success' => 'New Lecture added']);
+            return response()->json(['status' => true, 'data' => $CurriculumLecture], 200);
+            // return redirect()->back()->with(['success' => 'New Lecture added']);
         } catch (Exception $e) {
-
-            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+            return response()->json(["status" => false, "error" => "Oops, there was an error"]);
+            // return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
 
     public function updateLecture(Request $request){
-        $request->validate([
+
+        $validator = validator($request->all(),
+        [
             'title' => 'required',
             'description' => 'required',
-            'mediaTypeRaido' => 'required',
+            'courseMediaType' => 'required',
             'id' => 'required',
-            'courseVideo' =>  'mimes:mp4,ogx,oga,ogv,ogg,webm',
-            'courseThumbnail' =>  'image|mimes:jpg,png,jpeg|max:2048',
         ]);
+
+        if($validator->fails()) {
+            // return as appropriate
+            return response()->json($validator->errors(), 422);
+        }
 
         try {
 
             $video = null;
 
-            if($request->mediaTypeRaido == 'mp4'){
-                if($request->courseVideo == null){
-                    if($request->courseVideoSpan == null){
-                        return redirect()->back()->with(["error" => "You must provide a video"]);
+            if($request->courseMediaType == 'mp4'){
+                if($request->courseVideo == null || $request->courseVideo == 'null'){
+                    if($request->courseVideoSpan == null || $request->courseVideoSpan == 'null'){
+                        return response()->json(["status" => false, "error" => "You must provide a video"]);
                     }else{
                         $video = $request->courseVideoSpan;
                     }
                 }else{
+                    $validator = validator($request->all(),
+                        [
+                            'courseVideo' =>  'mimes:mp4,ogx,oga,ogv,ogg,webm',
+                        ]
+                    );
+                    if($validator->fails()) {
+                        return response()->json($validator->errors(), 422);
+                    }
                     $video = SystemFileManager::InternalUploader($request->courseVideo, "videos");
                 }
+
             }elseif($request->mediaTypeRaido == 'url'){
                 if($request->courseURL == null){
-                    return redirect()->back()->with(["error" => "You must provide a video url"]);
+                    return response()->json(["status" => false, "error" => "You must provide a video url"]);
+                    // return redirect()->back()->with(["error" => "You must provide a video url"]);
                 }else{
                     $video = $request->courseURL;
                 }
             }else if($request->mediaTypeRaido == 'youtube'){
                 if($request->courseYoutube == null){
-                    return redirect()->back()->with(["error" => "You must provide a youtube url"]);
+                    return response()->json(["status" => false, "error" => "You must provide a youtube url"]);
+                    // return redirect()->back()->with(["error" => "You must provide a youtube url"]);
                 }else{
                     $video = $request->courseYoutube;
                 }
             }else{
-                return redirect()->back()->with(["error" => "Oops, there was an error"]);
+                return response()->json(["status" => false, "error" => "Oops, there was an error"]);
+                // return redirect()->back()->with(["error" => "Oops, there was an error"]);
             }
             $thumbnail = null;
-            if($request->courseThumbnail){
-                $thumbnail = SystemFileManager::InternalUploader($request->courseThumbnail, "thumbnails");
-            }else{
+            if($request->courseThumbnail == null || $request->courseThumbnail  == 'null'){
                 $thumbnail = $request->courseThumbnailSpan;
+            }else{
+                $validator = validator($request->all(),
+                    [
+                        'courseThumbnail' =>  'image|mimes:jpg,png,jpeg|max:2048',
+                    ]
+                );
+                if($validator->fails()) {
+                    return response()->json($validator->errors(), 422);
+                }
+                $thumbnail = SystemFileManager::InternalUploader($request->courseThumbnail, "thumbnails");
+
             }
 
             CurriculumLecture::where('id', $request->id)->update(
@@ -403,15 +445,18 @@ class CourseController extends Controller
                     'title' => $request->title,
                     'description' => $request->description,
                     'media_video' => $video,
-                    'media_type' => $request->mediaTypeRaido,
+                    'media_type' => $request->courseMediaType,
                     'media_thumbnail'=> $thumbnail,
                 ]
             );
+            $lecture = CurriculumLecture::find($request->id);
 
-            return redirect()->back()->with(['success' => 'Lecture updated']);
+            // return redirect()->back()->with(['success' => 'Lecture updated']);
+            return response()->json(['status' => true, 'id' => $lecture->curriculumid], 200);
         } catch (Exception $e) {
+            return response()->json(["status" => false, "error" => "Oops, there was an error", 'e' => $e->getMessage()]);
 
-            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+            // return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
     public function deleteLecture($id){

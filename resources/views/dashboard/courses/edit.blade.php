@@ -45,7 +45,7 @@
                                     </li>
                                 </ul>
                                 {{-- error --}}
-                                <div class="alert alert-danger alert-dismissible fade hidden js_display_error" role="alert">
+                                <div class="alert alert-danger alert-dismissible x-hidden js_display_error" role="alert">
                                     <strong>Error!</strong> Opps Something went wrong
                                     <div class="error_append"></div>
                                 </div>
@@ -405,8 +405,8 @@
                 {
                     $('.error_append').html('');
                     $('#loader-overlay').css('display', 'block');
-                    $('.js_display_error').removeClass('show');
-                    $('.js_display_error').addClass( 'hidden');
+                    $('.js_display_error').removeClass('y-hidden');
+                    $('.js_display_error').addClass( 'x-hidden');
                 },
                 success:function(data){
                     $('#loader-overlay').css('display', 'none');
@@ -417,8 +417,8 @@
                                         <li>${data.error}</li>
                                     </ul>`;
                         $('.error_append').html(html);
-                        $('.js_display_error').addClass('show');
-                        $('.js_display_error').removeClass('hidden');
+                        $('.js_display_error').addClass('y-hidden');
+                        $('.js_display_error').removeClass('x-hidden');
                     }
 
                 },
@@ -438,8 +438,8 @@
                                     </ul>`;
                         $('.error_append').html(html);
                     }
-                    $('.js_display_error').addClass('show');
-                    $('.js_display_error').removeClass('hidden');
+                    $('.js_display_error').addClass('y-hidden');
+                    $('.js_display_error').removeClass('x-hidden');
                     $('#loader-overlay').css('display', 'none');
                     $('.progress-bar').css('width', '0%');
                     $('.progress-bar').text('0%');

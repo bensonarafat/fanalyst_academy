@@ -23,7 +23,11 @@ Route::group(['prefix' => 'courses'], function(){
     Route::post('/create', [CourseController::class, 'storeCourse']);
     Route::post('/update-course', [CourseController::class, 'updateCourse']);
     Route::group(['prefix' => 'curriculum'], function(){
-        Route::post('/update', [CourseController::class, 'updateCurriculum']);
-        Route::post('/store', [CourseController::class, 'newCurriculum']);
+        // --
+        // --
+        Route::group(['prefix' => 'lecture'], function(){
+            Route::post('/store', [CourseController::class, 'storeLecture']);
+            Route::post('/update', [CourseController::class, 'updateLecture']);
+        });
     });
 });
