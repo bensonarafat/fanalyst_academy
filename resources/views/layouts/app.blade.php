@@ -65,8 +65,8 @@
             @endauth
 
             <div class="main_logo" id="logo">
-                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:150px;"/></a>
-                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:150px;" alt="" /></a>
+                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:100px;"/></a>
+                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:100px;" alt="" /></a>
             </div>
 
             @auth

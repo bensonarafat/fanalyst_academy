@@ -35,7 +35,7 @@
                                 <a href="https://twitter.com/FanalystAcademy?t=JsmagNpS81tamFyVL0IYvA&s=08"><i class="fab fa-twitter"></i></a>
                                 <a href="https://www.linkedin.com/company/fanalyst-academy/"><i class="fab fa-linkedin-in"></i></a>
                                 <a href="https://instagram.com/fanalystacademy?igshid=YmMyMTA2M2Y="><i class="fab fa-instagram"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
+                                <a href="https://youtube.com/@fanalystacademy"><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>
                     </div>

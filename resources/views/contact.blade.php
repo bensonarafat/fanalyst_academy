@@ -98,6 +98,9 @@
                                 <li>
                                     <a href="https://instagram.com/fanalystacademy?igshid=YmMyMTA2M2Y=" class="yu"><i class="fab fa-instagram"></i></a>
                                 </li>
+                                <li>
+                                    <a href="https://youtube.com/@fanalystacademy"><i class="fab fa-youtube"></i></a>
+                                </li>
                             </ul>
                         </div>
                     </div>

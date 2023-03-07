@@ -286,8 +286,8 @@
                                                 <a href="javascript:void(0)" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
                                                     <div class="section-header-left">
                                                         <span class="section-title-wrapper">
-                                                            <i class="uil uil-presentation-play crse_icon"></i>
-                                                            <span class="section-title-text">{{ $row->title }}</span>
+                                                            <i class="uil uil-angle-down crse_icon"></i>
+                                                            <span class="section-title-text">{{ $row->name }}</span>
                                                         </span>
                                                     </div>
                                                     <div class="section-header-right">
