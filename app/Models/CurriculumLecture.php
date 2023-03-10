@@ -19,5 +19,7 @@ class CurriculumLecture extends Model
         'media_video',
         'media_type',
         'media_thumbnail',
+        'lecture_type',
+        'document',
     ];
 }

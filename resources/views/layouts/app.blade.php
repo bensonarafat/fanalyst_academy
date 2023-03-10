@@ -304,7 +304,21 @@
                                     @endforeach
                                 </ul>
                             </li>
+                            <li class="menu--item menu--item__has_sub_menu">
+                                <label class="menu--link" title="Tests">
+                                    <i class="uil uil-clipboard-alt menu--icon"></i>
+                                    <span class="menu--label">Quiz</span>
+                                </label>
+                                <ul class="sub_menu">
+                                    <li class="sub_menu--item">
+                                        <a href="certification_test_view.html" class="sub_menu--link">Test View</a>
+                                    </li>
+                                    <li class="sub_menu--item">
+                                        <a href="certification_test__result.html" class="sub_menu--link">Quiz Result</a>
+                                    </li>
 
+                                </ul>
+                            </li>
                             {{-- <li class="menu--item">
                                 <a href="{{ route('saved') }}" class="menu--link" title="Saved Courses">
                                     <i class="uil uil-heart-alt menu--icon"></i>

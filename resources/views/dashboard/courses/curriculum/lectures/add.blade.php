@@ -36,53 +36,71 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="lecture-video-dt mt-30">
-                                    <span class="video-info">Select your preferred video type. (.mp4, YouTube etc.)</span>
-                                    <div class="video-category">
-                                        <label><input type="radio" name="mediaTypeRaido" id="mp4" value="mp4" checked="" /><span>HTML5(mp4)</span></label>
-                                        <label><input type="radio" name="mediaTypeRaido" id="url" value="url" /><span>External URL</span></label>
-                                        <label><input type="radio" name="mediaTypeRaido" id="youtube" value="youtube" /><span>YouTube</span></label>
-                                        <div class="mp4 video-box" style="display: block;">
-                                            <div class="new-section">
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <label for="">Video (mp4)</label><br/>
-                                                        <input type="file" accept="video/mp4,video/x-m4v,video/*" id="courseVideo" name="courseVideo"/>
-                                                    </div>
 
+                                <ul class="nav nav-tabs mt-30" id="myTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                      <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Video</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                      <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Document</button>
+                                    </li>
+
+                                  </ul>
+                                  <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="lecture-video-dt mt-30">
+                                            <span class="video-info">Select your preferred video type. (.mp4, YouTube etc.)</span>
+                                            <div class="video-category">
+                                                <label><input type="radio" name="mediaTypeRaido" id="mp4" value="mp4" checked="" /><span>HTML5(mp4)</span></label>
+                                                <label><input type="radio" name="mediaTypeRaido" id="url" value="url" /><span>External URL</span></label>
+                                                <label><input type="radio" name="mediaTypeRaido" id="youtube" value="youtube" /><span>YouTube</span></label>
+                                                <div class="mp4 video-box" style="display: block;">
+                                                    <div class="new-section">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <label for="">Video (mp4)</label><br/>
+                                                                <input type="file" accept="video/mp4,video/x-m4v,video/*" id="courseVideo" name="courseVideo"/>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="url video-box">
-                                            <div class="new-section">
-                                                <div class="ui search focus mt-30 lbel25">
-                                                    <label>External URL*</label>
-                                                    <div class="ui left icon input swdh19">
-                                                        <input class="prompt srch_explore" type="text" placeholder="External Video URL" name="courseURL" id="courseURL" value="" />
+                                                <div class="url video-box">
+                                                    <div class="new-section">
+                                                        <div class="ui search focus mt-30 lbel25">
+                                                            <label>External URL*</label>
+                                                            <div class="ui left icon input swdh19">
+                                                                <input class="prompt srch_explore" type="text" placeholder="External Video URL" name="courseURL" id="courseURL" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="youtube video-box">
+                                                    <div class="new-section">
+                                                        <div class="ui search focus mt-30 lbel25">
+                                                            <label>Youtube URL*</label>
+                                                            <div class="ui left icon input swdh19">
+                                                                <input class="prompt srch_explore" type="text" placeholder="Youtube Video URL" name="courseYoutube" id="courseYoutube" value="" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="youtube video-box">
-                                            <div class="new-section">
-                                                <div class="ui search focus mt-30 lbel25">
-                                                    <label>Youtube URL*</label>
-                                                    <div class="ui left icon input swdh19">
-                                                        <input class="prompt srch_explore" type="text" placeholder="Youtube Video URL" name="courseYoutube" id="courseYoutube" value="" />
-                                                    </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    <label for="">Thumbnail (jpg,png)</label> <br/>
+                                                    <input type="file" accept="image/*" id="courseThumbnail" name="courseThumbnail"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12">
-                                            <label for="">Thumbnail (jpg,png)</label> <br/>
-                                            <input type="file" accept="image/*" id="courseThumbnail" required name="courseThumbnail"/>
+                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="col-lg-12 col-md-12 mt-20">
+                                            <label for="">Document (jpg,pdf,docx)</label> <br/>
+                                            <input type="file" id="courseDocument" name="courseDocument" class="form-control"/>
                                         </div>
                                     </div>
-                                </div>
-
-
+                                  </div>
                             </div>
                         </div>
                     </div>
@@ -91,6 +109,7 @@
             <div class="modal-footer">
                 <input type="hidden" name="courseid" id="courseid" value="{{ $courseid }}">
                 <input type="hidden" name="curriculumid" id="curriculumid" value="{{ $curriculumid }}">
+                <input type="hidden" name="lectureType" id="lectureType" value="video">
                 <button type="button" class="main-btn cancel" data-dismiss="modal">Close</button>
                 <button type="button" class="js_submit_lecture main-btn">Add Lecture</button>
             </div>
@@ -140,7 +159,7 @@
                                     <tr>
                                         <th class="text-center" scope="col">SN</th>
                                         <th>Title</th>
-                                        <th>Media Type</th>
+                                        <th>Lecture Type</th>
                                         <th scope="col">Created Date</th>
                                         <th class="text-center" scope="col">Action</th>
                                     </tr>
@@ -150,7 +169,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $row->title }}</td>
-                                            <td>{{ $row->media_type }}</td>
+                                            <td>{{ ucfirst($row->lecture_type) }}</td>
                                             <td>{{ \Carbon\Carbon::parse($row->created_at)->format('d M, Y') }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('edit.lecture', $row->id) }}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
@@ -202,6 +221,7 @@
     $('.js_submit_lecture').on('click', function(){
         let courseVideo = $('#courseVideo').prop('files')[0];
         let courseThumbnail = $('#courseThumbnail').prop('files')[0];
+        let courseDocument = $('#courseDocument').prop('files')[0];
 
         let courseMediaType = '';
         if($("#mp4").prop("checked")){
@@ -213,9 +233,13 @@
         }
 
         if(courseVideo === undefined) courseVideo = null;
+        if(courseDocument === undefined) courseDocument = null;
+        if(courseThumbnail === undefined) courseThumbnail = null;
+
         var data = new FormData();
         data.append('courseVideo', courseVideo);
         data.append('courseThumbnail', courseThumbnail);
+        data.append('courseDocument', courseDocument);
         data.append('title', $('#title').val());
         data.append('description', $('#description').val());
         data.append('courseMediaType', courseMediaType);
@@ -223,6 +247,7 @@
         data.append('courseYoutube', $('#courseYoutube').val());
         data.append('courseid', $('#courseid').val());
         data.append('curriculumid', $('#curriculumid').val());
+        data.append('lectureType', $('#lectureType').val());
 
         const BASE_URL = "{{ url('/') }}";
         const REQUEST_URL = "<?=Request::url()?>";
@@ -297,5 +322,14 @@
         $('.progress-bar').css('width', percent + '%');
         $('.progress-bar').text( percent + '%');
     }
+
+    $('#myTab button[data-target="#home"]').on('click', function (event) {
+        event.preventDefault();
+        $('#lectureType').val("video");
+    })
+    $('#myTab button[data-target="#profile"]').on('click', function (event) {
+        event.preventDefault();
+        $('#lectureType').val("document");
+    })
 </script>
 @endsection

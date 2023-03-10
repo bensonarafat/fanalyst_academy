@@ -298,19 +298,31 @@
                                                    @foreach ($lectures as $x)
                                                    <div class="lecture-container">
                                                         <div class="left-content">
-                                                            <i class="uil uil-play-circle icon_142"></i>
+                                                            @if($x->lecture_type == "video")
+                                                                <i class="uil uil-play-circle icon_142"></i>
+                                                            @else
+                                                                <i class="uil uil-file icon_142"></i>
+                                                            @endif
                                                             <div class="top">
                                                                 <div class="title">{{ $x->title }}</div>
                                                             </div>
                                                         </div>
                                                         <div class="details">
                                                             @if(auth()->user()->id == $course->instructor)
-                                                                <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
+                                                                @if($x->lecture_type == "video")
+                                                                    <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
+                                                                @else
+                                                                    <a href="{{ asset($x->document) }}" download="">View</a>
+                                                                @endif
                                                             @else
                                                                 @if($enrolled == 0)
                                                                     <a href="javascript:void(0)" class="preview-text">--</a>
                                                                 @else
-                                                                    <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
+                                                                    @if($x->lecture_type == "video")
+                                                                        <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
+                                                                    @else
+                                                                        <a href="{{ asset($x->document) }}" download="">View</a>
+                                                                    @endif
                                                                 @endif
                                                             @endif
                                                         </div>

@@ -247,5 +247,22 @@ class PagesController extends Controller
     public function purchased($status){
         return view('dashboard.purchased', compact('status'));
     }
+
+    // Quiz ---
+    public function addQuiz(){
+        return view("dashboard.quiz.add");
+    }
+
+    public function editQuiz($id){
+        return view("dashboard.quiz.edit");
+    }
+
+    public function addTopic(){
+        return view("dashboard.quiz.topic.add");
+    }
+
+    public function editTopic($id){
+        return view("dashboard.quiz.topic.edit");
+    }
 }
 

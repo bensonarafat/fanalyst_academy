@@ -81,8 +81,10 @@ CREATE TABLE IF NOT EXISTS `curriculum_lecture` (
     `curriculumid` int(11) NOT NULL,
     `title` varchar(255) NOT NULL,
     `description` text NOT NULL,
-    `media_video` varchar(255) NOT NULL,
+    `media_video` varchar(255) NULL DEFAULT NULL,
     `media_type` varchar(255) NOT NULL,
+    `lecture_type` varchar(255) NOT NULL DEFAULT 'video',
+    `document` varchar(255) NULL DEFAULT NULL,
     `media_thumbnail` varchar(255) NULL DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -177,3 +179,29 @@ CREATE TABLE IF NOT EXISTS `contacts` (
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+-- Quiz
+CREATE TABLE IF NOT EXISTS `topics` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `category_id` int(11) NOT NULL,
+    `level` int(11) NOT NULL,
+    `name` int(11) NOT NULL,
+    `time` int(11) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `quiz` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `topic` int(11) NOT NULL,
+    `question` text NOT NULL,
+    `a` text NOT NULL,
+    `b` text NOT NULL,
+    `c` text NOT NULL,
+    `d` text NOT NULL,
+    `answer` text NOT NULL,
+    `answer_option` varchar(255) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

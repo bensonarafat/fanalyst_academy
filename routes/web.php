@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,4 +148,23 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 
     Route::get('/purchased/{status}', [PagesController::class, 'purchased'])->name('purchased');
+
+
+    Route::group(["prefix" => "quiz"], function() {
+
+        Route::get("/add", [PagesController::class, "addQuiz"])->name('add.quiz');
+        Route::get("/edit/{id}", [PagesController::class, "editQuiz"])->name('edit.quiz');
+        Route::post('/store', [QuizController::class, "storeQuiz"])->name('store.quiz');
+        Route::post('/update', [QuizController::class, "updateQuiz"])->name('update.quiz');
+        Route::delete('/delete/{id}', [QuizController::class, "deleteQuiz"])->name('delete.quiz');
+
+        Route::group(["prefix" => "topic"], function(){
+            Route::get('/add', [PagesController::class, "addTopic"])->name('add.topic');
+            Route::get('/edit/{id}', [PagesController::class, "editTopic"])->name('edit.topic');
+            Route::post('/store', [QuizController::class, "storeTopic"])->name('store.topic');
+            Route::post('/update', [QuizController::class, "updateTopic"])->name('update.topic');
+            Route::delete('/delete/{id}', [QuizController::class, "deleteTopic"])->name('delete.topic');
+        });
+
+    });
 });

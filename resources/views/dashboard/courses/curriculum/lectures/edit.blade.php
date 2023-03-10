@@ -42,52 +42,73 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="lecture-video-dt mt-30">
-                                                <span class="video-info">Select your preferred video type. (.mp4, YouTube etc.)</span>
-                                                <div class="video-category">
-                                                    <label><input type="radio" name="mediaTypeRaido" id="mp4" value="mp4" @if($lecture->media_type == 'mp4') checked @endif/><span>HTML5(mp4)</span></label>
-                                                    <label><input type="radio" name="mediaTypeRaido" id="url" value="url" @if($lecture->media_type == 'url') checked @endif /><span>External URL</span></label>
-                                                    <label><input type="radio" name="mediaTypeRaido" id="youtube" value="youtube" @if($lecture->media_type == 'youtube') checked @endif/><span>YouTube</span></label>
-                                                    <div class="mp4 video-box" style="display: block;">
-                                                        <div class="new-section">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12">
-                                                                    <label for="">Video (mp4)</label><br/>
-                                                                    <input type="file" accept="video/mp4,video/x-m4v,video/*" id="courseVideo" name="courseVideo"/>
-                                                                    <input type="hidden" id="courseVideoSpan" name="courseVideoSpan" value="{{ $lecture->media_video }}">
+
+                                            <ul class="nav nav-tabs mt-30" id="myTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                  <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Video</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                  <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Document</button>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                    <div class="lecture-video-dt mt-30">
+                                                        <span class="video-info">Select your preferred video type. (.mp4, YouTube etc.)</span>
+                                                        <div class="video-category">
+                                                            <label><input type="radio" name="mediaTypeRaido" id="mp4" value="mp4" @if($lecture->media_type == 'mp4') checked @endif/><span>HTML5(mp4)</span></label>
+                                                            <label><input type="radio" name="mediaTypeRaido" id="url" value="url" @if($lecture->media_type == 'url') checked @endif /><span>External URL</span></label>
+                                                            <label><input type="radio" name="mediaTypeRaido" id="youtube" value="youtube" @if($lecture->media_type == 'youtube') checked @endif/><span>YouTube</span></label>
+                                                            <div class="mp4 video-box" style="display: block;">
+                                                                <div class="new-section">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 col-md-12">
+                                                                            <label for="">Video (mp4)</label><br/>
+                                                                            <input type="file" accept="video/mp4,video/x-m4v,video/*" id="courseVideo" name="courseVideo"/>
+                                                                            <input type="hidden" id="courseVideoSpan" name="courseVideoSpan" value="{{ $lecture->media_video }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="url video-box">
+                                                                <div class="new-section">
+                                                                    <div class="ui search focus mt-30 lbel25">
+                                                                        <label>External URL*</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore" type="text" placeholder="External Video URL" id="courseURL" name="courseURL" value="{{ $lecture->media_video }}" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="youtube video-box">
+                                                                <div class="new-section">
+                                                                    <div class="ui search focus mt-30 lbel25">
+                                                                        <label>Youtube URL*</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore" type="text" placeholder="Youtube Video URL" id="courseYoutube" name="courseYoutube" value="{{ $lecture->media_video }}" />
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="url video-box">
-                                                        <div class="new-section">
-                                                            <div class="ui search focus mt-30 lbel25">
-                                                                <label>External URL*</label>
-                                                                <div class="ui left icon input swdh19">
-                                                                    <input class="prompt srch_explore" type="text" placeholder="External Video URL" id="courseURL" name="courseURL" value="{{ $lecture->media_video }}" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="youtube video-box">
-                                                        <div class="new-section">
-                                                            <div class="ui search focus mt-30 lbel25">
-                                                                <label>Youtube URL*</label>
-                                                                <div class="ui left icon input swdh19">
-                                                                    <input class="prompt srch_explore" type="text" placeholder="Youtube Video URL" id="courseYoutube" name="courseYoutube" value="{{ $lecture->media_video }}" />
-                                                                </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <label for="">Thumbnail (jpg,png)</label> <br/>
+                                                                <input type="file" accept="image/*" name="courseThumbnail" id="courseThumbnail"/>
+                                                                <input type="hidden" name="courseThumbnailSpan" id="courseThumbnailSpan" value="{{ $lecture->media_thumbnail }}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12 col-md-12">
-                                                        <label for="">Thumbnail (jpg,png)</label> <br/>
-                                                        <input type="file" accept="image/*" name="courseThumbnail" id="courseThumbnail"/>
-                                                        <input type="hidden" name="courseThumbnailSpan" id="courseThumbnailSpan" value="{{ $lecture->media_thumbnail }}">
+                                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                    <div class="col-lg-12 col-md-12 mt-20">
+                                                        <label for="">Document (jpg,pdf,docx)</label> <br/>
+                                                        <input type="file" id="courseDocument" name="courseDocument" class="form-control"/>
+                                                        <input type="hidden" name="courseDocumentSpan" name="courseDocumentSpan" value="{{ $lecture->document }}">
                                                     </div>
                                                 </div>
                                             </div>
+
 
 
                                         </div>
@@ -97,6 +118,7 @@
 
                             <div class="mt-20">
                                 <input type="hidden" name="id" id="lecture_id" value="{{ $lecture->id }}">
+                                <input type="hidden" name="lectureType" id="lectureType" value="{{ $lecture->lecture_type }}">
                                 <button type="button" class="main-btn js_update_lecture">Update Lecture</button>
                             </div>
                         </form>
@@ -140,6 +162,7 @@
     $('.js_update_lecture').on('click', function(){
         let courseVideo = $('#courseVideo').prop('files')[0];
         let courseThumbnail = $('#courseThumbnail').prop('files')[0];
+        let courseDocument = $('#courseDocument').prop('files')[0];
 
         let courseMediaType = '';
         if($("#mp4").prop("checked")){
@@ -152,10 +175,12 @@
 
         if(courseVideo === undefined) courseVideo = null;
         if(courseThumbnail === undefined) courseThumbnail = null;
+        if(courseThumbnail === undefined) courseThumbnail = null;
 
         var data = new FormData();
         data.append('courseVideo', courseVideo);
         data.append('courseThumbnail', courseThumbnail);
+        data.append('courseDocument', courseDocument);
         data.append('title', $('#title').val());
         data.append('description', $('#description').val());
         data.append('courseMediaType', courseMediaType);
@@ -164,6 +189,8 @@
         data.append('id', $('#lecture_id').val());
         data.append('courseThumbnailSpan', $('#courseThumbnailSpan').val());
         data.append('courseVideoSpan', $('#courseVideoSpan').val());
+        data.append('courseDocumentSpan', $('#courseDocumentSpan').val());
+        data.append('lectureType', $('#lectureType').val());
 
         const BASE_URL = "{{ url('/') }}";
         const REQUEST_URL = "<?=Request::url()?>";
@@ -238,5 +265,13 @@
         $('.progress-bar').css('width', percent + '%');
         $('.progress-bar').text( percent + '%');
     }
+    $('#myTab button[data-target="#home"]').on('click', function (event) {
+        event.preventDefault();
+        $('#lectureType').val("video");
+    })
+    $('#myTab button[data-target="#profile"]').on('click', function (event) {
+        event.preventDefault();
+        $('#lectureType').val("document");
+    })
 </script>
 @endsection
