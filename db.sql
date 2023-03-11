@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `topics` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `category_id` int(11) NOT NULL,
     `level` int(11) NOT NULL,
-    `name` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL,
     `time` int(11) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -202,6 +202,20 @@ CREATE TABLE IF NOT EXISTS `quiz` (
     `d` text NOT NULL,
     `answer` text NOT NULL,
     `answer_option` varchar(255) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `answers` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `user_id` int(11) NOT NULL,
+    `topic` int(11) NOT NULL,
+    `question` int(11) NOT NULL,
+    `select` varchar(50) NULL DEFAULT NULL,
+    `mark` tinyint(1) NOT NULL DEFAULT 0,
+    `answer` varchar(50) NULL DEFAULT NULL,
+    `ref` varchar(255) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

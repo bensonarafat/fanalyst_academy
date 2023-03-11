@@ -253,35 +253,35 @@
                     <div class="left_section">
                         <ul>
                             <li class="menu--item">
-                                <a href="/" class="menu--link active" title="Home">
+                                <a href="/" class="menu--link {{ Request::is('/') ? 'active' : '' }}" title="Home">
                                     <i class="uil uil-home-alt menu--icon"></i>
                                     <span class="menu--label">Home</span>
                                 </a>
                             </li>
                             @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
-                                <a href="{{ route('analysis') }}" class="menu--link" title="Analyics">
+                                <a href="{{ route('analysis') }}" class="menu--link {{ Request::is('/analysis') ? 'active' : '' }}" title="Analyics">
                                     <i class="uil uil-analysis menu--icon"></i>
                                     <span class="menu--label">Analyics</span>
                                 </a>
                             </li>
                             @endif
                             <li class="menu--item">
-                                <a href="{{ route('courses') }}" class="menu--link" title="Courses">
+                                <a href="{{ route('courses') }}" class="menu--link {{ Request::is('courses') ? 'active' : '' }}" title="Courses">
                                     <i class="uil uil-book-alt menu--icon"></i>
                                     <span class="menu--label">Courses</span>
                                 </a>
                             </li>
                             @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
-                                <a href="{{ route('create.course') }}" class="menu--link active" title="Create Course">
+                                <a href="{{ route('create.course') }}" class="menu--link {{ Request::is('courses/create') ? 'active' : '' }}" title="Create Course">
                                     <i class="uil uil-plus-circle menu--icon"></i>
                                     <span class="menu--label">Create Course</span>
                                 </a>
                             </li>
                             @endif
                             <li class="menu--item">
-                                <a href="{{ route('explore') }}" class="menu--link" title="Explore">
+                                <a href="{{ route('explore') }}" class="menu--link {{ Request::is('explore') ? 'active' : '' }}" title="Explore">
                                     <i class="uil uil-search menu--icon"></i>
                                     <span class="menu--label">Explore</span>
                                 </a>
@@ -310,11 +310,16 @@
                                     <span class="menu--label">Quiz</span>
                                 </label>
                                 <ul class="sub_menu">
+                                    @if(auth()->user()->type == "admin")
                                     <li class="sub_menu--item">
-                                        <a href="certification_test_view.html" class="sub_menu--link">Test View</a>
+                                        <a href="{{ route("quiz.index") }}" class="sub_menu--link">Questions</a>
+                                    </li>
+                                    @endif
+                                    <li class="sub_menu--item">
+                                        <a href="{{ route("take.quiz") }}" class="sub_menu--link">Take Quiz</a>
                                     </li>
                                     <li class="sub_menu--item">
-                                        <a href="certification_test__result.html" class="sub_menu--link">Quiz Result</a>
+                                        <a href="{{ route('quiz.result') }}" class="sub_menu--link">Quiz Result</a>
                                     </li>
 
                                 </ul>
@@ -378,7 +383,7 @@
 
                             @if(auth()->user()->type == 'admin')
                             <li class="menu--item">
-                                <a href="{{ route('users') }}" class="menu--link" title="users">
+                                <a href="{{ route('users') }}" class="menu--link {{ Request::is('users') ? 'active' : '' }}" title="users">
                                     <i class="uil uil-user menu--icon"></i>
                                     <span class="menu--label">Users</span>
                                 </a>
@@ -386,7 +391,7 @@
                             @endif
 
                             <li class="menu--item">
-                                <a href="{{ route('settings') }}" class="menu--link" title="Setting">
+                                <a href="{{ route('settings') }}" class="menu--link {{ Request::is('settings') ? 'active' : '' }}" title="Setting">
                                     <i class="uil uil-cog menu--icon"></i>
                                     <span class="menu--label">Settings</span>
                                 </a>
@@ -424,6 +429,7 @@
         <script src="{{ asset("assets/js/custom.js") }}"></script>
         <script src="{{ asset('assets/js/custom1.js') }}"></script>
         <script src="{{ asset("assets/js/night-mode.js") }}"></script>
+        <script src="{{ asset("assets/js/test-timer.js") }}"></script>
         <script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
         <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
 

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
+use App\Models\Quiz;
 use App\Models\User;
+use App\Models\Topic;
+use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Rating;
 use App\Models\Category;
-use App\Models\Curriculum;
-use Illuminate\Http\Request;
-use App\Models\CurriculumLecture;
 use App\Models\Enrolled;
-use App\Models\Like;
+use App\Models\Curriculum;
 use App\Models\Transaction;
+use App\Models\CurriculumLecture;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
@@ -249,20 +252,60 @@ class PagesController extends Controller
     }
 
     // Quiz ---
-    public function addQuiz(){
-        return view("dashboard.quiz.add");
+    public function quiz(){
+        $categories = Category::latest()->get();
+        return view("dashboard.quiz.index", compact("categories"));
+    }
+
+    public function quizResult(){
+
+        $answers = DB::table('answers')->select('ref')->distinct()->get();
+
+        return view("dashboard.quiz.result", compact("answers"));
+
+    }
+
+    public function takeQuiz(){
+        $categories = Category::latest()->get();
+        $topics = null;
+        if(isset($_GET['q'])){
+            $topics = Topic::where(['level' => $_GET['level'], "category_id" => $_GET['category']])->latest()->get();
+        }
+        return view("dashboard.quiz.take", compact("categories", "topics"));
+    }
+
+    public function startTest($id){
+        $quiz = Quiz::where("topic", $id)->latest()->get();
+        $topic = Topic::where("id", $id)->first();
+        return view("dashboard.quiz.test", compact("quiz", "topic"));
+    }
+    public function addQuiz($id){
+        $quiz = Quiz::where("topic", $id)->get();
+        $topic = Topic::find($id);
+        return view("dashboard.quiz.add", compact("quiz", "topic"));
     }
 
     public function editQuiz($id){
-        return view("dashboard.quiz.edit");
+        $quiz = Quiz::where("id", $id)->first();
+        return view("dashboard.quiz.edit", compact("quiz"));
     }
 
     public function addTopic(){
-        return view("dashboard.quiz.topic.add");
+        $categories = Category::latest()->get();
+        return view("dashboard.quiz.topic.add", compact("categories"));
     }
 
     public function editTopic($id){
-        return view("dashboard.quiz.topic.edit");
+        $categories = Category::latest()->get();
+        $topic = Topic::find($id);
+        return view("dashboard.quiz.topic.edit", compact("categories", "topic"));
+    }
+
+    public function resultScore($ref){
+        $answers = Answer::where("ref", $ref)->get();
+        $wrong = Answer::where(["ref" => $ref, "mark" => "0"])->get();
+        $right = Answer::where(["ref" => $ref, "mark" => "1"])->get();
+        return view("dashboard.quiz.result-score", compact("answers", "wrong", "right"));
     }
 }
 

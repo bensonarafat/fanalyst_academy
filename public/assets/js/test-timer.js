@@ -1,5 +1,5 @@
-document.getElementById('timer').innerHTML =
-  60 + ":" + 00;
+// document.getElementById('timer').innerHTML =
+//   60 + ":" + 00;
 startTimer();
 
 function startTimer() {
@@ -9,7 +9,7 @@ function startTimer() {
   var s = checkSecond((timeArray[1] - 1));
   if(s==59){m=m-1}
   //if(m<0){alert('timer completed')}
-  
+
   document.getElementById('timer').innerHTML =
     m + ":" + s;
   console.log(m)

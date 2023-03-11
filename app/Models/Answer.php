@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Topic extends Model
+class Answer extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
-        'level',
-        'name',
-        'time',
+        'user_id',
+        'question',
+        'select',
+        'mark',
+        'answer',
+        'topic',
+        'ref',
     ];
 }
