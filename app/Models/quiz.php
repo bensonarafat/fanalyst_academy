@@ -20,5 +20,6 @@ class Quiz extends Model
         'd',
         'answer',
         'answer_option',
+        'explanation',
     ];
 }

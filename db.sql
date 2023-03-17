@@ -202,6 +202,7 @@ CREATE TABLE IF NOT EXISTS `quiz` (
     `d` text NOT NULL,
     `answer` text NOT NULL,
     `answer_option` varchar(255) NOT NULL,
+    `explanation` text NOT NULL DEFAULT '',
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

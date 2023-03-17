@@ -95,12 +95,15 @@ class PagesController extends Controller
     }
 
     public function addCategory(){
-        return view('dashboard.category.add');
+        $categories = Category::latest()->get();
+        $children_categories = Category::whereNull('parentid')->latest()->get();
+        return view('dashboard.category.add', compact("children_categories", "categories"));
     }
 
     public function editCategory($id){
         $category = Category::find($id);
-        return view('dashboard.category.edit', compact('category'));
+        $children_categories = Category::whereNull('parentid')->latest()->get();
+        return view('dashboard.category.edit', compact('category', 'children_categories'));
     }
 
     public function viewCategory($id){
@@ -147,7 +150,7 @@ class PagesController extends Controller
     }
 
     public function createCourse(){
-        $categories = Category::latest()->get();
+        $categories = Category::whereNull('parentid')->latest()->get();
         return view('dashboard.courses.create', compact('categories'));
     }
 
@@ -171,7 +174,7 @@ class PagesController extends Controller
 
     public function editCourse($id){
         $course = Course::find($id);
-        $categories = Category::latest()->get();
+        $categories = Category::whereNull('parentid')->latest()->get();
         return view('dashboard.courses.edit', compact('categories', 'course'));
     }
 
@@ -253,20 +256,18 @@ class PagesController extends Controller
 
     // Quiz ---
     public function quiz(){
-        $categories = Category::latest()->get();
+        $categories = Category::whereNull('parentid')->latest()->get();
         return view("dashboard.quiz.index", compact("categories"));
     }
 
     public function quizResult(){
-
         $answers = DB::table('answers')->select('ref')->distinct()->get();
-
         return view("dashboard.quiz.result", compact("answers"));
 
     }
 
     public function takeQuiz(){
-        $categories = Category::latest()->get();
+        $categories = Category::whereNull('parentid')->latest()->get();
         $topics = null;
         if(isset($_GET['q'])){
             $topics = Topic::where(['level' => $_GET['level'], "category_id" => $_GET['category']])->latest()->get();
@@ -275,9 +276,8 @@ class PagesController extends Controller
     }
 
     public function startTest($id){
-        $quiz = Quiz::where("topic", $id)->latest()->get();
         $topic = Topic::where("id", $id)->first();
-        return view("dashboard.quiz.test", compact("quiz", "topic"));
+        return view("dashboard.quiz.test", compact("topic", "id"));
     }
     public function addQuiz($id){
         $quiz = Quiz::where("topic", $id)->get();
@@ -291,14 +291,15 @@ class PagesController extends Controller
     }
 
     public function addTopic(){
-        $categories = Category::latest()->get();
+        $categories = Category::whereNull('parentid')->latest()->get();
         return view("dashboard.quiz.topic.add", compact("categories"));
     }
 
     public function editTopic($id){
-        $categories = Category::latest()->get();
+        $categories = Category::whereNull('parentid')->latest()->get();
         $topic = Topic::find($id);
-        return view("dashboard.quiz.topic.edit", compact("categories", "topic"));
+        $level = Category::find($topic->level);
+        return view("dashboard.quiz.topic.edit", compact("categories", "topic", "level"));
     }
 
     public function resultScore($ref){

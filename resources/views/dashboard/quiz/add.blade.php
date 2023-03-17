@@ -69,6 +69,15 @@
                                             <option value="d">D</option>
                                         </select>
                                     </div>
+
+                                    <div class="ui search focus lbel25 mt-10">
+                                        <label>Explanation*</label>
+                                        <div class="ui form swdh30">
+                                            <div class="field">
+                                                <textarea rows="3" name="explanation" class="" id="explanation" placeholder="Explanation here..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

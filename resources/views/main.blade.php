@@ -190,7 +190,74 @@
         </div>
     </div>
 
-    <style>
+    <div class="_215td5" id="cr458">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title589 mb-20 text-center">
+                        <h2>Quiz</h2>
+                        <p>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</p>
+                        <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>ACCA Quiz</h4>
+                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>CFA Quiz</h4>
+                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>ICAN Quiz</h4>
+                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>FRM Quiz</h4>
+                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>Personal Finance Quiz</h4>
+                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>Corporate Finance Quiz</h4>
+                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
 
 @media (min-width: 61.31em){
     .component-margin:last-of-type {

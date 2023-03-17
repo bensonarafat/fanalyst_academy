@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Quiz;
 use App\Models\Topic;
 use App\Models\Answer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,6 +41,7 @@ class QuizController extends Controller
                 "d" => $request->d,
                 "answer" => $answer,
                 "answer_option" => $request->answer,
+                "explanation" => $request->explanation,
             ]);
             return redirect()->back()->with(["success" => "Question uploaded"]);
         } catch (Exception $e) {
@@ -75,6 +77,7 @@ class QuizController extends Controller
                 "d" => $request->d,
                 "answer" => $answer,
                 "answer_option" => $request->answer,
+                "explanation" => $request->explanation,
             ]);
             return redirect()->back()->with(["success" => "Question updated"]);
         } catch (Exception $e) {
@@ -168,6 +171,22 @@ class QuizController extends Controller
             return redirect()->route('result.score', $ref);
         } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
+        }
+    }
+
+    public function getQuiz($id) :JsonResponse {
+        try {
+           $quiz =  Quiz::where("topic", $id)->latest()->get()->toArray();
+           $collection  = collect($quiz)->shuffle()->take(20);
+            return response()->json([
+                "status" => true,
+                "data" => $collection->all(),
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                "status" => false,
+                "message" => "Oops, there was an error"
+            ], 500);
         }
     }
 }

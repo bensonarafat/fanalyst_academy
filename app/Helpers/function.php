@@ -4,9 +4,9 @@ use App\Models\Category;
 
 function appCategories($limit = null){
     if($limit){
-    return Category::latest()->limit($limit)->get();
+    return Category::whereNull('parentid')->latest()->limit($limit)->get();
     }else{
-     return Category::latest()->get();
+     return Category::whereNull('parentid')->latest()->get();
     }
 }
 

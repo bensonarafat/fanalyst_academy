@@ -54,10 +54,13 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($topics as $x)
+                                            @php
+                                                $level = App\Models\Category::where("id",$x->level)->first();
+                                            @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $x->name }}</td>
-                                                <td class="text-center">Level {{ $x->level }}</td>
+                                                <td class="text-center">{{ $level->name }}</td>
                                                 <td class="text-center">{{ $x->time }} Minute</td>
                                                 <td class="text-center">{{ \Carbon\Carbon::parse($x->created_at)->format('d M, Y') }}</td>
                                                 <td class="text-center">

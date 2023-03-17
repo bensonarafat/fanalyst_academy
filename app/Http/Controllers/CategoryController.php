@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function store(Request $request){
+
         $request->validate([
             "name" => 'required',
         ]);
@@ -16,7 +17,8 @@ class CategoryController extends Controller
             Category::create(
                 [
                     'name' => $request->name,
-                    'description' => $request->description
+                    'description' => $request->description,
+                    "parentid" => $request->category,
                 ]
                 );
             return redirect()->back()->with(["success" => "Category Created"]);
@@ -34,7 +36,8 @@ class CategoryController extends Controller
             Category::where('id', $request->id)->update(
                 [
                     'name' => $request->name,
-                    'description' => $request->description
+                    'description' => $request->description,
+                    "parentid" => $request->category,
                 ]
                 );
             return redirect()->back()->with(["success" => "Category Updated"]);

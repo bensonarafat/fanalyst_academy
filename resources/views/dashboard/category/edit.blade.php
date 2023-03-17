@@ -30,6 +30,17 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
+                                    <div class="ui search focus mt-30 lbel25">
+                                        <label>Category</label>
+                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category">
+                                            <option value="">Select category</option>
+                                            @foreach ($children_categories as $row)
+                                                <option value="{{ $row->id }}" @if($row->id == $category->parentid) selected @endif>{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
                                     <div class="ui search focus lbel25 mt-30">
                                         <label>Description</label>
                                         <div class="ui form swdh30">

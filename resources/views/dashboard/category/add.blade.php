@@ -30,6 +30,17 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
+                                    <div class="ui search focus mt-30 lbel25">
+                                        <label>Category</label>
+                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category">
+                                            <option value="">Select category</option>
+                                            @foreach ($children_categories as $row)
+                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
                                     <div class="ui search focus lbel25 mt-30">
                                         <label>Description</label>
                                         <div class="ui form swdh30">
@@ -55,14 +66,19 @@
                                 <tr>
                                     <th scope="col">SN</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Category</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (appCategories() as $row)
+                                @foreach ($categories as $row)
+                                @php
+                                    $childrenCategory = App\Models\Category::where("id", $row->parentid)->first();
+                                @endphp
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->name }}</td>
+                                    <td>{{ $row->parentid  == null ? '--' : $childrenCategory->name }}</td>
                                     <td>
                                         <a href="{{ route('delete.category', $row->id) }}"><i class="fa fa-trash"></i></a>
                                         <a href="/category/edit-category/{{ $row->id }}"><i class="fa fa-edit"></i></a>

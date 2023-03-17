@@ -33,7 +33,10 @@
                                                     <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category" required>
                                                         <option value="">Select category</option>
                                                         @foreach ($categories as $row)
-                                                            <option value="{{ $row->id }}" @if($row->id == $topic->category_id) selected @endif>{{ $row->name }}</option>
+                                                            @php
+                                                                $levels = App\Models\Category::where("parentid", $row->id)->get();
+                                                            @endphp
+                                                            <option value="{{ $row->id }}" data-json="{{ $levels }}" @if($row->id == $topic->category_id) selected @endif>{{ $row->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -41,13 +44,12 @@
                                             <div class="new-section mt-10">
                                                 <div class="form_group">
                                                     <label class="label25">Level*</label>
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="level" id="level" required>
-                                                        <option value="">Select level</option>
-                                                        <option value="1"  @if(1 == $topic->level) selected @endif>Level 1</option>
-                                                        <option value="2" @if(2 == $topic->level) selected @endif>Level 2</option>
-                                                        <option value="3" @if(3 == $topic->level) selected @endif>Level 3</option>
-                                                        <option value="4" @if(4 == $topic->level) selected @endif>Level 4</option>
-                                                    </select>
+                                                    <div class="__levelreplace">
+                                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="level" id="level" required>
+                                                            <option value="">Select level</option>
+                                                            <option value="{{ $level->id }}" selected>{{ $level->name }}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -88,5 +90,18 @@
     </div>
     @include('components.footer')
 </div>
+<script src="{{ asset("assets/js/jquery-3.3.1.min.js") }}"></script>
+<script>
+    $('#category').on("change", function(){
+        let data = $( "#category option:selected" ).attr('data-json');
+        let json = JSON.parse(data);
+        let html = '<select class="form-control hj145 dropdown cntry152 prompt srch_explore" name="level" id="level" required>'
+        json.forEach((item, index) => {
+            html += `<option value=`+item.id+`>`+item.name+`</option>`;
+        });
 
+        html += '</select>';
+        $('.__levelreplace').html(html);
+    });
+</script>
 @endsection

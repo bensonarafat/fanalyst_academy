@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,8 @@ Route::group(['prefix' => 'courses'], function(){
             Route::post('/update', [CourseController::class, 'updateLecture']);
         });
     });
+});
+
+Route::group(["prefix" => "quiz"], function(){
+    Route::get("/get/{id}", [QuizController::class, 'getQuiz']);
 });
