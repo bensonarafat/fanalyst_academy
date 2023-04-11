@@ -153,6 +153,31 @@
                         if(index == 1){
                             style = "style='display:block'";
                         }
+
+
+                        let __d = ``
+                        if(e.d){
+                            __d = `
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input id="d`+e.id+`" type="radio" name="option`+e.id+`" value="d" tabindex="0" class="hidden _changeoption" />
+                                            <label for="d`+e.id+`">`+e.d+`</label>
+                                        </div>
+                                    </div>
+                                `;
+                        }
+
+                        let __e = ``
+                        if(e.e){
+                            __e = `
+                                    <div class="field">
+                                        <div class="ui radio checkbox">
+                                            <input id="e`+e.id+`" type="radio" name="option`+e.id+`" value="e" tabindex="0" class="hidden _changeoption" />
+                                            <label for="e`+e.id+`">`+e.e+`</label>
+                                        </div>
+                                    </div>
+                                `;
+                        }
                         questions += `
                                 <div class="ques_item current__question_index`+index+`" `+style+`>
                                     <div class="ques_title">
@@ -183,12 +208,8 @@
                                                     <label for="c`+e.id+`">`+e.c+`</label>
                                                 </div>
                                             </div>
-                                            <div class="field">
-                                                <div class="ui radio checkbox">
-                                                    <input id="e`+e.id+`" type="radio" name="option`+e.id+`" value="d" tabindex="0" class="hidden _changeoption" />
-                                                    <label for="e`+e.id+`">`+e.d+`</label>
-                                                </div>
-                                            </div>
+                                            `+__d+`
+                                            `+ __e +`
                                         </div>
                                     </div>
                                 </div>
@@ -217,9 +238,9 @@
         let answer_option = greatparent.find('.answer_option');
         let answer = greatparent.find('.__answer');
         let select = greatparent.find('.__select');
+
         if(_this.is(":checked")){
-            if(answer_option.val() == _this.val() ){
-                console.log(answer_option.val());
+            if(answer_option.val().toLowerCase() == _this.val() ){
                 select.val(answer_option.val());
                 answer.val(1);
             }else{

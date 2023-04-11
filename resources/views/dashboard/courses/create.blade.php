@@ -84,8 +84,8 @@
                                                                 <label>Course Description*</label>
                                                                 <div class="ui form swdh30">
                                                                     <div class="field">
-                                                                        {{-- <x-forms.tinymce-editor/> --}}
-                                                                        <textarea rows="3" name="description" id="description" required placeholder="description here..."></textarea>
+                                                                        <x-forms.tinymce-editor/>
+                                                                        {{-- <textarea rows="3" name="description" id="description" required placeholder="description here..."></textarea> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -95,7 +95,9 @@
                                                                 <label>What will students learn in your course?*</label>
                                                                 <div class="ui form swdh30">
                                                                     <div class="field">
-                                                                        <textarea rows="3" name="will_learn" id="will_learn" required placeholder=""></textarea>
+                                                                        <div>
+                                                                            <textarea id="will_learn" class="myeditorinstance" name="will_learn" ></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="help-block">Student will gain this skills, knowledge after completing this course. (One per line).</div>
@@ -106,7 +108,9 @@
                                                                 <label>Requirements*</label>
                                                                 <div class="ui form swdh30">
                                                                     <div class="field">
-                                                                        <textarea rows="3" name="prerequisites" id="prerequisites" required placeholder=""></textarea>
+                                                                        <div>
+                                                                            <textarea id="prerequisites" class="myeditorinstance" name="prerequisites" ></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="help-block">What knowledge, technology, tools required by users to start this course. (One per line).</div>
@@ -351,15 +355,19 @@
             let require_login = ($("#require_login").prop("checked") == true ? '1' : '0');
             let require_enroll = ($("#require_enroll").prop("checked") == true ? '1' : '0');
 
+            var content = tinymce.get("myeditorinstance").getContent();
+            var will_learn_content = tinymce.get("will_learn").getContent();
+            var prerequisites_content = tinymce.get("prerequisites").getContent();
+
             if(courseVideo === undefined) courseVideo = null;
             var data = new FormData();
             data.append('courseVideo', courseVideo);
             data.append('courseThumbnail', courseThumbnail);
             data.append('title', $('#title').val());
             data.append('short_description', $('#short_description').val());
-            data.append('description', $('#description').val());
-            data.append('will_learn', $('#will_learn').val());
-            data.append('prerequisites', $('#prerequisites').val());
+            data.append('description', content);
+            data.append('will_learn', will_learn_content);
+            data.append('prerequisites', prerequisites_content);
             data.append('category', $('#category').val());
             data.append('courseURL', $('#courseURL').val());
             data.append('courseYoutube', $('#courseYoutube').val());

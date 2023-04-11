@@ -52,9 +52,16 @@
                                             </div>
 
                                             <div class="ui search focus mt-10 lbel25">
-                                                <label>Option D*</label>
+                                                <label>Option D</label>
                                                 <div class="ui left icon input swdh19">
-                                                    <input class="prompt srch_explore" type="text" placeholder="Option D here" required name="d" id="d" value="{{ $quiz->d }}" />
+                                                    <input class="prompt srch_explore" type="text" placeholder="Option D here"  name="d" id="d" value="{{ $quiz->d }}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="ui search focus mt-10 lbel25">
+                                                <label>Option E</label>
+                                                <div class="ui left icon input swdh19">
+                                                    <input class="prompt srch_explore" type="text" placeholder="Option E here" name="e" id="e" value="{{ $quiz->e }}" />
                                                 </div>
                                             </div>
 
@@ -68,6 +75,7 @@
                                                     <option value="b" @if($quiz->answer_option == "b") selected @endif>B</option>
                                                     <option value="c" @if($quiz->answer_option == "c") selected @endif>C</option>
                                                     <option value="d" @if($quiz->answer_option == "d") selected @endif>D</option>
+                                                    <option value="e" @if($quiz->answer_option == "e") selected @endif>E</option>
                                                 </select>
                                             </div>
 

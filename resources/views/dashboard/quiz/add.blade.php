@@ -51,9 +51,16 @@
                                     </div>
 
                                     <div class="ui search focus mt-10 lbel25">
-                                        <label>Option D*</label>
+                                        <label>Option D</label>
                                         <div class="ui left icon input swdh19">
-                                            <input class="prompt srch_explore" type="text" placeholder="Option D here" required name="d" id="d" value="" />
+                                            <input class="prompt srch_explore" type="text" placeholder="Option D here" name="d" id="d" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="ui search focus mt-10 lbel25">
+                                        <label>Option E</label>
+                                        <div class="ui left icon input swdh19">
+                                            <input class="prompt srch_explore" type="text" placeholder="Option E here" name="e" id="e" value="" />
                                         </div>
                                     </div>
 
@@ -67,6 +74,7 @@
                                             <option value="b">B</option>
                                             <option value="c">C</option>
                                             <option value="d">D</option>
+                                            <option value="e">E</option>
                                         </select>
                                     </div>
 

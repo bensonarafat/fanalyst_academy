@@ -27,8 +27,7 @@ class PagesController extends Controller
         $courses = null;
         $instructors = null;
         $featured = null;
-        $freeCourses = null;
-        $paidCourses = null;
+        $allCourses = null;
         if(Auth::check()){
             if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
                 $instructorCourses = Course::where('instructor', auth()->user()->id)->get();
@@ -45,10 +44,9 @@ class PagesController extends Controller
                 $instructors = User::where('type', 'instructor')->latest()->limit(5)->get();
             }
         }else{
-            $freeCourses = Course::where(['status' =>  'active', 'is_free' => 0])->latest()->limit(10)->get();
-            $paidCourses = Course::where(['status' =>  'active', 'is_free' => 1])->latest()->limit(10)->get();
+            $allCourses = Course::where(['status' =>  'active'])->latest()->limit(10)->get();
         }
-        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'freeCourses', 'paidCourses'));
+        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses'));
     }
 
     public function about(){
@@ -306,7 +304,13 @@ class PagesController extends Controller
         $answers = Answer::where("ref", $ref)->get();
         $wrong = Answer::where(["ref" => $ref, "mark" => "0"])->get();
         $right = Answer::where(["ref" => $ref, "mark" => "1"])->get();
-        return view("dashboard.quiz.result-score", compact("answers", "wrong", "right"));
+        $quiz = Quiz::where("topic", $answers->first()->topic)->get();
+        return view("dashboard.quiz.result-score", compact("answers", "wrong", "right", "quiz"));
+    }
+
+    public function importQuestions(){
+        $topics = Topic::latest()->get();
+        return view("dashboard.quiz.import-questions", compact("topics"));
     }
 }
 

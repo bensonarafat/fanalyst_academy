@@ -200,7 +200,6 @@ CREATE TABLE IF NOT EXISTS `quiz` (
     `b` text NOT NULL,
     `c` text NOT NULL,
     `d` text NOT NULL,
-    `answer` text NOT NULL,
     `answer_option` varchar(255) NOT NULL,
     `explanation` text NOT NULL DEFAULT '',
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),

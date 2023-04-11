@@ -36,6 +36,150 @@
 
     <div class="_215td5">
         <div class="container">
+            <div class="mb-20 text-left">
+                <h2>Topics</h2>
+                <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
+            </div>
+            <div class="flex">
+                <button type="button" class="btn btn-outline-primary mx-2 mb-2">All</button>
+                @foreach (appcategories() as $row )
+                    <button type="button" class="btn btn-outline-primary mx-2 mb-2">{{ $row->name }}</button>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="_215td5">
+        <div class="container">
+            <div>
+
+                <div>
+                    <div class="component-margin">
+                        <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
+                            <div class="unit-title--title-container--2RfU_">
+                                <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-1152523765">Courses</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="_14d25">
+                            <div class="row">
+                                @foreach ($allCourses as $row)
+                                     @php
+                                        $user = \App\Models\User::find($row->instructor);
+                                        // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
+                                    @endphp
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="fcrse_1 mt-30">
+                                            <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
+                                                <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                                                <div class="course-overlay">
+                                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                                </div>
+                                            </a>
+                                            <div class="fcrse_content">
+                                                <div class="vdtodt">
+                                                    <span class="vdt14">{{ $row->likes }} likes</span>
+                                                    <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
+                                                </div>
+                                                <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
+                                                <div class="auth1lnkprce">
+                                                    <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
+                                                    <div class="prce142">
+                                                        @if(!$row->is_free)
+                                                            FREE
+                                                        @else
+                                                            {!! naira() . number_format($row->amount, 2) !!}
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="_215td5" id="cr458">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title589 mb-20 text-center">
+                        <h2>Practice Tests</h2>
+                        <p>Looking to ace your upcoming exams? Try our comprehensive practice test for the ultimate preparation experience!</p>
+                        <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>ACCA Exam Practice Test </h4>
+                        <span>Prepare for your ACCA exam with our comprehensive and
+                            realistic practice tests.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>CFA Exam Practice Test</h4>
+                        <span> Boost your expertise and exam proficiency with our all-inclusive
+                            CFA exam practice tests.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>ICAN Exam Practice </h4>
+                        <span>Test Prepare for the objectives section of the ICAN Foundation exam
+                            with past questions.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>FRM Exam Practice Test</h4>
+                        <span> Prepare for the FRM exam with our practice tests to enhance your
+                            knowledge and test-taking skills.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>Personal finance Practice Test </h4>
+                        <span>Test your financial knowledge with our practice tests to
+                            improve your personal finance skills.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="apply_job_link mt-30">
+                        <h4>Corporate finance Practice </h4>
+                        <span>Test Evaluate your understanding of corporate finance through
+                            our comprehensive practice exams.</span>
+                        <div class="apply_job_link_right">
+                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="_215td5">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title589 text-center">
@@ -81,182 +225,7 @@
             </div>
         </div>
     </div>
-    <div class="_215td5">
-        <div class="container">
-            <div>
 
-                <div>
-                    <div class="component-margin">
-                        <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
-                            <div class="unit-title--title-container--2RfU_">
-                                <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-1152523765">Free Courses</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="_14d25">
-                            <div class="row">
-                                @foreach ($freeCourses as $row)
-                                     @php
-                                        $user = \App\Models\User::find($row->instructor);
-                                        // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
-                                    @endphp
-                                    <div class="col-lg-3 col-md-4">
-                                        <div class="fcrse_1 mt-30">
-                                            <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                                <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
-                                                <div class="course-overlay">
-                                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                                </div>
-                                            </a>
-                                            <div class="fcrse_content">
-                                                <div class="vdtodt">
-                                                    <span class="vdt14">{{ $row->likes }} likes</span>
-                                                    <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
-                                                </div>
-                                                <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
-                                                <div class="auth1lnkprce">
-                                                    <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
-                                                    <div class="prce142">
-                                                        @if(!$row->is_free)
-                                                            FREE
-                                                        @else
-                                                            {!! naira() . number_format($row->amount, 2) !!}
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="_215td5">
-        <div class="container">
-            <div>
-                <div class="component-margin">
-                    <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
-                        <div class="unit-title--title-container--2RfU_">
-                            <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-1152523765">Paid Courses</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="_14d25">
-                        <div class="row">
-                            @foreach ($paidCourses as $row)
-                                 @php
-                                    $user = \App\Models\User::find($row->instructor);
-                                    // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
-                                @endphp
-                                <div class="col-lg-3 col-md-4">
-                                    <div class="fcrse_1 mt-30">
-                                        <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                            <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
-                                            <div class="course-overlay">
-                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                            </div>
-                                        </a>
-                                        <div class="fcrse_content">
-                                            <div class="vdtodt">
-                                                <span class="vdt14">{{ $row->likes }} likes</span>
-                                                <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
-                                            </div>
-                                            <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
-                                            <div class="auth1lnkprce">
-                                                <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
-                                                <div class="prce142">
-                                                    @if(!$row->is_free)
-                                                        FREE
-                                                    @else
-                                                        {!! naira() . number_format($row->amount, 2) !!}
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="_215td5" id="cr458">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title589 mb-20 text-center">
-                        <h2>Quiz</h2>
-                        <p>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</p>
-                        <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>ACCA Quiz</h4>
-                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>CFA Quiz</h4>
-                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>ICAN Quiz</h4>
-                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>FRM Quiz</h4>
-                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>Personal Finance Quiz</h4>
-                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>Corporate Finance Quiz</h4>
-                        <span>{{ config('app.name') }} is a fast growing company and we're expanding both our Punjab office and international offices.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("submit.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 <style>
 
 @media (min-width: 61.31em){

@@ -157,6 +157,8 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get("/test/{id}", [PagesController::class, "startTest"])->name("start.test");
         Route::post("/submit-quiz", [QuizController::class, "submitQuiz"])->name("submit.quiz");
         Route::get("/result-score/{ref}", [PagesController::class, "resultScore"])->name("result.score");
+        Route::get('/import-questions', [PagesController::class, "importQuestions"])->name('import.questions');
+        Route::post('/store-import-questions', [QuizController::class, "importQuestion"])->name('store.import.questions');
 
         Route::get("/add/{id}", [PagesController::class, "addQuiz"])->name('add.quiz');
         Route::get("/edit/{id}", [PagesController::class, "editQuiz"])->name('edit.quiz');

@@ -18,7 +18,7 @@ class Quiz extends Model
         'b',
         'c',
         'd',
-        'answer',
+        'e',
         'answer_option',
         'explanation',
     ];

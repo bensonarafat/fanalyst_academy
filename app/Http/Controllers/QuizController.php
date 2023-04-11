@@ -6,9 +6,12 @@ use Exception;
 use App\Models\Quiz;
 use App\Models\Topic;
 use App\Models\Answer;
-use Illuminate\Http\JsonResponse;
+use App\Imports\QuizImport;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Classes\SystemFileManager;
 
 class QuizController extends Controller
 {
@@ -18,20 +21,10 @@ class QuizController extends Controller
             "a" => "required",
             "b" => "required",
             "c" => "required",
-            "d" => "required",
             "answer" => "required",
             "topic" => "required",
         ]);
         try {
-            if ($request->answer == "a") {
-                $answer = $request->a;
-            }else if($request->answer == "b"){
-                $answer = $request->b;
-            }else if($request->answer == "c"){
-                $answer = $request->c;
-            }else if($request->answer == "d"){
-                $answer = $request->d;
-            }
             Quiz::create([
                 "topic" => $request->topic,
                 "question" => $request->question,
@@ -39,7 +32,7 @@ class QuizController extends Controller
                 "b" => $request->b,
                 "c" => $request->c,
                 "d" => $request->d,
-                "answer" => $answer,
+                "e" => $request->e,
                 "answer_option" => $request->answer,
                 "explanation" => $request->explanation,
             ]);
@@ -55,27 +48,17 @@ class QuizController extends Controller
             "a" => "required",
             "b" => "required",
             "c" => "required",
-            "d" => "required",
             "answer" => "required",
             "id" => "required",
         ]);
         try {
-            if ($request->answer == "a") {
-                $answer = $request->a;
-            }else if($request->answer == "b"){
-                $answer = $request->b;
-            }else if($request->answer == "c"){
-                $answer = $request->c;
-            }else if($request->answer == "d"){
-                $answer = $request->d;
-            }
             Quiz::where("id", $request->id)->update([
                 "question" => $request->question,
                 "a" => $request->a,
                 "b" => $request->b,
                 "c" => $request->c,
                 "d" => $request->d,
-                "answer" => $answer,
+                "e" => $request->e,
                 "answer_option" => $request->answer,
                 "explanation" => $request->explanation,
             ]);
@@ -187,6 +170,22 @@ class QuizController extends Controller
                 "status" => false,
                 "message" => "Oops, there was an error"
             ], 500);
+        }
+    }
+
+
+    public function importQuestion(Request $request){
+        $request->validate([
+            "topic" => "required",
+            "file" => "required|mimes:xlsx,txt"
+        ]);
+        try {
+            $quizpath = SystemFileManager::InternalUploader($request->file, "quiz");
+            Excel::import(new QuizImport($request->topic), $quizpath);
+            return redirect()->back()->with(["success" => "Question imported"]);
+        } catch (Exception $e) {
+            dd($e);
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
 }

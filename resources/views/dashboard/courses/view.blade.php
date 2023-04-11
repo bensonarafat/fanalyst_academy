@@ -253,7 +253,7 @@
                                 <div class="_htg451">
                                     <div class="_htg452">
                                         <h3>Requirements</h3>
-                                        {{ $course->prerequisites }}
+                                        {!! $course->prerequisites !!}
                                     </div>
                                     <div class="_htg452 mt-35">
                                         <h3>Description</h3>
@@ -263,7 +263,7 @@
                                     <div class="_htgdrt mt-35">
                                         <h3>What you'll learn</h3>
                                         <div class="_scd123">
-                                            {{ $course->will_learn }}
+                                            {!! $course->will_learn !!}
                                         </div>
                                     </div>
                                 </div>

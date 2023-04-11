@@ -69,7 +69,6 @@
                 <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:100px;" alt="" /></a>
             </div>
 
-            @auth
                 <div class="top-category">
                     <div class="ui compact menu cate-dpdwn">
                         <div class="ui simple dropdown item">
@@ -83,7 +82,6 @@
                         </div>
                     </div>
                 </div>
-            @endauth
 
             <div class="search120">
                 <div class="ui search">
@@ -96,31 +94,11 @@
             <div class="header_right">
                 <ul>
                     @guest
-                    <li class="nav__other">
-                        <a href="{{ route('explore.view') }}"><strong>Explore</strong></a>
-                    </li>
                     <li class="nav__other nav__last">
-                        <a href="{{ route('contact') }}"><strong>Contact</strong></a>
+                        <a href="{{ route('explore.view') }}"><strong>Start Teaching</strong></a>
                     </li>
                     @endguest
-                    {{-- @guest
-                        <li class="nav__other">
-                            <a href="/">Home</a>
-                        </li>
-                        <li class="nav__other">
-                            <a href="{{ route("about") }}">About Us</a>
-                        </li>
-                        <li class="nav__other">
-                            <a href="{{ route("students") }}">Students</a>
-                        </li>
-                        <li class="nav__other nav__last">
-                            <a href="{{ route("lectures") }}">Lectures</a>
-                        </li>
-                       <li class="nav__other nav__last">
-                            <a href="{{ route("contact") }}" >Contact Us</a>
-                        </li>
-                    @endguest
-                    --}}
+
                     @auth
                         <li>
                            @if(auth()->user()->type == "student")
@@ -150,11 +128,10 @@
                         <li>
                             <a href="{{ route('cart') }}" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">{{ countInCart() }}</span></a>
                         </li>
+                        <li class="nav__other">
+                            <a href="{{ route('contact') }}" class="option_links" title="contact"><i class="uil uil-phone"></i></a>
+                        </li>
                     @auth
-
-                        {{-- <li class="ui dropdown">
-                            <a href="{{ route('notifications') }}" class="option_links" title="Notifications"><i class="uil uil-bell"></i><span class="noti_count">3</span></a>
-                        </li> --}}
                         <li class="ui dropdown">
                             <a href="#" class="opts_account" title="Account">
                                 <img src="@if(auth()->user()->photo) {{ asset(auth()->user()->photo) }} @else {{ asset("assets/images/hd_dp.jpg") }} @endif" alt="" />
@@ -183,7 +160,7 @@
                                         </span>
                                     </a>
                                 </div>
-                                <a href="{{ route('settings') }}" class="item channel_item">Settingss</a>
+                                <a href="{{ route('settings') }}" class="item channel_item">Settings</a>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="item channel_item">Sign Out</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -200,36 +177,47 @@
             <a href="{{ route('explore.view') }}" class="option_links text-center" title="cart">
                 <div class="d-flex flex-column">
                     <i class="uil uil-bars"></i>
-                    <span style="font-size:11px;">Explore</span>
+                    <span style="font-size:11px;">Start Teaching</span>
                 </div>
             </a>
-            <a href="{{ route('login') }}" class="option_links text-center" title="cart">
-                <div class="d-flex flex-column">
-                    <i class="uil uil-user"></i>
-                    @auth
-                        <span style="font-size:11px;">Account</span>
-                    @endauth
-                    @guest
-                        <span style="font-size:11px;">Login</span>
-                    @endguest
-                </div>
-            </a>
-            <div class="main_logo" id="logo">
-                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:110px;"/></a>
-                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:110px;" alt="" /></a>
-            </div>
+
             <a href="{{ route('contact') }}" class="option_links text-center" title="cart">
                 <div class="d-flex flex-column">
                     <i class="uil uil-phone"></i>
                     <span style="font-size:11px;">Contact</span>
                 </div>
             </a>
+            <div class="main_logo" id="logo">
+                <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:110px;"/></a>
+                <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:110px;" alt="" /></a>
+
+            </div>
             <a href="{{ route('cart') }}" class="option_links text-center" title="cart">
                 <div class="d-flex flex-column">
                     <i class="uil uil-shopping-cart-alt"></i><span class="noti_count">{{ countInCart() }}</span>
                     <span style="font-size:11px;">Cart</span>
                 </div>
             </a>
+            @auth
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();"  class="option_links text-center" title="cart">
+                <div class="d-flex flex-column">
+                    <i class="uil uil-unlock"></i>
+                    <span style="font-size:11px;">Logout</span>
+                </div>
+            </a>
+            <form id="logout-form2" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+            @endauth
+
+            @guest
+            <a href="{{ route('login') }}" class="option_links text-center" title="cart">
+                <div class="d-flex flex-column">
+                    <i class="uil uil-user"></i>
+                    <span style="font-size:11px;">Login</span>
+                </div>
+            </a>
+            @endguest
         </header>
 
         <style>
@@ -313,6 +301,9 @@
                                     @if(auth()->user()->type == "admin")
                                     <li class="sub_menu--item">
                                         <a href="{{ route("quiz.index") }}" class="sub_menu--link">Questions</a>
+                                    </li>
+                                    <li class="sub_menu--item">
+                                        <a href="{{ route("import.questions") }}" class="sub_menu--link">Import Questions</a>
                                     </li>
                                     @endif
                                     <li class="sub_menu--item">
