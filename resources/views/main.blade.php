@@ -10,9 +10,9 @@
                 <img class="d-block w-100" style="height:550px;object-fit:cover" src="{{ asset('assets/images/banner/1.jpg') }}" alt="First slide">
                 <div class="carousel-caption d-md-block">
                     <h2>Welcome to Fanalyst Academy</h2>
-                    <p>We offer ACCA, ICAN, CFA, FRM, Corporate Finance and Personal Finance training services</p>
+                    <p>Upgrade your skills, and accelerate your learning with cutting edge courses</p>
                     <a href="{{ route("login") }}" class="upload_btn" title="Enrol">Enrol Now</a>
-                  </div>
+                </div>
               </div>
               <div class="carousel-item">
                 <img class="d-block w-100" style="height:550px;object-fit:cover;" src="{{ asset('assets/images/banner/2.jpg') }}" alt="Second slide">
@@ -35,72 +35,139 @@
     </section>
 
     <div class="_215td5">
+        <div class="mx-2 mb-4 mobile_search" style="display:none;">
+            <div class="input-group input-group-lg">
+                <input type="search" class="form-control" placeholder="What do you want to learn? " aria-label="What do you want to learn?" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2"><i class="uil uil-search"></i></span>
+                </div>
+              </div>
+        </div>
         <div class="container">
-            <div class="mb-20 text-left">
-                <h2>Topics</h2>
-                <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
-            </div>
-            <div class="flex">
-                <button type="button" class="btn btn-outline-primary mx-2 mb-2">All</button>
+            <div class="row">
+                <div class="col-sm-12 col-lg-3">
+                    @php
+                        $allcourse_count = App\Models\Course::where(["status" => "active"])->count();
+                    @endphp
+                    <a href="/" class="__category" style="width:100%">
+                        <strong>
+                            <span style="background: white;border-radius:100%; padding: 8px 5px;margin-right:5px;">
+                                <img src="{{ asset("assets/images/category.png") }}" style="width:25px; height:25px;object-fit:contain;">
+                            </span>
+                            All({{ $allcourse_count }})
+                        </strong>
+                    </a>
+                </div>
                 @foreach (appcategories() as $row )
-                    <button type="button" class="btn btn-outline-primary mx-2 mb-2">{{ $row->name }}</button>
+                    @php
+                        $course_count = App\Models\Course::where(["category" => $row->id, "status" => "active"])->count();
+                    @endphp
+                    <div class="col-sm-12 col-lg-3">
+                        <a href="?cat={{ $row->id }}" style="width:100%" class="__category">
+                            <strong>
+                                <span style="background: white;border-radius:100%; padding: 8px 5px;margin-right:5px;">
+                                    @if($row->icon == null)
+                                    <img src="{{ asset("assets/images/category.png") }}" style="width:25px; height:25px;object-fit:contain;">
+                                    @else
+                                        <img src="{{ asset($row->icon) }}" style="width:25px; height:25px;object-fit:contain;">
+                                    @endif
+                                </span>
+                                {{ $row->name }} ({{$course_count }})
+                            </strong>
+                        </a>
+                    </div>
                 @endforeach
             </div>
         </div>
     </div>
-    <div class="_215td5">
-        <div class="container">
-            <div>
+    <div class="container">
+        @isset($_GET['cat'])
+        <div class="row">
+            <div style="display:flex;align-items: end;">
+                <span style="background: black;
+                border-radius: 100%;
+                padding: 5px;
+                color: white;
+                margin-right: 5px;
+                height: 35px;
+                width: 35px;
+                text-align: center;
+                display: flex;
+                place-items: center;">
+                    <i style="font-size: 20px;" class="uil {!! randomIcons()['icon']; !!}"></i>
+                </span>
+                <h2>{{ $category->name }}
+                    <p>{{ $categoryCoureses }} Courses</p>
+                </h2>
+            </div>
+        </div>
+        <hr>
+        <div class="">
 
-                <div>
-                    <div class="component-margin">
-                        <div class="unit-title--container--2Zy9z unit-title--has-title--ZqwQR">
-                            <div class="unit-title--title-container--2RfU_">
-                                <h2 class="ud-heading-xl unit-title--title--3KpMc" data-us="0" data-purpose="discovery-unit-1152523765">Courses</h2>
-                            </div>
-                        </div>
+            <div style="display:flex;justify-content: space-between; ">
+                <div style="display:flex; padding: 5px;">
+                    <div style="display: flex;border: 1px solid #948f8f;padding: 5px;border-radius: 5px;margin-right:2px;">
+                        <strong>Sort By: </strong>
+                        <select name="" id="" class="form-control">
+                            <option value="">Nearest</option>
+                        </select>
                     </div>
-                    <div class="col-md-12">
-                        <div class="_14d25">
-                            <div class="row">
-                                @foreach ($allCourses as $row)
-                                     @php
-                                        $user = \App\Models\User::find($row->instructor);
-                                        // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
-                                    @endphp
-                                    <div class="col-lg-3 col-md-4">
-                                        <div class="fcrse_1 mt-30">
-                                            <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
-                                                <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
-                                                <div class="course-overlay">
-                                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                                </div>
-                                            </a>
-                                            <div class="fcrse_content">
-                                                <div class="vdtodt">
-                                                    <span class="vdt14">{{ $row->likes }} likes</span>
-                                                    <span class="vdt14">{{ \Carbon\Carbon::parse($row->created_at)->diffForhumans(); }}</span>
-                                                </div>
-                                                <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
-                                                <div class="auth1lnkprce">
-                                                    <p class="cr1fot">By <a href="{{ route('view.user', $user->id) }}">{{ $user->fullname }}</a></p>
-                                                    <div class="prce142">
-                                                        @if(!$row->is_free)
-                                                            FREE
-                                                        @else
-                                                            {!! naira() . number_format($row->amount, 2) !!}
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                    <div style="display:flex;border: 1px solid #948f8f;padding: 5px;border-radius: 5px;    align-items: center;">
+                        <i class="fa fa-filter"></i>
+                        <span>Filter</span>
+                    </div>
+                </div>
+
+                {{-- <div style="display:flex;border: 1px solid #948f8f;padding: 5px;border-radius: 5px;    align-items: center;">
+                    <div class="">
+                        <i class="uil uil-th"></i>
+                    </div>
+                    <div class="">
+                        <i class="uil uil-list-ul"></i>
+                    </div>
+                </div> --}}
+            </div>
+
+        </div>
+        @endisset
+
+        <div class="row">
+            @foreach ($allCourses as $row)
+                    @php
+                    $user = \App\Models\User::find($row->instructor);
+                    // $rate = \App\Models\Rating::where('courseid', $row->id)->avg('vote');
+                @endphp
+                <div class="col-6 col-sm-3">
+                    <div class="fcrse_1 mt-30">
+                        <a href="{{ route('view.course', $row->id) }}" class="fcrse_img">
+                            <img src="{{ asset($row->media_thumbnail) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                            <div class="course-overlay">
+                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+                            </div>
+                        </a>
+                        <div class="fcrse_content">
+                            <a href="{{ route('view.course', $row->id) }}" class="crse14s">{{ $row->title }}</a>
+                            <p style="font-size:11px;">
+                                By {{ $user->fullname }}
+                            </p>
+                            <div class="auth1lnkprce">
+                                <p class="cr1fot">
+                                    @if(!$row->is_free)
+                                        Free
+                                    @else
+                                        From {!! naira() . number_format($row->amount, 2) !!}
+                                    @endif
+
+                                </p>
+                                <div class="prce142">
+                                    <i class="fa fa-star" style="color: #FFD700;font-size: 12px;"></i>
+                                    <span style="font-size: 13px;">{{ $row->ratings }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -226,14 +293,49 @@
         </div>
     </div>
 
+    <div class="_215td5">
+        <div class="container">
+            <div class="non-student-cta--non-student-cta-bg--1okkJ">
+                <div class="non-student-cta--non-student-cta-content-wrapper--26uBA">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img loading="lazy" class="non-student-cta--non-student-cta-image--7Y7Ul non-student-cta--on-desktop--2bk9D" data-purpose="desktop-non-student-cta-image" alt="" width="400" height="400" src="{{ asset("assets/images/start_teaching.jpg") }}" srcset="{{ asset("assets/images/start_teaching.jpg") }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="non-student-cta--non-student-cta--2quSb" data-purpose="non-student-cta-body">
+                                <h3 class="ud-heading-serif-xl non-student-cta--non-student-cta__header--3xgVp" data-purpose="non-student-cta-title">Teach with Us</h3>
+                                <div class="ud-text-md non-student-cta--non-student-cta__content--3D827">Fanalyst Academy presents a unique opportunity for instructors worldwide to share their expertise and inspire students to learn what they love. With our comprehensive resources and support, you can create an engaging learning experience and make a real impact in the lives of students worldwide. Join our community of passionate instructors today and help shape the future of education!</div>
+                                <a href="{{ route("login") }}" class="career_lnk5">Start teaching today</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 <style>
 
-@media (min-width: 61.31em){
-    .component-margin:last-of-type {
-        margin-bottom: 9.6rem;
+
+.non-student-cta--non-student-cta-content-wrapper--26uBA {
+    padding: 0 2.4rem;
+}
+@media only screen and (max-width: 600px) {
+    .non-student-cta--non-student-cta-content-wrapper--26uBA img{
+    width: 100% !important;
+    object-fit: contain !important;
     }
 }
 
+@media (min-width: 61.31em){
+.non-student-cta--on-mobile--18vY3 {
+    display: none;
+}
+
+
+}
 .unit-title--container--2Zy9z .unit-title--title-container--2RfU_ {
     display: flex;
     justify-content: space-between;
@@ -323,6 +425,91 @@
     }
 }
 
-    </style>
+
+@media (min-width: 61.31em){
+.non-student-cta--non-student-cta--2quSb {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 40rem;
+    text-align: left;
+}
+}
+
+.non-student-cta--non-student-cta--2quSb {
+    max-width: 60rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (min-width: 37.56em){
+.non-student-cta--non-student-cta__header--3xgVp {
+    font-family: var(--font-stack-heading-serif);
+    font-weight: 700;
+    font-size: 3.2rem;
+    line-height: 1.25;
+    letter-spacing: -.05rem;
+}
+}
+.non-student-cta--non-student-cta__header--3xgVp {
+    margin-bottom: 1.6rem;
+}
+.ud-heading-serif-xl {
+    font-family: var(--font-stack-heading-serif);
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 1.35;
+    letter-spacing: -.02rem;
+}
+
+@media (min-width: 37.56em){
+.non-student-cta--non-student-cta__content--3D827 {
+    font-size: 1.2rem;
+}
+}
+
+.non-student-cta--non-student-cta__content--3D827 {
+    margin-bottom: 1.6rem;
+}
+.ud-text-md {
+    font-family: udemy sans,sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+    font-weight: 400;
+    line-height: 1.4;
+    /* font-size: 1.6rem; */
+}
+
+
+@media (min-width: 61.31em){
+.non-student-cta--ctas-container--1alXW {
+    justify-content: left;
+}
+}
+
+@media (min-width: 37.56em){
+    .non-student-cta--ctas-container--1alXW {
+        flex-direction: row;
+    }
+}
+.non-student-cta--ctas-container--1alXW {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (min-width: 61.31em){
+    .non-student-cta--non-student-cta--2quSb {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 40rem;
+        text-align: left;
+    }
+}
+    .non-student-cta--non-student-cta--2quSb {
+        max-width: 60rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
     @include("components.footer")
 </div>

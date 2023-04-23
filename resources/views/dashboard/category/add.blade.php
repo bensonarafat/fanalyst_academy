@@ -18,7 +18,7 @@
 
                         </div>
                         <div class="p-2">
-                            <form action="{{ route('store.category') }}" method="post">
+                            <form action="{{ route('store.category') }}" method="post" enctype="multipart/form-data">
                                 @include("components.alert")
                                 @csrf
                                 <div class="col-lg-12 col-md-12">
@@ -51,6 +51,17 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="ui search focus lbel25 mt-30">
+                                        <label>Icon</label>
+                                        <div class="ui form swdh30">
+                                            <div class="field">
+                                               <input type="file" name="icon" id="icon" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="p-2">
                                     <button data-direction="next" class="btn btn-default steps_btn">Submit</button>
                                 </div>
@@ -67,6 +78,7 @@
                                     <th scope="col">SN</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Category</th>
+                                    <th scope="col">Icon</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -79,6 +91,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->name }}</td>
                                     <td>{{ $row->parentid  == null ? '--' : $childrenCategory->name }}</td>
+                                    <td>@if($row->icon == null) NULL @else <img src="{{ asset($row->icon) }}" style="width:25px;height:25px;object-fit:contain;">@endif</td>
                                     <td>
                                         <a href="{{ route('delete.category', $row->id) }}"><i class="fa fa-trash"></i></a>
                                         <a href="/category/edit-category/{{ $row->id }}"><i class="fa fa-edit"></i></a>

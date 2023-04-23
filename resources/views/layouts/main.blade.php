@@ -170,10 +170,10 @@
     </header>
 
     <header class="mobile_header header" style="display:none;">
-        <a href="{{ route('explore.view') }}" class="option_links text-center" title="cart">
+        <a href="javascripit:void(0)" class="option_links text-center click_menu" title="menu">
             <div class="d-flex flex-column">
                 <i class="uil uil-bars"></i>
-                <span style="font-size:11px;">Start Teaching</span>
+                <span style="font-size:11px;">Menu</span>
             </div>
         </a>
 
@@ -216,21 +216,8 @@
         @endguest
     </header>
 
-    <style>
-        .mobile_header{
-            display: none !important;
-            justify-content: space-evenly;
-        }
-        @media only screen and (max-width: 768px) {
-            /* For mobile phones: */
-            .mobile_header {
-               display: flex !important;
-            }
-            .xheader{
-               display: none !important;
-            }
-        }
-    </style>
+    @include("layouts.drawer")
+
     @yield('content')
 
     <script data-cfasync="false" src="{{ asset("assets/cloudflare-static/email-decode.min.js") }}"></script>
@@ -258,10 +245,17 @@
         });
     </script>
     <script>
-        $(function () {
-            $(".sortable").sortable();
-            $(".sortable").disableSelection();
-        });
+            $('.click_menu').on("click", function() {
+                $('.drawer').css("display", "block");
+            });
+
+            $('.drawer__close').on("click", function() {
+                $('.drawer').css("display", "none");
+            });
+            $(function () {
+                $(".sortable").sortable();
+                $(".sortable").disableSelection();
+            });
     </script>
 </body>
 

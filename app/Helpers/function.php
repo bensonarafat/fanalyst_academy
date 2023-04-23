@@ -71,4 +71,138 @@ function generateRandomString($length = 25) {
     }
     return $randomString;
 }
+
+
+function randomIcons(){
+    $rand = rand(1,20);
+
+    $icons =
+    [
+        [
+            "icon" => "uil-compress",
+            "color" => "#f56161",
+            "background" => "#3caea3"
+        ],
+        [
+            "icon" => "uil-compress-alt-left",
+            "color" => "#3caea3",
+            "background" => "#9b59b6"
+        ],
+        [
+            "icon" => "uil-eye",
+            "color" => "#9b59b6",
+            "background" => "#f1c40f"
+        ],
+        [
+            "icon" => "uil-clock-eight",
+            "color" => "#f1c40f",
+            "background" => "#e74c3c"
+        ],
+        [
+            "icon" => "uil-apps",
+            "color" => "#e74c3c",
+            "background" => "#2980b9"
+        ],
+
+        //
+
+
+        [
+            "icon" => "uil-align-left-justify",
+            "color" => "#2980b9",
+            "background" => "#27ae60"
+        ],
+        [
+            "icon" => "uil-bolt",
+            "color" => "#e67e22",
+            "background" => "#2c3e50"
+        ],
+        [
+            "icon" => "uil-cancel",
+            "color" => "#2c3e50",
+            "background" => "#d35400"
+        ],
+
+        [
+            "icon" => "uil-clipboard",
+            "color" => "#d35400",
+            "background" => "#1abc9c"
+        ],
+        [
+            "icon" => "uil-copy",
+            "color" => "#1abc9c",
+            "background" => "#8e44ad"
+        ],
+        [
+            "icon" => "uil-envelope",
+            "color" => "#8e44ad",
+            "background" => "#f39c12"
+        ],
+
+        //
+
+
+        [
+            "icon" => "uil-database",
+            "color" => "#f39c12",
+            "background" => "#e74c3c"
+        ],
+        [
+            "icon" => "uil-mars",
+            "color" => "#e74c3c",
+            "background" => "#9b59b6"
+        ],
+
+
+        //
+
+        [
+            "icon" => "uil-music",
+            "color" => "#f39c12",
+            "background" => "#e74c3c"
+        ],
+        [
+            "icon" => "uil-plane-fly",
+            "color" => "#e74c3c",
+            "background" => "#9b59b6"
+        ],
+
+        [
+            "icon" => "uil-tag",
+            "color" => "#f39c12",
+            "background" => "#e74c3c"
+        ],
+        [
+            "icon" => "uil-tear",
+            "color" => "#e74c3c",
+            "background" => "#9b59b6"
+        ],
+
+
+        [
+            "icon" => "uil-user-circle",
+            "color" => "#e67e22",
+            "background" => "#2c3e50"
+        ],
+        [
+            "icon" => "uil-tear",
+            "color" => "#2c3e50",
+            "background" => "#d35400"
+        ],
+
+        [
+            "icon" => "uil-windsock",
+            "color" => "#d35400",
+            "background" => "#1abc9c"
+        ],
+
+        [
+            "icon" => "uil-music",
+            "color" => "#f39c12",
+            "background" => "#e74c3c"
+        ],
+    ];
+
+    return $icons[$rand];
+}
 ?>

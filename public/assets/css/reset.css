@@ -219,3 +219,95 @@ element.style {
     font-size: 25px;
     color: white;
 }
+
+
+.drawer {
+    /* Take full size */
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    display:none;
+}
+.drawer__overlay {
+    /* Take full size */
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    /* User still can see the content of main page */
+    background-color: rgba(0, 0, 0, 0.5);
+
+    z-index: -1;
+}
+
+.drawer__sidebar {
+    /* Take full height */
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 200px;
+    /* Background */
+    background-color: #fff;
+}
+.mobile_header{
+    display: none !important;
+    justify-content: space-evenly;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .mobile_header {
+       display: flex !important;
+    }
+    .xheader{
+       display: none !important;
+    }
+
+
+    .mobile_search {
+        display: block !important;
+     }
+}
+
+.drawer__close{
+    border-radius: 100%;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 0px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.drawer__close .uil{
+    font-size: 30px;
+}
+.__category{
+    padding: 10px;
+    color: white;
+    display: inline-block;
+    font-weight: 400;
+    margin: 10px 5px;
+    background: #9b4923;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.edu_social_links .fab{
+    font-size: 20px !important;
+}

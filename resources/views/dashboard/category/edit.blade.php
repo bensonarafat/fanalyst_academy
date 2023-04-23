@@ -18,7 +18,7 @@
 
                         </div>
                         <div class="p-2">
-                            <form action="{{ route('update.category') }}" method="post">
+                            <form action="{{ route('update.category') }}" method="post" enctype="multipart/form-data">
                                 @include("components.alert")
                                 @csrf
                                 <div class="col-lg-12 col-md-12">
@@ -46,6 +46,17 @@
                                         <div class="ui form swdh30">
                                             <div class="field">
                                                 <textarea rows="3" name="description" id="" placeholder="description here...">{{ $category->description }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="ui search focus lbel25 mt-30">
+                                        <label>Icon</label>
+                                        <div class="ui form swdh30">
+                                            <div class="field">
+                                                <input type="hidden" name="iconspan" value="{{ $category->icon }}">
+                                               <input type="file" name="icon" id="icon" class="form-control">
                                             </div>
                                         </div>
                                     </div>

@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
     `name` varchar(255) NOT NULL,
     `parentid` int(11) NULL DEFAULT NULL,
     `description` varchar(255) NULL DEFAULT NULL,
+    `icon` varchar(255) NULL DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

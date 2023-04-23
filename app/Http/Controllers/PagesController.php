@@ -28,6 +28,8 @@ class PagesController extends Controller
         $instructors = null;
         $featured = null;
         $allCourses = null;
+        $category = null;
+        $categoryCoureses = null;
         if(Auth::check()){
             if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
                 $instructorCourses = Course::where('instructor', auth()->user()->id)->get();
@@ -44,9 +46,15 @@ class PagesController extends Controller
                 $instructors = User::where('type', 'instructor')->latest()->limit(5)->get();
             }
         }else{
-            $allCourses = Course::where(['status' =>  'active'])->latest()->limit(10)->get();
+            if(isset($_GET['cat'])){
+                $allCourses = Course::where(['status' =>  'active', 'category' => $_GET['cat']])->latest()->limit(10)->get();
+                $category = Category::find($_GET['cat']);
+                $categoryCoureses = Course::where(['status' =>  'active', 'category' => $_GET['cat']])->count();
+            }else{
+                $allCourses = Course::where(['status' =>  'active'])->latest()->limit(10)->get();
+            }
         }
-        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses'));
+        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses', 'category', 'categoryCoureses'));
     }
 
     public function about(){
