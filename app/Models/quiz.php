@@ -13,6 +13,7 @@ class Quiz extends Model
 
     protected $fillable = [
         'topic',
+        'qid',
         'question',
         'a',
         'b',

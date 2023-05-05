@@ -3,27 +3,35 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
     public function addToCart(Request $request){
+
         try {
             $cart = session()->get('cart');
-            if($cart == null){
 
-                $cart[] = $request->id;
+            if($cart == null){
+                $cart[] = [
+                    "id" => $request->id,
+                    "type" => $request->type,
+                ];
+
 
             }else{
-                if(!in_array($request->id, $cart)){
-                    array_push($cart, $request->id);
+
+                if (!array_element_exists($cart, $request->id,  $request->type)) {
+                    array_push($cart,  [
+                        "id" => $request->id,
+                        "type" => $request->type,
+                    ]);
                 }
             }
             session()->put('cart', $cart);
             return redirect()->back()->with(["success" => "Course added to Cart"]);
         } catch (Exception $e) {
-            dd($e);
+
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
@@ -32,9 +40,13 @@ class CheckoutController extends Controller
         try {
             $cart = session()->get('cart');
             if($cart != null){
-                if (($key = array_search($request->id, $cart)) !== false) {
-                    unset($cart[$key]);
+                foreach ($cart as $key => $item) {
+                    if ($item['id'] == $request->id && $item['type'] == $request->type) {
+                        unset($cart[$key]);
+                        break;
+                    }
                 }
+
             }
             session()->put('cart', $cart);
             return redirect()->back()->with(["success" => "Course removed from Cart"]);
@@ -43,17 +55,22 @@ class CheckoutController extends Controller
         }
     }
 
-    public function removeInlineCart($id){
+    public function removeInlineCart($id, $type){
         try {
             $cart = session()->get('cart');
             if($cart != null){
-                if (($key = array_search($id, $cart)) !== false) {
-                    unset($cart[$key]);
+                foreach ($cart as $key => $item) {
+                    if ($item['id'] == $id && $item['type'] == $type) {
+                        unset($cart[$key]);
+                        break;
+                    }
                 }
+
             }
             session()->put('cart', $cart);
             return redirect()->back()->with(["success" => "Course removed from Cart"]);
         } catch (Exception $e) {
+
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }

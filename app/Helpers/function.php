@@ -27,10 +27,10 @@ function naira(){
 }
 
 
-function inCart($id){
+function inCart($id, $type='course'){
     $cart =  session()->get('cart');
     if($cart == null) return false;
-    if(in_array($id, $cart)){
+    if(array_element_exists($cart, $id, $type)){
         return true;
     }else{
         return false;
@@ -205,4 +205,20 @@ function randomIcons(){
 
     return $icons[$rand];
 }
+
+function array_element_exists($array, $id, $type) {
+
+    if($array != null){
+        foreach ($array as $element) {
+            if ($element['id'] == $id && $element['type'] == $type) {
+                return true;
+            }
+        }
+        return false;
+    }else{
+        return false;
+    }
+}
+
+
 ?>

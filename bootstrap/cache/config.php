@@ -679,10 +679,10 @@
   ),
   'paystack' => 
   array (
-    'publicKey' => 'pk_test_63a7796dc8b155aa476bf82f6bb1b79b03ac94b2',
-    'secretKey' => 'sk_test_cf71f33646c72a7840da83d37d0fa8a04d0e7e39',
+    'publicKey' => 'pk_test_08b9e0a7796421d9af344428ab08a42c7b2b0b5c',
+    'secretKey' => 'sk_test_a0f71e78e040ff03f7c80cc7850b8ab467ed0649',
     'paymentUrl' => 'https://api.paystack.co',
-    'merchantEmail' => 'codepym.ini@gmail.com',
+    'merchantEmail' => 'info@fanalystacademy.com',
   ),
   'queue' => 
   array (

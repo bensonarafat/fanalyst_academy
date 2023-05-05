@@ -14,10 +14,12 @@ class Transaction extends Model
     protected $fillable = [
         'userid',
         'courseid',
+        'quizid',
         'reference',
         'amount',
         'discount',
         'total',
+        "type",
         'payment_method',
     ];
 }

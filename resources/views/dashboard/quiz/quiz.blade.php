@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 @section('title', 'Quiz')
-
 <form action="{{ route("store.quiz") }}" method="post">
     @csrf
     <div class="modal fade" id="add_lecture_model" tabindex="-1" aria-labelledby="lectureModalLabel" aria-hidden="true">
@@ -92,7 +91,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="topic" id="topic" value="{{ $topic->id }}">
+                    <input type="hidden" name="topicid" id="topicid" value="{{ $topic->id }}">
+                    <input type="hidden" name="qid" id="qid" value="{{ $question->id }}">
                     <button type="button" class="main-btn cancel" data-dismiss="modal">Close</button>
                     <button type="submit" class="main-btn">Add Question</button>
                 </div>
@@ -106,13 +106,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="st_title"><i class="uil uil-book-alt"></i>Questions</h2>
+                    <h2 class="st_title"><i class="uil uil-book-alt"></i>{{ $question->name }}</h2>
                 </div>
                 <div class="col-md-12">
                     <div class="card_dash1">
                         <div class="card_dash_left1">
                             <i class="uil uil-book-alt"></i>
-                            <h1>Jump Into Questions Creation</h1>
+                            <h1>Jump Into Quiz Creation</h1>
                         </div>
                         <div class="card_dash_right1">
                             <button class="create_btn_dash" data-toggle="modal" data-target="#add_lecture_model">Create New Question</button>
@@ -123,48 +123,37 @@
             <div class="row">
                 <div class="col-md-12">
                     @include("components.alert")
-                    <div class="my_courses_tabs">
-
-                        <div class="table-responsive mt-30">
-                            <table class="table ucp-table">
-                                <thead class="thead-s">
-                                    <tr>
-                                        <th scope="col">SN.</th>
-                                        <th>Topic</th>
-                                        <th>Question</th>
-                                        <th>Answer</th>
-                                        <th>Created</th>
-                                        <th class="text-center" scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($quiz as $row)
-                                    @php
-                                        $topic = \App\Models\Topic::where("id", $row->topic)->first();
-                                    @endphp
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $topic->name }}</td>
-                                        <td>{{ $row->question }}</td>
-                                        <td>{{ $row->answer }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($row->created_at)->format('d M, Y') }}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route("edit.quiz", $row->id) }}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
-                                            <a href="{{ route("delete.quiz", $row->id) }}" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                    <table class="table ucp-table">
+                        <thead class="thead-s">
+                            <tr>
+                                <th scope="col">SN.</th>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Created</th>
+                                <th class="text-center" scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($quiz as $row)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $row->question }}</td>
+                                <td>{{ strtoupper($row->answer_option) }}</td>
+                                <td>{{ \Carbon\Carbon::parse($row->created_at)->format('d M, Y') }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route("edit.quiz", $row->id) }}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
+                                    <a href="{{ route("delete.quiz", $row->id) }}" title="Delete" class="gray-s"><i class="uil uil-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
 
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
     @include("components.footer")
 </div>
-
 @endsection

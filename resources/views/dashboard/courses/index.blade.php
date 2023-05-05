@@ -39,6 +39,7 @@
                                             <th class="text-center" scope="col">Purchases</th>
                                             <th class="text-center" scope="col">Enrolled</th>
                                             @if(auth()->user()->type == 'admin')<th>Approve</th>@endif
+                                            <th class="text-center" scope="col">Share</th>
                                             <th class="text-center" scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -67,6 +68,9 @@
                                                         <option value="declined" @if($row->status == 'declined') selected @endif>Declined</option>
                                                     </select>
                                                 </form>
+                                            </td>
+                                            <td class="text-center">
+                                                <span  onclick="copyToClipboard('{{ route('share.course', $row->link) }}')" title="Share" class="gray-s"><i class="uil uil-share-alt"></i></span>
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('edit.course', $row->id) }}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
@@ -149,4 +153,24 @@
     @include('components.footer')
 </div>
 @endif
+
+<script>
+function copyToClipboard(text) {
+  // Create a temporary input element
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("value", text);
+    document.body.appendChild(input);
+
+    // Select the input text
+    input.select();
+
+    // Copy the selected text to the clipboard
+    document.execCommand("copy");
+
+    // Remove the temporary input element
+    document.body.removeChild(input);
+    alert("Link Copied. Paste to share")
+    }
+</script>
 @endsection

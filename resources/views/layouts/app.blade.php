@@ -95,7 +95,7 @@
                 <ul>
                     @guest
                     <li class="nav__other nav__last">
-                        <a href="{{ route('explore.view') }}"><strong>Start Teaching</strong></a>
+                        <a href="/register?tutor=true"><strong>Start Teaching</strong></a>
                     </li>
                     @endguest
 
@@ -285,13 +285,16 @@
                                     <span class="menu--label">Quiz</span>
                                 </label>
                                 <ul class="sub_menu">
-                                    @if(auth()->user()->type == "admin")
-                                    <li class="sub_menu--item">
-                                        <a href="{{ route("quiz.index") }}" class="sub_menu--link">Questions</a>
-                                    </li>
-                                    <li class="sub_menu--item">
-                                        <a href="{{ route("import.questions") }}" class="sub_menu--link">Import Questions</a>
-                                    </li>
+                                    @if(auth()->user()->type == 'instructor' || auth()->user()->type == "admin" )
+                                        {{-- <li class="sub_menu--item">
+                                            <a href="{{ route("quiz.index") }}" class="sub_menu--link">Questions</a>
+                                        </li>
+                                        <li class="sub_menu--item">
+                                            <a href="{{ route("import.questions") }}" class="sub_menu--link">Import Questions</a>
+                                        </li> --}}
+                                        <li class="sub_menu--item">
+                                            <a href="{{ route("quiz.index") }}" class="sub_menu--link">Create Quiz</a>
+                                        </li>
                                     @endif
                                     <li class="sub_menu--item">
                                         <a href="{{ route("take.quiz") }}" class="sub_menu--link">Take Quiz</a>

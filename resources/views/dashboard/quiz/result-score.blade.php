@@ -39,43 +39,35 @@
                     <div class="">
                         <div class="">
                             @foreach ($quiz as $row)
+                                @php
+                                    $answer =  \App\Models\Answer::where("question", $row->id)->first();
+                                @endphp
                                 <div class="ques_item">
-                                    <div class="ques_title">
-                                        <span>
-                                            Question {{ $loop->iteration }}:-</span> {{ $row->question }}
-                                        </span>
-                                        <br/>
-                                        @if(strtolower($row->answer_option) == "a")
-                                        <span>
-                                            <strong>Answer: </strong> {{ $row->a }}
-                                        </span>
-                                        @elseif(strtolower($row->answer_option) == "b")
-                                        <span>
-                                            <strong>Answer: </strong> {{ $row->b }}
-                                        </span>
-                                        @elseif(strtolower($row->answer_option) == "c")
-                                        <span>
-                                            <strong>Answer: </strong> {{ $row->c }}
-                                        </span>
-                                        @elseif(strtolower($row->answer_option) == "d")
-                                        <span>
-                                            <strong>Answer: </strong> {{ $row->d }}
-                                        </span>
-                                        @elseif(strtolower($row->answer_option) == "e")
-                                        <span>
-                                            <strong>Answer: </strong> {{ $row->e }}
-                                        </span>
-                                        @endif
+                                    <strong style="font-size:18px;">
+                                        {{ $loop->iteration }}. {{ $row->question }}
+                                    </strong>
+                                    <div style="display:flex" style="font-size:16px;">
 
-                                        <div style="background:rgb(162, 208, 162);padding:10px;">
-                                            <h4 style="color:white">Explanation</h4>
-                                            <hr>
-                                            <p style="color:white">
-                                                {{ $row->explanation }}
-                                            </p>
-
+                                        <div class="maker">
+                                           <span>@if(strtolower($answer->select) == "a" && strtolower($row->answer_option) != "a") <img src="{{ asset("assets/images/wrong.png") }}" style="width:20px;" alt=""> @endif</span> <span>@if(strtolower($row->answer_option) == "a") <img src="{{ asset("assets/images/correct.png") }}" style="width:20px;" alt=""> @endif</span> <br/>
+                                           <span>@if(strtolower($answer->select) == "b" && strtolower($row->answer_option) != "b") <img src="{{ asset("assets/images/wrong.png") }}" style="width:20px;" alt=""> @endif</span>  <span>@if(strtolower($row->answer_option) == "b")<img src="{{ asset("assets/images/correct.png") }}"  style="width:20px;" alt=""> @endif </span> <br/>
+                                           <span>@if(strtolower($answer->select) == "c" && strtolower($row->answer_option) != "c") <img src="{{ asset("assets/images/wrong.png") }}" style="width:20px;" alt=""> @endif</span>  <span>@if(strtolower($row->answer_option) == "c") <img src="{{ asset("assets/images/correct.png") }}"  style="width:20px;" alt=""> @endif </span> <br/>
+                                           <span>@if(strtolower($answer->select) == "d" && strtolower($row->answer_option) != "d") <img src="{{ asset("assets/images/wrong.png") }}" style="width:20px;" alt=""> @endif</span>  <span>@if(strtolower($row->answer_option) == "d") <img src="{{ asset("assets/images/correct.png") }}"  style="width:20px;" alt="">@endif </span> <br/>
+                                            @if($row->e)<span>@if(strtolower($answer->select) == "e" && strtolower($row->answer_option) != "e") <img src="{{ asset("assets/images/wrong.png") }}" style="width:20px;" alt=""> @endif</span>  <span>@if(strtolower($row->answer_option) == "e") <img src="{{ asset("assets/images/correct.png") }}"  style="width:20px;" alt=""> @endif </span>@endif
+                                        </div>
+                                        <div>
+                                            <span>a. {{ $row->a }}</span> <br/>
+                                            <span>b. {{ $row->b }}</span> <br/>
+                                            <span>c. {{ $row->c }}</span> <br/>
+                                            <span>d. {{ $row->d }}</span> <br/>
+                                            @if($row->e) <span>e. {{ $row->e }}</span>@endif <br/>
                                         </div>
                                     </div>
+
+                                    <p style="color:blue;margin-top:10px" >
+                                        {{ $row->explanation }}
+                                    </p>
+
                                 </div>
                             @endforeach
 

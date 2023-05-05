@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Question extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        "qid",
-        'user_id',
-        'question',
-        'select',
-        'mark',
-        'answer',
-        'topic',
-        'ref',
+        'userid',
+        'categoryid',
+        'subcategory',
+        'topicid',
+        'name',
+        'time',
+        'price'
     ];
+
 }

@@ -51,10 +51,10 @@
                     @endphp
                     <a href="/" class="__category" style="width:100%">
                         <strong>
-                            <span style="background: white;border-radius:100%; padding: 8px 5px;margin-right:5px;">
-                                <img src="{{ asset("assets/images/category.png") }}" style="width:25px; height:25px;object-fit:contain;">
+                            <span style="background: white;border-radius:100%; padding: 8px 4px;margin-right:5px;">
+                                <img src="{{ asset("assets/images/category.png") }}" style="width:20px; height:20px;object-fit:contain;">
                             </span>
-                            All({{ $allcourse_count }})
+                            <span style="font-size: 12px;">All ({{ $allcourse_count }})</span>
                         </strong>
                     </a>
                 </div>
@@ -65,14 +65,14 @@
                     <div class="col-sm-12 col-lg-3">
                         <a href="?cat={{ $row->id }}" style="width:100%" class="__category">
                             <strong>
-                                <span style="background: white;border-radius:100%; padding: 8px 5px;margin-right:5px;">
+                                <span style="background: white;border-radius:100%; padding: 8px 4px;margin-right:5px;">
                                     @if($row->icon == null)
-                                    <img src="{{ asset("assets/images/category.png") }}" style="width:25px; height:25px;object-fit:contain;">
+                                    <img src="{{ asset("assets/images/category.png") }}" style="width:20px;height:20px;object-fit:contain;">
                                     @else
-                                        <img src="{{ asset($row->icon) }}" style="width:25px; height:25px;object-fit:contain;">
+                                        <img src="{{ asset($row->icon) }}" style="width:20px;height:20px;object-fit:contain;">
                                     @endif
                                 </span>
-                                {{ $row->name }} ({{$course_count }})
+                                <span style="font-size: 12px;">{{ $row->name }} ({{$course_count }})</span>
                             </strong>
                         </a>
                     </div>
@@ -117,15 +117,6 @@
                         <span>Filter</span>
                     </div>
                 </div>
-
-                {{-- <div style="display:flex;border: 1px solid #948f8f;padding: 5px;border-radius: 5px;    align-items: center;">
-                    <div class="">
-                        <i class="uil uil-th"></i>
-                    </div>
-                    <div class="">
-                        <i class="uil uil-list-ul"></i>
-                    </div>
-                </div> --}}
             </div>
 
         </div>
@@ -181,66 +172,26 @@
                         <img class="line-title" src="{{ asset("assets/images/line.svg") }}" alt="" />
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>ACCA Exam Practice Test </h4>
-                        <span>Prepare for your ACCA exam with our comprehensive and
-                            realistic practice tests.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
+
+                {{-- Quiz here  --}}
+                <div class="row">
+                    @foreach ($topics as $row)
+                    <div class="col-6 col-sm-3">
+                        <div class="fcrse_1 mt-30">
+                            <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="fcrse_img">
+                                <img src="{{ asset($row->image) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                                <div class="course-overlay">
+                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                </div>
+                            </a>
+                            <div class="fcrse_content">
+                                <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="crse14s">{{ $row->name }}</a>
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>CFA Exam Practice Test</h4>
-                        <span> Boost your expertise and exam proficiency with our all-inclusive
-                            CFA exam practice tests.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>ICAN Exam Practice </h4>
-                        <span>Test Prepare for the objectives section of the ICAN Foundation exam
-                            with past questions.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>FRM Exam Practice Test</h4>
-                        <span> Prepare for the FRM exam with our practice tests to enhance your
-                            knowledge and test-taking skills.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>Personal finance Practice Test </h4>
-                        <span>Test your financial knowledge with our practice tests to
-                            improve your personal finance skills.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="apply_job_link mt-30">
-                        <h4>Corporate finance Practice </h4>
-                        <span>Test Evaluate your understanding of corporate finance through
-                            our comprehensive practice exams.</span>
-                        <div class="apply_job_link_right">
-                            <a href="{{ route("take.quiz") }}" class="career_lnk5">Start</a>
-                        </div>
-                    </div>
-                </div>
+                {{-- Quiz here --}}
             </div>
         </div>
     </div>
@@ -305,7 +256,7 @@
                             <div class="non-student-cta--non-student-cta--2quSb" data-purpose="non-student-cta-body">
                                 <h3 class="ud-heading-serif-xl non-student-cta--non-student-cta__header--3xgVp" data-purpose="non-student-cta-title">Teach with Us</h3>
                                 <div class="ud-text-md non-student-cta--non-student-cta__content--3D827">Fanalyst Academy presents a unique opportunity for instructors worldwide to share their expertise and inspire students to learn what they love. With our comprehensive resources and support, you can create an engaging learning experience and make a real impact in the lives of students worldwide. Join our community of passionate instructors today and help shape the future of education!</div>
-                                <a href="{{ route("login") }}" class="career_lnk5">Start teaching today</a>
+                                <a href="/register?tutor=true" class="career_lnk5">Start teaching today</a>
                             </div>
                         </div>
                     </div>

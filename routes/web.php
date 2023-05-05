@@ -38,13 +38,15 @@ Route::get('/faq', [PagesController::class, 'faq'])->name('faq');
 Route::get('/courses-section', [PagesController::class, 'courseSection'])->name('course.section');
 Route::get('/explore-view', [PagesController::class, 'exploreView'])->name('explore.view');
 Route::post('/contact', [ContactController::class, 'contact'])->name('send.contact');
+Route::get("/sc/{link}",[PagesController::class, "shareCourse"])->name("share.course");
+Route::get("/su/{link}",[PagesController::class, "shareUser"])->name('share.user');
 
 Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/add-to-cart', [CheckoutController::class, 'addToCart'])->name('add.cart');
     Route::post('/remove-from-cart', [CheckoutController::class, 'removeFromCart'])->name('remove.cart');
 
-    Route::get('/remove-line-cart/{id}', [CheckoutController::class, 'removeInlineCart'])->name('remove.inline.cart');
+    Route::get('/remove-line-cart/{id}/{type}', [CheckoutController::class, 'removeInlineCart'])->name('remove.inline.cart');
 
     Route::group(['prefix' => 'explore'], function(){
         Route::get('/', [PagesController::class, 'explore'])->name('explore');
@@ -160,11 +162,22 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/import-questions', [PagesController::class, "importQuestions"])->name('import.questions');
         Route::post('/store-import-questions', [QuizController::class, "importQuestion"])->name('store.import.questions');
 
-        Route::get("/add/{id}", [PagesController::class, "addQuiz"])->name('add.quiz');
+        Route::get("/quiz-add/{id}", [PagesController::class, "addQuiz"])->name('add.quiz');
+        Route::get("/add/{id}", [PagesController::class, "quizPage"])->name('quiz.page');
         Route::get("/edit/{id}", [PagesController::class, "editQuiz"])->name('edit.quiz');
         Route::post('/store', [QuizController::class, "storeQuiz"])->name('store.quiz');
         Route::post('/update', [QuizController::class, "updateQuiz"])->name('update.quiz');
         Route::get('/delete/{id}', [QuizController::class, "deleteQuiz"])->name('delete.quiz');
+
+
+        Route::group(["prefix" => "question"], function(){
+            Route::get('/question/{id}', [PagesController::class, "questions"])->name('questions');
+            Route::get('/add/{id}', [PagesController::class, "addQuestions"])->name('add.question');
+            Route::get('/edit/{id}', [PagesController::class, "editQuestion"])->name('edit.question');
+            Route::post('/store', [QuizController::class, "storeQuestion"])->name('store.question');
+            Route::post('/update', [QuizController::class, "updateQuestion"])->name('update.question');
+            Route::get('/delete/{id}', [QuizController::class, "deleteQuestion"])->name('delete.question');
+        });
 
         Route::group(["prefix" => "topic"], function(){
             Route::get('/add', [PagesController::class, "addTopic"])->name('add.topic');

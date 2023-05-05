@@ -21,9 +21,10 @@
                             <thead class="thead-s">
                                 <tr>
                                     <th class="text-center" scope="col">No.</th>
+                                    <th>Topic</th>
+                                    <th>Question</th>
                                     <th>Category</th>
-                                    <th>Level</th>
-                                    <th>Name</th>
+                                    <th>Sub Category</th>
                                     <th>Date</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -33,14 +34,16 @@
                                 @php
                                     $ans = App\Models\Answer::where("ref",$row->ref)->first();
                                     $topic = App\Models\Topic::where("id",$ans->topic)->first();
-                                    $category = App\Models\Category::where("id", $topic->category_id)->first();
-                                    $level = App\Models\Category::where("id", $topic->level)->first();
+                                    $question = App\Models\Question::where("id",$ans->qid)->first();
+                                    $category = App\Models\Category::where("id", $question->categoryid)->first();
+                                    $subcategory = App\Models\Category::where("id", $question->subcategory)->first();
                                 @endphp
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $level->name }}</td>
                                     <td>{{ $topic->name }}</td>
+                                    <td>{{ $question->name }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $subcategory->name }}</td>
                                     <td>{{ \Carbon\Carbon::parse($ans->created_at)->format('d M, Y')  }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('result.score', $row->ref) }}" title="Result" class="gray-s"><i class="uil uil-eye"></i> View </a>

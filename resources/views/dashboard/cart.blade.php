@@ -27,30 +27,59 @@
                     @for ($i = 0; $i < count(getCart()); $i++)
                     @php
                         $carts = getCart();
-                        $course = \App\Models\Course::find($carts[$i]);
-                        $user = \App\Models\User::find($course->instructor);
+                        if($carts[$i]['type'] == "quiz") {
+                            $question = \App\Models\Question::find($carts[$i]["id"]);
+                            $topic =  \App\Models\Topic::find($question->topicid);
+                            $user =  \App\Models\User::find($question->userid);
+                        }else{
+                            $course = \App\Models\Course::find($carts[$i]["id"]);
+                            $user = \App\Models\User::find($course->instructor);
+                        }
+
                     @endphp
                     <div class="fcrse_1">
-                        <a href="{{ route('view.course', $course->id) }}" class="hf_img">
-                            <img class="cart_img" style="width:100%;height:150px;object-fit:cover;" src="{{ asset($course->media_thumbnail) }}" alt="" />
-                        </a>
-                        <div class="hs_content">
-                            <div class="eps_dots eps_dots10 more_dropdown">
-                                <a href="{{ route('remove.inline.cart', $course->id) }}"><i class="uil uil-times"></i></a>
+                        @if ($carts[$i]['type'] == "quiz")
+                            <a href="" class="hf_img">
+                                <img class="cart_img" style="width:100%;height:150px;object-fit:cover;" src="{{ asset($topic->image) }}" alt="" />
+                            </a>
+                            <div class="hs_content">
+                                <div class="eps_dots eps_dots10 more_dropdown">
+                                    <a href="/remove-line-cart/{{ $question->id }}/quiz"><i class="uil uil-times"></i></a>
+                                </div>
+                                <a href="" class="crse14s title900 pt-2">{{ $question->name }}</a>
+                                <div class="auth1lnkprce">
+                                    <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
+                                    <div class="prce142">{!! naira() . number_format($question->price, 2)  !!}</div>
+                                </div>
                             </div>
-                            <a href="course_detail_view.html" class="crse14s title900 pt-2">{{ $course->title }}</a>
-                            <a href="#" class="crse-cate">{{ $course->short_description }}</a>
-                            <div class="auth1lnkprce">
-                                <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
-                                <div class="prce142">{!! naira() . number_format($course->amount, 2)  !!}</div>
+                            @php
+                                $amount += $question->price;
+                                $grand = $amount;
+                            @endphp
+                        @else
+                            <a href="{{ route('view.course', $course->id) }}" class="hf_img">
+                                <img class="cart_img" style="width:100%;height:150px;object-fit:cover;" src="{{ asset($course->media_thumbnail) }}" alt="" />
+                            </a>
+                            <div class="hs_content">
+                                <div class="eps_dots eps_dots10 more_dropdown">
+                                    <a href="/remove-line-cart/{{ $course->id }}/quiz"><i class="uil uil-times"></i></a>
+                                </div>
+                                <a href="{{ route('view.course', $course->id) }}" class="crse14s title900 pt-2">{{ $course->title }}</a>
+                                <a href="#" class="crse-cate">{{ $course->short_description }}</a>
+                                <div class="auth1lnkprce">
+                                    <p class="cr1fot">By <a href="#">{{ $user->fullname }}</a></p>
+                                    <div class="prce142">{!! naira() . number_format($course->amount, 2)  !!}</div>
+                                </div>
                             </div>
-                        </div>
+                            @php
+                                $amount += $course->amount;
+                                $discount += $course->discount;
+                                $grand = $amount - $discount;
+                            @endphp
+                        @endif
+
                     </div>
-                    @php
-                        $amount += $course->amount;
-                        $discount += $course->discount;
-                        $grand = $amount - $discount;
-                    @endphp
+
                     @endfor
 
                 </div>

@@ -9,10 +9,9 @@ class Topic extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'category_id',
-        'level',
         'name',
-        'time',
+        'image',
     ];
 }

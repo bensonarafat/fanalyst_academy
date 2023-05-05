@@ -64,10 +64,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        session()->put("type", trim($data['type']));
         return User::create([
             'fullname' => $data['fullname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            "link" => generateRandomString(10),
         ]);
+    }
+
+    protected function redirectTo()
+    {
+        if (session()->get("type") == "tutor") {
+            return "/users/instructor-application";
+        }
+        return '/';
     }
 }

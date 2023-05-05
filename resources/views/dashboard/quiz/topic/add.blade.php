@@ -27,51 +27,14 @@
                                                     <input class="form_input_1" type="text" title="name" name="name" id="name" placeholder="Name here" required />
                                                 </div>
                                             </div>
-                                            <div class="new-section mt-10">
-                                                <div class="form_group">
-                                                    <label class="label25">Category*</label>
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category" required>
-                                                        <option value="">Select category</option>
-                                                        @foreach ($categories as $row)
-                                                            @php
-                                                                $levels = App\Models\Category::where("parentid", $row->id)->get();
-                                                            @endphp
-                                                            <option value="{{ $row->id }}" data-json="{{ $levels }}">{{ $row->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="new-section mt-10">
-                                                <div class="form_group">
-                                                    <label class="label25">Level*</label>
-                                                    <div class="__levelreplace">
-                                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="level" id="level" required>
-                                                            <option value="">Select level</option>
-                                                        </select>
-                                                    </div>
+
+                                            <div class="ui search focus mt-10 lbel25">
+                                                <label>Image </label>
+                                                <div class="ui left icon input swdh19">
+                                                    <input class="prompt srch_explore" type="file" required name="image" id="file" />
                                                 </div>
                                             </div>
 
-                                            <div class="new-section mt-10">
-                                                <div class="form_group">
-                                                    <label class="label25">Time*</label>
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="time" id="time" required>
-                                                        <option value="">Select time</option>
-                                                        <option value="5">5 Minutes</option>
-                                                        <option value="10">10 Minutes</option>
-                                                        <option value="15">15 Minutes</option>
-                                                        <option value="20">20 Minutes</option>
-                                                        <option value="25">25 Minutes</option>
-                                                        <option value="30">30 Minutes</option>
-                                                        <option value="35">35 Minutes</option>
-                                                        <option value="40">40 Minutes</option>
-                                                        <option value="45">45 Minutes</option>
-                                                        <option value="50">50 Minutes</option>
-                                                        <option value="55">55 Minutes</option>
-                                                        <option value="60">60 Minutes</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

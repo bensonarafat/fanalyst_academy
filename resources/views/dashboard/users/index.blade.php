@@ -25,6 +25,7 @@
                                             <th scope="col">Type</th>
                                             <th scope="col">Mobile</th>
                                             <th scope="col">Status</th>
+                                            <th class="text-center" scope="col">Share</th>
                                             <th class="text-center" scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -47,6 +48,9 @@
                                                 <td>{{ $row->mobile }}</td>
                                                 <td>{!! UserStatus($row->status) !!}</td>
                                                 <td class="text-center">
+                                                    <span  onclick="copyToClipboard('{{ route('share.user', $row->link) }}')" title="Share" class="gray-s"><i class="uil uil-share-alt"></i></span>
+                                                </td>
+                                                <td class="text-center">
                                                     <a href="{{ route('view.user', $row->id) }}" title="View" class="gray-s"><i class="uil uil-eye"></i></a>
                                                 </td>
                                             </tr>
@@ -62,5 +66,23 @@
     </div>
     @include('components.footer')
 </div>
+<script>
+    function copyToClipboard(text) {
+      // Create a temporary input element
+        var input = document.createElement("input");
+        input.setAttribute("type", "text");
+        input.setAttribute("value", text);
+        document.body.appendChild(input);
 
+        // Select the input text
+        input.select();
+
+        // Copy the selected text to the clipboard
+        document.execCommand("copy");
+
+        // Remove the temporary input element
+        document.body.removeChild(input);
+        alert("Link Copied. Paste to share")
+        }
+    </script>
 @endsection

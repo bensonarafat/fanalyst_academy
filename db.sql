@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `linkedin_url` varchar(255) NULL DEFAULT NULL,
   `youtube_url` varchar(255) NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
+  `link` varchar(255) NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -62,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
     `likes` int(11) NOT NULL DEFAULT 0,
     `enrolled` int(11) NOT NULL DEFAULT 0,
     `ratings` int(11) NOT NULL DEFAULT 0,
+    `link` varchar(255) NULL DEFAULT NULL,
     `status` varchar(255) NOT NULL DEFAULT 'pending',
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -125,12 +127,14 @@ CREATE TABLE IF NOT EXISTS `ratings` (
 CREATE TABLE IF NOT EXISTS `transactions` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userid` int(11) NOT NULL,
-    `courseid`  int(11) NOT NULL,
+    `courseid`  int(11) NULL  DEFAULT NULL,
+    `quizid` int(11) NULL  DEFAULT NULL,
     `reference` varchar(255) NOT NULL,
     `amount` decimal(25,2) NOT NULL DEFAULT 0.00,
     `discount` decimal(25,2) NOT NULL DEFAULT 0.00,
     `total` decimal(25,2) NOT NULL DEFAULT 0.00,
     `status` varchar(255) NOT NULL DEFAULT 'pending',
+    `type` varchar(255) NOT NULL,
     `payment_method` varchar(255) NOT NULL ,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -142,6 +146,14 @@ CREATE TABLE IF NOT EXISTS `enrolled` (
     `userid` int(11) NOT NULL,
     `courseid`  int(11) NOT NULL,
     `is_free` tinyint(1) NOT NULL DEFAULT 0,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `quiz_enrolled` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `questionid`  int(11) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -182,12 +194,15 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 
 
 -- Quiz
-CREATE TABLE IF NOT EXISTS `topics` (
+CREATE TABLE IF NOT EXISTS `questions` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `category_id` int(11) NOT NULL,
-    `level` int(11) NOT NULL,
+    `userid` int(11) NOT NULL,
+    `categoryid` int(11) NOT NULL,
+    `topicid` int(11) NOT NULL,
+    `subcategory` int(11) NOT NULL,
     `name` varchar(255) NOT NULL,
     `time` int(11) NOT NULL,
+    `price` decimal(25,2) NOT NULL DEFAULT 0.00,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -196,13 +211,23 @@ CREATE TABLE IF NOT EXISTS `topics` (
 CREATE TABLE IF NOT EXISTS `quiz` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `topic` int(11) NOT NULL,
+    `qid` int(11) NOT NULL,
     `question` text NOT NULL,
     `a` text NOT NULL,
     `b` text NOT NULL,
     `c` text NOT NULL,
     `d` text NOT NULL,
+    `e` text NULL DEFAULT NULL,
     `answer_option` varchar(255) NOT NULL,
     `explanation` text NOT NULL DEFAULT '',
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `topics` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `name` varchar(255) NOT NULL,
+    `image` varchar(255) NOT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -210,6 +235,7 @@ CREATE TABLE IF NOT EXISTS `quiz` (
 
 CREATE TABLE IF NOT EXISTS `answers` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `qid` int(11) NOT NULL,
     `user_id` int(11) NOT NULL,
     `topic` int(11) NOT NULL,
     `question` int(11) NOT NULL,

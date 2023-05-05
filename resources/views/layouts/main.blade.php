@@ -91,7 +91,7 @@
             <ul>
                 @guest
                 <li class="nav__other nav__last">
-                    <a href="{{ route('explore.view') }}"><strong>Start Teaching</strong></a>
+                    <a href="/register?tutor=true"><strong>Start Teaching</strong></a>
                 </li>
                 @endguest
 

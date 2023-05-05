@@ -14,7 +14,7 @@
                 <a href="{{ route("register") }}" style="font-weight: 500;"> Register </a>
             </div>
             <div class="my-2">
-                <a href="{{ route("login") }}" style="font-weight: 500;">  Start Teaching </a>
+                <a href="/register?tutor=true" style="font-weight: 500;">  Start Teaching </a>
             </div>
         </div>
         <hr>

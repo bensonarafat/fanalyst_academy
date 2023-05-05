@@ -11,15 +11,57 @@ use App\Models\Course;
 use App\Models\Rating;
 use App\Models\Category;
 use App\Models\Enrolled;
+use App\Models\Question;
 use App\Models\Curriculum;
 use App\Models\Transaction;
 use App\Models\CurriculumLecture;
+use App\Models\QuizEnrolled;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
+
+    public function shareUser($link){
+        $exist = User::where("link", $link)->exists();
+        if($exist){
+            $user = User::where("link", $link)->first();
+            $courses = Course::where(["instructor" => $user->id, "status" => "active"])->latest()->get();
+            return view("shared-user", compact("user", "courses"));
+        }else{
+            return abort(404, "Page not Found");
+        }
+    }
+
+    public function shareCourse($link){
+        $exist = Course::where("link", $link)->exists();
+        if($exist){
+            $course = Course::where(["link" => $link])->first();
+            $instructor = User::find($course->instructor);
+
+            $rate = Rating::where('courseid', $course->id)->avg('vote');
+            $ratings = Rating::where('courseid', $course->id)->get();
+            $curriculum = Curriculum::where('courseid', $course->id)->get();
+
+            $enrolled = Enrolled::where([ 'courseid' => $course->id])->count();
+            if(Auth::check()){
+                $isLike = Like::where(['userid' => auth()->user()->id, 'courseid' =>  $course->id])->count();
+            }else{
+                $isLike = 0;
+            }
+            if($isLike == 0){
+                $like = 'like';
+            }else{
+                $like = 'unlike';
+            }
+            $students = Enrolled::where([ 'courseid' => $course->id])->latest()->get();
+            return view("shared-course", compact('course', 'instructor', 'rate', 'ratings', 'curriculum', 'enrolled', 'like', 'students'));
+        }else{
+            return abort(404, "Page not Found");
+        }
+    }
     public function index(){
+
         $totalSales = 0;
         $totalEnroll = 0;
         $totalCourse = 0;
@@ -30,6 +72,7 @@ class PagesController extends Controller
         $allCourses = null;
         $category = null;
         $categoryCoureses = null;
+        $topics = null;
         if(Auth::check()){
             if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin'){
                 $instructorCourses = Course::where('instructor', auth()->user()->id)->get();
@@ -53,8 +96,10 @@ class PagesController extends Controller
             }else{
                 $allCourses = Course::where(['status' =>  'active'])->latest()->limit(10)->get();
             }
+
+            $topics = Topic::latest()->get();
         }
-        return view("index", compact('totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses', 'category', 'categoryCoureses'));
+        return view("index", compact( 'topics', 'totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses', 'category', 'categoryCoureses'));
     }
 
     public function about(){
@@ -262,8 +307,8 @@ class PagesController extends Controller
 
     // Quiz ---
     public function quiz(){
-        $categories = Category::whereNull('parentid')->latest()->get();
-        return view("dashboard.quiz.index", compact("categories"));
+        $topics = Topic::latest()->get();
+        return view("dashboard.quiz.index", compact("topics"));
     }
 
     public function quizResult(){
@@ -273,22 +318,27 @@ class PagesController extends Controller
     }
 
     public function takeQuiz(){
-        $categories = Category::whereNull('parentid')->latest()->get();
+        $questions = Category::whereNull('parentid')->latest()->get();
         $topics = null;
-        if(isset($_GET['q'])){
-            $topics = Topic::where(['level' => $_GET['level'], "category_id" => $_GET['category']])->latest()->get();
+        if(isset($_GET['query'])){
+            $questions = Question::where('topicid', $_GET['id'])->latest()->get();
         }
-        return view("dashboard.quiz.take", compact("categories", "topics"));
+        $topics = Topic::latest()->get();
+        return view("dashboard.quiz.take", compact("questions", "topics"));
     }
 
     public function startTest($id){
-        $topic = Topic::where("id", $id)->first();
-        return view("dashboard.quiz.test", compact("topic", "id"));
+        $question = Question::where("id", $id)->first();
+        $quizenrolled = QuizEnrolled::where(['userid' => auth()->user()->id, "questionid" => $id])->exists();
+        return view("dashboard.quiz.test", compact("question", "id", "quizenrolled"));
     }
-    public function addQuiz($id){
-        $quiz = Quiz::where("topic", $id)->get();
-        $topic = Topic::find($id);
-        return view("dashboard.quiz.add", compact("quiz", "topic"));
+
+
+    public function quizPage($id){
+        $question = Question::find($id);
+        $quiz = Quiz::where("qid", $id)->get();
+        $topic = Topic::find($question->topicid);
+        return view("dashboard.quiz.quiz", compact("question", "quiz", "topic"));
     }
 
     public function editQuiz($id){
@@ -297,15 +347,29 @@ class PagesController extends Controller
     }
 
     public function addTopic(){
-        $categories = Category::whereNull('parentid')->latest()->get();
-        return view("dashboard.quiz.topic.add", compact("categories"));
+        return view("dashboard.quiz.topic.add");
     }
 
     public function editTopic($id){
-        $categories = Category::whereNull('parentid')->latest()->get();
         $topic = Topic::find($id);
-        $level = Category::find($topic->level);
-        return view("dashboard.quiz.topic.edit", compact("categories", "topic", "level"));
+        return view("dashboard.quiz.topic.edit", compact("topic"));
+    }
+
+    public function questions($id){
+        $categories = Category::whereNull('parentid')->latest()->get();
+        return view("dashboard.quiz.question.index", compact("categories","id"));
+    }
+
+    public function addQuestions($id){
+        $categories = Category::whereNull('parentid')->latest()->get();
+        return view("dashboard.quiz.question.add", compact("categories", "id"));
+    }
+
+    public function editQuestion($id){
+        $categories = Category::whereNull('parentid')->latest()->get();
+        $question = Question::find($id);
+        $subcategory = Category::find($question->categoryid);
+        return view("dashboard.quiz.question.edit", compact("categories", "question", "subcategory", "id"));
     }
 
     public function resultScore($ref){

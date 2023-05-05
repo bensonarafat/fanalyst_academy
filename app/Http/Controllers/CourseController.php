@@ -108,6 +108,7 @@ class CourseController extends Controller
                 "media_video" => $video,
                 "media_type" => $request->courseMediaType,
                 "media_thumbnail" => $thumbnail,
+                "link" => generateRandomString(10),
             ]);
 
             return response()->json(['status' => true, 'data' => $course], 200);

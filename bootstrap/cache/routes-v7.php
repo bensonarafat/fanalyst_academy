@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::o1nuFRUzvvtPaLXW',
+            '_route' => 'generated::V6RCzKqWeICVTcf8',
           ),
           1 => NULL,
           2 => 
@@ -122,7 +122,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::cdqs3pYiyX0fm7Ld',
+            '_route' => 'generated::MghY8RPjyJ5TJY9R',
           ),
           1 => NULL,
           2 => 
@@ -141,7 +141,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::huz1WvIe91aQyPn0',
+            '_route' => 'generated::qvCwz3j9Glf16pc1',
           ),
           1 => NULL,
           2 => 
@@ -160,7 +160,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Co7M1JkfKlcugqhk',
+            '_route' => 'generated::wA9hlOu9jO02bNaB',
           ),
           1 => NULL,
           2 => 
@@ -179,7 +179,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::3OUN1kE8otlSoqm2',
+            '_route' => 'generated::LEw5wBBBcELP9tG7',
           ),
           1 => NULL,
           2 => 
@@ -215,7 +215,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::l8WrFplMRhSuPZh2',
+            '_route' => 'generated::npNuUaVqZ6M4YCWZ',
           ),
           1 => NULL,
           2 => 
@@ -270,7 +270,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::PSm8FaLfLyDKY7Eg',
+            '_route' => 'generated::erBN9Y2GKwx10bfK',
           ),
           1 => NULL,
           2 => 
@@ -361,7 +361,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::tck1aFEZ3AOu9bdh',
+            '_route' => 'generated::JnN0KgHEjdYyz0rR',
           ),
           1 => NULL,
           2 => 
@@ -1257,7 +1257,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::hryOg9YCli3o0Ep1',
+            '_route' => 'generated::EIwcP6cX5cIIqOrt',
           ),
           1 => NULL,
           2 => 
@@ -1427,6 +1427,44 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/quiz/question/store' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'store.question',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/quiz/question/update' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'update.question',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/quiz/topic/add' => 
       array (
         0 => 
@@ -1488,7 +1526,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/api/quiz/get/([^/]++)(*:29)|/p(?|assword/reset/([^/]++)(*:63)|urchased/([^/]++)(*:87))|/remove\\-line\\-cart/([^/]++)(*:123)|/c(?|ourses/(?|c(?|ourse/([^/]++)(*:164)|urriculum/(?|edit/([^/]++)(*:198)|delete/([^/]++)/([^/]++)(*:230)|lecture/(?|add/([^/]++)(*:261)|delete/([^/]++)(*:284)|edit/([^/]++)(*:305))))|edit\\-course/([^/]++)(*:337)|delete\\-course/([^/]++)(*:368)|stream/([^/]++)/([^/]++)/([^/]++)(*:409)|like\\-course/([^/]++)/([^/]++)(*:447))|ategory/(?|edit\\-category/([^/]++)(*:490)|delete\\-category/([^/]++)(*:523)|cat/([^/]++)(*:543)))|/users/view/([^/]++)(*:573)|/quiz/(?|t(?|est/([^/]++)(*:606)|opic/(?|edit/([^/]++)(*:635)|delete/([^/]++)(*:658)))|result\\-score/([^/]++)(*:690)|add/([^/]++)(*:710)|edit/([^/]++)(*:731)|delete/([^/]++)(*:754)))/?$}sDu',
+      0 => '{^(?|/api/quiz/get/([^/]++)(*:29)|/p(?|assword/reset/([^/]++)(*:63)|urchased/([^/]++)(*:87))|/s(?|c/([^/]++)(*:110)|u/([^/]++)(*:128))|/remove\\-line\\-cart/([^/]++)/([^/]++)(*:174)|/c(?|ourses/(?|c(?|ourse/([^/]++)(*:215)|urriculum/(?|edit/([^/]++)(*:249)|delete/([^/]++)/([^/]++)(*:281)|lecture/(?|add/([^/]++)(*:312)|delete/([^/]++)(*:335)|edit/([^/]++)(*:356))))|edit\\-course/([^/]++)(*:388)|delete\\-course/([^/]++)(*:419)|stream/([^/]++)/([^/]++)/([^/]++)(*:460)|like\\-course/([^/]++)/([^/]++)(*:498))|ategory/(?|edit\\-category/([^/]++)(*:541)|delete\\-category/([^/]++)(*:574)|cat/([^/]++)(*:594)))|/users/view/([^/]++)(*:624)|/quiz/(?|t(?|est/([^/]++)(*:657)|opic/(?|edit/([^/]++)(*:686)|delete/([^/]++)(*:709)))|result\\-score/([^/]++)(*:741)|qu(?|iz\\-add/([^/]++)(*:770)|estion/(?|question/([^/]++)(*:805)|add/([^/]++)(*:825)|edit/([^/]++)(*:846)|delete/([^/]++)(*:869)))|add/([^/]++)(*:891)|edit/([^/]++)(*:912)|delete/([^/]++)(*:935)))/?$}sDu',
     ),
     3 => 
     array (
@@ -1498,7 +1536,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::XKkr7jzEtAu5a2jJ',
+            '_route' => 'generated::eCF7YfhcAE21wGjq',
           ),
           1 => 
           array (
@@ -1561,17 +1599,17 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      123 => 
+      110 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'remove.inline.cart',
+            '_route' => 'share.course',
           ),
           1 => 
           array (
-            0 => 'id',
+            0 => 'link',
           ),
           2 => 
           array (
@@ -1584,7 +1622,54 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      164 => 
+      128 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'share.user',
+          ),
+          1 => 
+          array (
+            0 => 'link',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      174 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'remove.inline.cart',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+            1 => 'type',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      215 => 
       array (
         0 => 
         array (
@@ -1607,7 +1692,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      198 => 
+      249 => 
       array (
         0 => 
         array (
@@ -1630,13 +1715,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      230 => 
+      281 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::LxeQ2PD617xsF2WN',
+            '_route' => 'generated::8t8wmLJpNS3LbvIE',
           ),
           1 => 
           array (
@@ -1654,7 +1739,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      261 => 
+      312 => 
       array (
         0 => 
         array (
@@ -1677,7 +1762,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      284 => 
+      335 => 
       array (
         0 => 
         array (
@@ -1700,7 +1785,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      305 => 
+      356 => 
       array (
         0 => 
         array (
@@ -1723,7 +1808,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      337 => 
+      388 => 
       array (
         0 => 
         array (
@@ -1746,7 +1831,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      368 => 
+      419 => 
       array (
         0 => 
         array (
@@ -1769,7 +1854,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      409 => 
+      460 => 
       array (
         0 => 
         array (
@@ -1794,7 +1879,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      447 => 
+      498 => 
       array (
         0 => 
         array (
@@ -1818,7 +1903,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      490 => 
+      541 => 
       array (
         0 => 
         array (
@@ -1841,7 +1926,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      523 => 
+      574 => 
       array (
         0 => 
         array (
@@ -1864,13 +1949,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      543 => 
+      594 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::6hEUz0AXpKWiYa9J',
+            '_route' => 'generated::5vbRxFJCFFUT0jhk',
           ),
           1 => 
           array (
@@ -1887,7 +1972,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      573 => 
+      624 => 
       array (
         0 => 
         array (
@@ -1910,7 +1995,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      606 => 
+      657 => 
       array (
         0 => 
         array (
@@ -1933,7 +2018,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      635 => 
+      686 => 
       array (
         0 => 
         array (
@@ -1956,7 +2041,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      658 => 
+      709 => 
       array (
         0 => 
         array (
@@ -1979,7 +2064,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      690 => 
+      741 => 
       array (
         0 => 
         array (
@@ -2002,7 +2087,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      710 => 
+      770 => 
       array (
         0 => 
         array (
@@ -2025,7 +2110,122 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      731 => 
+      805 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'questions',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      825 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'add.question',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      846 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'edit.question',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      869 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delete.question',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      891 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'quiz.page',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      912 => 
       array (
         0 => 
         array (
@@ -2048,7 +2248,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      754 => 
+      935 => 
       array (
         0 => 
         array (
@@ -2232,7 +2432,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::o1nuFRUzvvtPaLXW' => 
+    'generated::V6RCzKqWeICVTcf8' => 
     array (
       'methods' => 
       array (
@@ -2255,7 +2455,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::o1nuFRUzvvtPaLXW',
+        'as' => 'generated::V6RCzKqWeICVTcf8',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2271,7 +2471,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::cdqs3pYiyX0fm7Ld' => 
+    'generated::MghY8RPjyJ5TJY9R' => 
     array (
       'methods' => 
       array (
@@ -2291,7 +2491,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::cdqs3pYiyX0fm7Ld',
+        'as' => 'generated::MghY8RPjyJ5TJY9R',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2307,7 +2507,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::huz1WvIe91aQyPn0' => 
+    'generated::qvCwz3j9Glf16pc1' => 
     array (
       'methods' => 
       array (
@@ -2327,7 +2527,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::huz1WvIe91aQyPn0',
+        'as' => 'generated::qvCwz3j9Glf16pc1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2343,7 +2543,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Co7M1JkfKlcugqhk' => 
+    'generated::wA9hlOu9jO02bNaB' => 
     array (
       'methods' => 
       array (
@@ -2363,7 +2563,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Co7M1JkfKlcugqhk',
+        'as' => 'generated::wA9hlOu9jO02bNaB',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2379,7 +2579,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::3OUN1kE8otlSoqm2' => 
+    'generated::LEw5wBBBcELP9tG7' => 
     array (
       'methods' => 
       array (
@@ -2399,7 +2599,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::3OUN1kE8otlSoqm2',
+        'as' => 'generated::LEw5wBBBcELP9tG7',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2415,7 +2615,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::XKkr7jzEtAu5a2jJ' => 
+    'generated::eCF7YfhcAE21wGjq' => 
     array (
       'methods' => 
       array (
@@ -2436,7 +2636,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::XKkr7jzEtAu5a2jJ',
+        'as' => 'generated::eCF7YfhcAE21wGjq',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2489,7 +2689,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::l8WrFplMRhSuPZh2' => 
+    'generated::npNuUaVqZ6M4YCWZ' => 
     array (
       'methods' => 
       array (
@@ -2509,7 +2709,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::l8WrFplMRhSuPZh2',
+        'as' => 'generated::npNuUaVqZ6M4YCWZ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2598,7 +2798,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::PSm8FaLfLyDKY7Eg' => 
+    'generated::erBN9Y2GKwx10bfK' => 
     array (
       'methods' => 
       array (
@@ -2618,7 +2818,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::PSm8FaLfLyDKY7Eg',
+        'as' => 'generated::erBN9Y2GKwx10bfK',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2817,7 +3017,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::tck1aFEZ3AOu9bdh' => 
+    'generated::JnN0KgHEjdYyz0rR' => 
     array (
       'methods' => 
       array (
@@ -2837,7 +3037,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::tck1aFEZ3AOu9bdh',
+        'as' => 'generated::JnN0KgHEjdYyz0rR',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3333,6 +3533,80 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'share.course' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'sc/{link}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PagesController@shareCourse',
+        'controller' => 'App\\Http\\Controllers\\PagesController@shareCourse',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'share.course',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'share.user' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'su/{link}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PagesController@shareUser',
+        'controller' => 'App\\Http\\Controllers\\PagesController@shareUser',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'share.user',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'add.cart' => 
     array (
       'methods' => 
@@ -3414,7 +3688,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'remove-line-cart/{id}',
+      'uri' => 'remove-line-cart/{id}/{type}',
       'action' => 
       array (
         'middleware' => 
@@ -4048,7 +4322,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::LxeQ2PD617xsF2WN' => 
+    'generated::8t8wmLJpNS3LbvIE' => 
     array (
       'methods' => 
       array (
@@ -4070,7 +4344,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::LxeQ2PD617xsF2WN',
+        'as' => 'generated::8t8wmLJpNS3LbvIE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4990,7 +5264,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::6hEUz0AXpKWiYa9J' => 
+    'generated::5vbRxFJCFFUT0jhk' => 
     array (
       'methods' => 
       array (
@@ -5012,7 +5286,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::6hEUz0AXpKWiYa9J',
+        'as' => 'generated::5vbRxFJCFFUT0jhk',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5103,7 +5377,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::hryOg9YCli3o0Ep1' => 
+    'generated::EIwcP6cX5cIIqOrt' => 
     array (
       'methods' => 
       array (
@@ -5125,7 +5399,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::hryOg9YCli3o0Ep1',
+        'as' => 'generated::EIwcP6cX5cIIqOrt',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5488,7 +5762,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'quiz/add/{id}',
+      'uri' => 'quiz/quiz-add/{id}',
       'action' => 
       array (
         'middleware' => 
@@ -5504,6 +5778,44 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'add.quiz',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'quiz.page' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'quiz/add/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PagesController@quizPage',
+        'controller' => 'App\\Http\\Controllers\\PagesController@quizPage',
+        'namespace' => NULL,
+        'prefix' => '/quiz',
+        'where' => 
+        array (
+        ),
+        'as' => 'quiz.page',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5654,6 +5966,232 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'delete.quiz',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'questions' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'quiz/question/question/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PagesController@questions',
+        'controller' => 'App\\Http\\Controllers\\PagesController@questions',
+        'namespace' => NULL,
+        'prefix' => 'quiz/question',
+        'where' => 
+        array (
+        ),
+        'as' => 'questions',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'add.question' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'quiz/question/add/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PagesController@addQuestions',
+        'controller' => 'App\\Http\\Controllers\\PagesController@addQuestions',
+        'namespace' => NULL,
+        'prefix' => 'quiz/question',
+        'where' => 
+        array (
+        ),
+        'as' => 'add.question',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'edit.question' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'quiz/question/edit/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PagesController@editQuestion',
+        'controller' => 'App\\Http\\Controllers\\PagesController@editQuestion',
+        'namespace' => NULL,
+        'prefix' => 'quiz/question',
+        'where' => 
+        array (
+        ),
+        'as' => 'edit.question',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'store.question' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'quiz/question/store',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\QuizController@storeQuestion',
+        'controller' => 'App\\Http\\Controllers\\QuizController@storeQuestion',
+        'namespace' => NULL,
+        'prefix' => 'quiz/question',
+        'where' => 
+        array (
+        ),
+        'as' => 'store.question',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'update.question' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'quiz/question/update',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\QuizController@updateQuestion',
+        'controller' => 'App\\Http\\Controllers\\QuizController@updateQuestion',
+        'namespace' => NULL,
+        'prefix' => 'quiz/question',
+        'where' => 
+        array (
+        ),
+        'as' => 'update.question',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'delete.question' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'quiz/question/delete/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\QuizController@deleteQuestion',
+        'controller' => 'App\\Http\\Controllers\\QuizController@deleteQuestion',
+        'namespace' => NULL,
+        'prefix' => 'quiz/question',
+        'where' => 
+        array (
+        ),
+        'as' => 'delete.question',
       ),
       'fallback' => false,
       'defaults' => 

@@ -8,9 +8,11 @@ use Maatwebsite\Excel\Concerns\ToModel;
 class QuizImport implements  ToModel
 {
     protected $topic;
+    protected $qid;
 
-    public function __construct($topic){
+    public function __construct($topic, $qid){
         $this->topic = $topic;
+        $this->qid = $qid;
     }
 
 
@@ -24,6 +26,7 @@ class QuizImport implements  ToModel
     {
         return new Quiz([
             "topic" => $this->topic,
+            "qid" => $this->qid,
             "question" => $row[1],
             "a" => $row[2],
             "b" => $row[3],
