@@ -11,12 +11,15 @@ class Question extends Model
 
     protected $fillable = [
         'userid',
-        'categoryid',
-        'subcategory',
         'topicid',
         'name',
         'time',
-        'price'
+        'price',
+        'isfree',
+        'description',
+        'image',
+        'likes',
+        'ratings'
     ];
 
 }

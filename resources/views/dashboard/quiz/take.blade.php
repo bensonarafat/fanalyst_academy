@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @section('title', 'Take Quiz')
-<div class="wrapper">
+<div class="wrapper @guest _bg4586 _new89 @endguest">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -14,46 +14,46 @@
             @include('components.alert')
             <div class="course__form">
                 <div class="general_info10">
+
                     @if(isset($_GET['query']))
-                    <div class="table-responsive mt-30">
-                        <table class="table ucp-table">
-                            <thead class="thead-s">
-                                <tr>
-                                    <th class="text-center" scope="col">No.</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>SubCategory</th>
-                                    <th>User</th>
-                                    <th>Price</th>
-                                    <th>Time</th>
-                                    <th>Date</th>
-                                    <th class="text-center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($questions as $row)
-                                @php
-                                    $category = App\Models\Category::where("id", $row->categoryid)->first();
-                                    $subcategory = App\Models\Category::where("id", $row->subcategory)->first();
-                                    $user = App\Models\User::find($row->userid);
-                                @endphp
-                                <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td>{{ $row->name }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $subcategory->name }}</td>
-                                    <td>{{ $user->fullname }}</td>
-                                    <td>{!! naira() . number_format($row->price, 2) !!}</td>
-                                    <td>{{ $row->time}} Minutes</td>
-                                    <td>{{ \Carbon\Carbon::parse($row->created_at)->format("D M, y")}} </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('start.test', $row->id) }}" title="Start" class="gray-s"><i class="uil uil-play"></i> Start </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="row">
+                            @foreach ($questions as $row)
+                            @php
+                                $user = \App\Models\User::find($row->userid);
+                            @endphp
+                            <div class="col-6 col-sm-3">
+                                <div class="fcrse_1 mt-30">
+                                    <a href="{{ route("view.test", $row->id) }}" class="fcrse_img">
+                                        <img src="{{ asset($row->image) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                                    </a>
+                                    <div class="fcrse_content">
+                                        <a href="{{ route("view.test", $row->id) }}" class="crse14s">{{ $row->name }}</a>
+                                        <div class="" style="display:flex;justify-content: space-between;">
+                                            <p style="font-size:11px;">
+                                                By {{ $user->fullname }}
+                                            </p>
+                                            <p style="font-size:11px;">
+                                                {{ $row->time }} Minutes
+                                            </p>
+                                        </div>
+                                        <div class="auth1lnkprce">
+                                            <p class="cr1fot">
+                                                @if($row->isfree)
+                                                    Free
+                                                @else
+                                                    From {!! naira() . number_format($row->price, 2) !!}
+                                                @endif
+                                            </p>
+                                            <div class="prce142">
+                                                <i class="fa fa-star" style="color: #FFD700;font-size: 12px;"></i>
+                                                <span style="font-size: 13px;">{{ $row->ratings }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     @else
                         {{-- Topics here --}}
                         <div class="row">
@@ -62,9 +62,6 @@
                                 <div class="fcrse_1 mt-30">
                                     <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="fcrse_img">
                                         <img src="{{ asset($row->image) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
-                                        <div class="course-overlay">
-                                            <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                        </div>
                                     </a>
                                     <div class="fcrse_content">
                                         <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="crse14s">{{ $row->name }}</a>

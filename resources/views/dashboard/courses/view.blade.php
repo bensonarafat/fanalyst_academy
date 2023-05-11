@@ -86,6 +86,7 @@
                                                 <li>
                                                     <form action="{{ route('enroll.free') }}" method="post">
                                                         @csrf
+                                                        <input type="hidden" name="type" value="course">
                                                         <input type="hidden" name="id" value="{{ $course->id }}">
                                                         <button type="submit" class="btn_adcart">Enroll for Free</button>
                                                     </form>

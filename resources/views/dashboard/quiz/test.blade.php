@@ -15,76 +15,6 @@
         </div>
     </div>
 
-    @if($quizenrolled)
-        <div class="faq1256">
-            <div class="container">
-                <div class="initloader text-center">
-                    <img src="https://i.pinimg.com/originals/45/12/4d/45124d126d0f0b6d8f5c4d635d466246.gif" width="200" alt="">
-                </div>
-
-                <div class="row question__content" style="display:none">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="certi_form rght1528">
-                            <div class="test_timer_bg">
-                                <ul class="test_timer_left">
-                                    <li>
-                                        <div class="timer_time">
-                                            <h4 class="question__total"></h4>
-                                            <p>Questions</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="timer_time">
-                                            <h4 id="timer">{{ $question->time }}:00</h4>
-                                            <p>Minutes</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-6">
-                        @include("components.alert")
-
-                        <form action="{{ route("submit.quiz") }}" method="post">
-                            @csrf
-                            <div class="all_questions_wrapper">
-                                <div class="certi_form">
-                                    <div class="all_ques_lest"></div>
-                                    <input type="hidden" name="qid" value="{{ $question->id }}">
-                                    <input type="hidden" name="topic" value="{{ $question->topicid }}">
-                                    <input type="hidden" name="currentshow" class="currentshow" value="1">
-                                    <input type="hidden" name="currentshow" class="totalquestions" value="0">
-                                    <div style="display:flex;justify-content:space-between">
-                                        <button class="test_previous_btn test_submit_btn" style="display:none" type="button">Previous</button>
-                                        <button class="test_next_btn test_submit_btn" type="button">Next</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="submit_quiz_wrapper" style="display: none">
-                                <div class="text-center" style="margin-top:50px;">
-                                    <h2>Quiz completed</h2>
-                                    <p>You can submit your test now or go back to review</p>
-                                </div>
-                                <div  style="display:flex;justify-content:space-evenly">
-                                    <button class="go__back test_submit_btn " type="button">Back</button>
-                                    <button class="test_submit_btn" type="submit">Submit Test</button>
-                                </div>
-
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-
-                <div class="text-center no__question" style="display:none">
-                    <h1>No Question Uploaded yet</h1>
-                </div>
-
-            </div>
-        </div>
-    @else
     <div class="faq1256">
         <div class="container">
             <div class="initloader text-center">
@@ -104,7 +34,7 @@
                                 </li>
                                 <li>
                                     <div class="timer_time">
-                                        <h4>{{ $question->time }}:00</h4>
+                                        <h4 id="timer">{{ $question->time }}:00</h4>
                                         <p>Minutes</p>
                                     </div>
                                 </li>
@@ -114,32 +44,45 @@
                 </div>
                 <div class="col-lg-7 col-md-6">
                     @include("components.alert")
-                    <div style="text-align: center">
-                        <h2>Enroll for Quiz</h2>
-                        <h3>{!! naira() . number_format($question->price, 2) !!}</h3>
-                        @if(inCart($question->id, 'quiz'))
-                        <form action="{{ route('remove.cart') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $question->id }}">
-                            <input type="hidden" name="type" value="quiz">
-                            <button class="btn_adcart">Remove from Cart ({!! naira() . number_format($question->price, 2) !!}) </button>
-                        </form>
-                        @else
-                        <form action="{{ route('add.cart') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $question->id }}">
-                            <input type="hidden" name="type" value="quiz">
-                            <button class="btn_adcart">Add to Cart ({!! naira() . number_format($question->price, 2) !!}) </button>
-                        </form>
-                        @endif
-                    </div>
+
+                    <form action="{{ route("submit.quiz") }}" method="post">
+                        @csrf
+                        <div class="all_questions_wrapper">
+                            <div class="certi_form">
+                                <div class="all_ques_lest"></div>
+                                <input type="hidden" name="qid" value="{{ $question->id }}">
+                                <input type="hidden" name="topic" value="{{ $question->topicid }}">
+                                <input type="hidden" name="currentshow" class="currentshow" value="1">
+                                <input type="hidden" name="currentshow" class="totalquestions" value="0">
+                                <div style="display:flex;justify-content:space-between">
+                                    <button class="test_previous_btn test_submit_btn" style="display:none" type="button">Previous</button>
+                                    <button class="test_next_btn test_submit_btn" type="button">Next</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="submit_quiz_wrapper" style="display: none">
+                            <div class="text-center" style="margin-top:50px;">
+                                <h2>Quiz completed</h2>
+                                <p>You can submit your test now or go back to review</p>
+                            </div>
+                            <div  style="display:flex;justify-content:space-evenly">
+                                <button class="go__back test_submit_btn " type="button">Back</button>
+                                <button class="test_submit_btn" type="submit">Submit Test</button>
+                            </div>
+
+                        </div>
+                    </form>
 
                 </div>
             </div>
 
+            <div class="text-center no__question" style="display:none">
+                <h1>No Question Uploaded yet</h1>
+            </div>
+
         </div>
     </div>
-    @endif
     @include("components.footer")
 </div>
 

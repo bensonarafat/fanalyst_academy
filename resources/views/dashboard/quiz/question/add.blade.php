@@ -30,25 +30,8 @@
                                             <div class="new-section mt-10">
                                                 <div class="form_group">
                                                     <label class="label25">Category*</label>
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="categoryid" id="category" required>
-                                                        <option value="">Select category</option>
-                                                        @foreach ($categories as $row)
-                                                            @php
-                                                                $levels = App\Models\Category::where("parentid", $row->id)->get();
-                                                            @endphp
-                                                            <option value="{{ $row->id }}" data-json="{{ $levels }}">{{ $row->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="new-section mt-10">
-                                                <div class="form_group">
-                                                    <label class="label25">Sub Category*</label>
-                                                    <div class="__levelreplace">
-                                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="subcategory" id="level" required>
-                                                            <option value="">Select sub category</option>
-                                                        </select>
-                                                    </div>
+                                                    <input class="form_input_1" type="text" readonly title="Category" name="topicname" id="topicname" value="{{ $topic->name }}" required />
+
                                                 </div>
                                             </div>
 
@@ -75,11 +58,35 @@
 
                                             <div class="new-section mt-10">
                                                 <div class="form_group">
-                                                    <label class="label25">Price *</label>
-                                                    <input class="form_input_1" type="number" title="price" name="price" id="price" placeholder="Price here" required />
+                                                    <label class="isfree">Is Free*</label>
+                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore isfree __changePrice" name="isfree" id="isfree" required>
+                                                        <option value="0" selected>No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
+                                            <div class="new-section mt-10 __removePrice">
+                                                <div class="form_group">
+                                                    <label class="label25">Price *</label>
+                                                    <input class="form_input_1" type="number" title="price" name="price" id="price" placeholder="Price here"/>
+                                                </div>
+                                            </div>
+                                            <div class="ui search focus mt-10 lbel25">
+                                                <label>Description*</label>
+                                                <div class="ui form swdh30">
+                                                    <div class="field">
+                                                        <textarea id="myeditorinstance" class="myeditorinstance" name="description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="ui search focus mt-10 lbel25">
+                                                <label>Image </label>
+                                                <div class="ui left icon input swdh19">
+                                                    <input class="prompt srch_explore" type="file" required name="image" id="file" />
+                                                </div>
+                                            </div>
                                             <div class="ui search focus mt-10 lbel25">
                                                 <label>File <small> (optional, must be xlmx)</small></label>
                                                 <div class="ui left icon input swdh19">
@@ -93,7 +100,7 @@
                             </div>
 
                             <div class="mt-20">
-                                <input type="hidden" name="topicid" value="{{ $id }}">
+                                <input type="hidden" name="topicid" value="{{ $topic->id }}">
                                 <button type="submit" class="main-btn js_update_lecture">Add Question </button>
                             </div>
                         </form>
@@ -104,19 +111,15 @@
     </div>
     @include('components.footer')
 </div>
-
 <script src="{{ asset("assets/js/jquery-3.3.1.min.js") }}"></script>
 <script>
-    $('#category').on("change", function(){
-        let data = $( "#category option:selected" ).attr('data-json');
-        let json = JSON.parse(data);
-        let html = '<select class="form-control hj145 dropdown cntry152 prompt srch_explore" name="subcategory" id="level" required>'
-        json.forEach((item, index) => {
-            html += `<option value=`+item.id+`>`+item.name+`</option>`;
-        });
-
-        html += '</select>';
-        $('.__levelreplace').html(html);
+    $(".__changePrice").on("change", function(e){
+        let _this = $(this);
+        if(_this.find(":selected").val() == "1"){
+            $('.__removePrice').css("display", "none");
+        }else{
+            $('.__removePrice').css("display", "block");
+        }
     });
 </script>
 @endsection

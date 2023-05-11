@@ -9,13 +9,15 @@ use App\Models\Topic;
 use App\Models\Answer;
 use App\Models\Course;
 use App\Models\Rating;
+use App\Models\Wallet;
 use App\Models\Category;
 use App\Models\Enrolled;
 use App\Models\Question;
 use App\Models\Curriculum;
 use App\Models\Transaction;
-use App\Models\CurriculumLecture;
 use App\Models\QuizEnrolled;
+use App\Models\CurriculumLecture;
+use App\Models\Earning;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -256,7 +258,10 @@ class PagesController extends Controller
     }
 
     public function earnings(){
-        return view('dashboard.earnings.index');
+        $wallet = Wallet::where("userid", auth()->user()->id)->first();
+        $earnings = Earning::where("userid", auth()->user()->id)->latest()->get();
+        $total_earns = Earning::where("userid", auth()->user()->id)->sum("amount");
+        return view('dashboard.earnings.index', compact("wallet", "earnings", "total_earns"));
     }
 
 
@@ -318,7 +323,7 @@ class PagesController extends Controller
     }
 
     public function takeQuiz(){
-        $questions = Category::whereNull('parentid')->latest()->get();
+        $questions = null;
         $topics = null;
         if(isset($_GET['query'])){
             $questions = Question::where('topicid', $_GET['id'])->latest()->get();
@@ -329,10 +334,25 @@ class PagesController extends Controller
 
     public function startTest($id){
         $question = Question::where("id", $id)->first();
-        $quizenrolled = QuizEnrolled::where(['userid' => auth()->user()->id, "questionid" => $id])->exists();
-        return view("dashboard.quiz.test", compact("question", "id", "quizenrolled"));
+        return view("dashboard.quiz.test", compact("question", "id"));
     }
+    public function viewTest($id){
+        $question = Question::where("id", $id)->first();
+        $iquizenrolled = QuizEnrolled::where(['userid' => auth()->user()->id, "questionid" => $id])->exists();
+        $students = QuizEnrolled::where(["questionid" => $id])->latest()->get();
+        $totalenrolled = count($students);
+        $instructor = User::find($question->userid);
+        $isLike = Like::where(['userid' => auth()->user()->id, 'questionid' =>  $id])->count();
+        if($isLike == 0){
+            $like = 'like';
+        }else{
+            $like = 'unlike';
+        }
+        $topic = Topic::find($question->topicid);
+        $quiz = Quiz::where(['qid' => $id ])->latest()->get();
 
+        return view("dashboard.quiz.view", compact("topic", "quiz", "students", "like", "question", "id", "iquizenrolled", 'totalenrolled', 'instructor'));
+    }
 
     public function quizPage($id){
         $question = Question::find($id);
@@ -356,27 +376,28 @@ class PagesController extends Controller
     }
 
     public function questions($id){
-        $categories = Category::whereNull('parentid')->latest()->get();
-        return view("dashboard.quiz.question.index", compact("categories","id"));
+        $questions = Question::where(["userid" => auth()->user()->id, "topicid" => $id])->latest()->get();
+        $topic = Topic::find($id);
+        return view("dashboard.quiz.question.index", compact("questions", "topic"));
     }
 
     public function addQuestions($id){
-        $categories = Category::whereNull('parentid')->latest()->get();
-        return view("dashboard.quiz.question.add", compact("categories", "id"));
+        $topic = Topic::find($id);
+        return view("dashboard.quiz.question.add", compact("topic"));
     }
 
     public function editQuestion($id){
-        $categories = Category::whereNull('parentid')->latest()->get();
         $question = Question::find($id);
-        $subcategory = Category::find($question->categoryid);
-        return view("dashboard.quiz.question.edit", compact("categories", "question", "subcategory", "id"));
+        $topic = Topic::find($question->topicid);
+        return view("dashboard.quiz.question.edit", compact("topic", "question"));
     }
 
     public function resultScore($ref){
         $answers = Answer::where("ref", $ref)->get();
         $wrong = Answer::where(["ref" => $ref, "mark" => "0"])->get();
         $right = Answer::where(["ref" => $ref, "mark" => "1"])->get();
-        $quiz = Quiz::where("topic", $answers->first()->topic)->get();
+        $quiz = Quiz::where(["topic" => $answers->first()->topic, "qid" => $answers->first()->qid])->get();
+
         return view("dashboard.quiz.result-score", compact("answers", "wrong", "right", "quiz"));
     }
 

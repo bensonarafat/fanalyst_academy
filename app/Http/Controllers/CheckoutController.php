@@ -16,6 +16,7 @@ class CheckoutController extends Controller
                 $cart[] = [
                     "id" => $request->id,
                     "type" => $request->type,
+                    "referral" => $request->referral ?? false,
                 ];
 
 
@@ -25,11 +26,12 @@ class CheckoutController extends Controller
                     array_push($cart,  [
                         "id" => $request->id,
                         "type" => $request->type,
+                        "referral" => $request->referral ?? false,
                     ]);
                 }
             }
             session()->put('cart', $cart);
-            return redirect()->back()->with(["success" => "Course added to Cart"]);
+            return redirect()->back()->with(["success" => "Item added to Cart"]);
         } catch (Exception $e) {
 
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
@@ -49,7 +51,7 @@ class CheckoutController extends Controller
 
             }
             session()->put('cart', $cart);
-            return redirect()->back()->with(["success" => "Course removed from Cart"]);
+            return redirect()->back()->with(["success" => "Item removed from Cart"]);
         } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }

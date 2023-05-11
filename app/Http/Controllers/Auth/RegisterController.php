@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,12 +67,21 @@ class RegisterController extends Controller
     {
 
         session()->put("type", trim($data['type']));
-        return User::create([
+        $user = User::create([
             'fullname' => $data['fullname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             "link" => generateRandomString(10),
         ]);
+
+        //create wallet
+        Wallet::create(
+            [
+                "userid" => $user->id
+            ]
+        );
+
+        return $user;
     }
 
     protected function redirectTo()

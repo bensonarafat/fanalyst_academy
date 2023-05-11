@@ -14,5 +14,6 @@ class QuizEnrolled extends Model
     protected $fillable = [
         'userid',
         'questionid',
+        'is_free',
     ];
 }

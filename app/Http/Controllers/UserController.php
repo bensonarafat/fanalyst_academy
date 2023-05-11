@@ -145,4 +145,25 @@ class UserController extends Controller
 
         }
     }
+
+    public function updateBankDetails(Request $request){
+        $request->validate([
+            'account_name' => 'required',
+            'account_number' => 'required',
+            'bank_name' => 'required',
+        ]);
+
+        try {
+            User::where("id", auth()->user()->id)->update(
+                [
+                    "account_name" => $request->account_name,
+                    "account_number" => $request->account_number,
+                    "bank_name" => $request->bank_name
+                ]
+            );
+            return redirect()->back()->with(['success' => 'Bank details Updated']);
+        } catch (Exception $e) {
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+        }
+    }
 }

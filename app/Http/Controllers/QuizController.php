@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Like;
 use App\Models\Quiz;
 use App\Models\Topic;
 use App\Models\Answer;
@@ -42,7 +43,6 @@ class QuizController extends Controller
             ]);
             return redirect()->back()->with(["success" => "Question uploaded"]);
         } catch (Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
@@ -97,6 +97,7 @@ class QuizController extends Controller
 
             return redirect()->route("quiz.index")->with(["success" => "Topic uploaded"]);
         } catch (Exception $e) {
+
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
     }
@@ -137,30 +138,30 @@ class QuizController extends Controller
     public function storeQuestion(Request $request){
         $request->validate([
             "name" => "required",
-            "categoryid" => "required",
-            "subcategory" => "required",
             "time" => "required",
-            "price" => "required",
-            "file" => "mimes:xlsx,txt"
+            "isfree" => "required",
+            "file" => "mimes:xlsx,txt",
+            "image" => "required|image|mimes:jpg,png,jpeg|max:2048"
         ]);
 
         try {
-
+            $image = SystemFileManager::InternalUploader($request->image, "questions");
            $question =  Question::create([
                 "userid" => auth()->user()->id,
-                "categoryid" => $request->categoryid,
-                "subcategory" => $request->subcategory,
                 "name" => $request->name,
                 "time" => $request->time,
                 "topicid" => $request->topicid,
                 "price" => $request->price,
+                "isfree" => $request->isfree,
+                "description" => $request->description,
+                "image" => $image,
             ]);
             if($request->file){
                 $questionid = $question->id;
                 $quizpath = SystemFileManager::InternalUploader($request->file, "quiz");
                 Excel::import(new QuizImport($request->topicid, $questionid), $quizpath);
             }
-            return redirect()->route("questions", $request->topicid)->with(["success" => "Question uploaded"]);
+            return redirect()->route("view.test", $question->id)->with(["success" => "Question uploaded"]);
         } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }
@@ -169,29 +170,33 @@ class QuizController extends Controller
     public function updateQuestion(Request $request){
         $request->validate([
             "name" => "required",
-            "categoryid" => "required",
-            "subcategory" => "required",
             "time" => "required",
-            "price" => "required",
-            "file" => "mimes:xlsx,txt"
+            "file" => "mimes:xlsx,txt",
+            "isfree" => "required",
+            "image" => "image|mimes:jpg,png,jpeg|max:2048"
         ]);
 
         try {
-
+            if($request->image){
+                $image = SystemFileManager::InternalUploader($request->image, "questions");
+            }else{
+                $image = $request->imagespan;
+            }
             Question::where("id", $request->id)->update([
                 "userid" => auth()->user()->id,
-                "categoryid" => $request->categoryid,
-                "subcategory" => $request->subcategory,
                 "name" => $request->name,
                 "time" => $request->time,
                 "topicid" => $request->topicid,
                 "price" => $request->price,
+                "isfree" => $request->isfree,
+                "description" => $request->description,
+                "image" => $image,
             ]);
             if($request->file){
                 $quizpath = SystemFileManager::InternalUploader($request->file, "quiz");
                 Excel::import(new QuizImport($request->topicid, $request->id), $quizpath);
             }
-            return redirect()->route("questions", $request->topicid)->with(["success" => "Question updated"]);
+            return redirect()->route("view.test", $request->id)->with(["success" => "Question updated"]);
         } catch (Exception $e) {
 
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
@@ -258,6 +263,21 @@ class QuizController extends Controller
             Excel::import(new QuizImport($request->topic, ''), $quizpath);
             return redirect()->back()->with(["success" => "Question imported"]);
         } catch (Exception $e) {
+            return redirect()->back()->with(["error" => "Oops, there was an error"]);
+        }
+    }
+
+    public function likeQuiz($id, $status){
+        try{
+            if($status == 'like'){
+                Like::create(['questionid' => $id, 'userid' => auth()->user()->id]);
+                Question::find($id)->increment('likes');
+            }else{
+                Question::find($id)->decrement('likes');
+                Like::where(['questionid' => $id, 'userid' => auth()->user()->id])->delete();
+            }
+            return redirect()->back()->with(['success' => "You $status course"]);
+        }catch(Exception $e){
             dd($e);
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }

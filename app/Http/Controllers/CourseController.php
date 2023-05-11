@@ -7,6 +7,7 @@ use App\Models\Like;
 use App\Models\Course;
 use App\Models\Enrolled;
 use App\Models\Curriculum;
+use App\Models\QuizEnrolled;
 use Illuminate\Http\Request;
 use App\Models\CurriculumLecture;
 use App\Http\Classes\SystemFileManager;
@@ -511,14 +512,24 @@ class CourseController extends Controller
 
     public function enrollFree(Request $request){
         try {
-            Enrolled::create([
-                'userid' => auth()->user()->id,
-                'courseid' => $request->id,
-                'is_free' => 1,
-            ]);
-            //increment course enrolled
-            Course::find($request->id)->increment('enrolled');
-            return redirect()->back()->with(['success' => 'Course Enrolled Successful']);
+            if($request->type == "quiz"){
+                QuizEnrolled::create([
+                    'userid' => auth()->user()->id,
+                    'questionid' => $request->id,
+                    'is_free' => 1,
+                ]);
+            }else{
+                Enrolled::create([
+                    'userid' => auth()->user()->id,
+                    'courseid' => $request->id,
+                    'is_free' => 1,
+                ]);
+                //increment course enrolled
+                Course::find($request->id)->increment('enrolled');
+            }
+
+
+            return redirect()->back()->with(['success' => 'Enrolled Successful']);
         } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
         }

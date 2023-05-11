@@ -12,5 +12,6 @@ class Like extends Model
     protected $fillable = [
         'userid',
         'courseid',
+        'questionid'
     ];
 }

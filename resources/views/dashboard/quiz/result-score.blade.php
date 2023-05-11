@@ -40,7 +40,7 @@
                         <div class="">
                             @foreach ($quiz as $row)
                                 @php
-                                    $answer =  \App\Models\Answer::where("question", $row->id)->first();
+                                    $answer =  \App\Models\Answer::where(["qid" => $row->qid, "topic" => $row->topic])->first();
                                 @endphp
                                 <div class="ques_item">
                                     <strong style="font-size:18px;">

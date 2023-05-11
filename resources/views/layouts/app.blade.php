@@ -327,14 +327,14 @@
                                 </a>
                             </li>
                             @endif --}}
-                            {{-- @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
+                            @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
                                 <a href="{{ route('earnings') }}" class="menu--link" title="Earning">
                                     <i class="uil uil-dollar-sign menu--icon"></i>
-                                    <span class="menu--label">Earning</span>
+                                    <span class="menu--label">Earnings</span>
                                 </a>
                             </li>
-                            @endif --}}
+                            @endif
                             {{-- @if(auth()->user()->type == 'instructor' || auth()->user()->type == 'admin')
                             <li class="menu--item">
                                 <a href="{{ route('payouts') }}" class="menu--link" title="Payout">

@@ -154,6 +154,7 @@ CREATE TABLE IF NOT EXISTS `quiz_enrolled` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userid` int(11) NOT NULL,
     `questionid`  int(11) NOT NULL,
+    `is_free` tinyint(1) NOT NULL DEFAULT 0,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -162,7 +163,8 @@ CREATE TABLE IF NOT EXISTS `quiz_enrolled` (
 CREATE TABLE IF NOT EXISTS `likes` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userid` int(11) NOT NULL,
-    `courseid`  int(11) NOT NULL,
+    `courseid`  int(11)  NULL DEFAULT NULL,
+    `questionid`  int(11)  NULL DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -197,12 +199,15 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 CREATE TABLE IF NOT EXISTS `questions` (
     `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userid` int(11) NOT NULL,
-    `categoryid` int(11) NOT NULL,
     `topicid` int(11) NOT NULL,
-    `subcategory` int(11) NOT NULL,
     `name` varchar(255) NOT NULL,
     `time` int(11) NOT NULL,
-    `price` decimal(25,2) NOT NULL DEFAULT 0.00,
+    `price` decimal(25,2) NULL DEFAULT NULL,
+    `isfree` tinyint(1) NOT NULL DEFAULT 0,
+    `image` varchar(255) NOT NULL,
+    `likes` int(11) NOT NULL DEFAULT 0,
+    `ratings` int(11) NOT NULL DEFAULT 0,
+    `description` text NULL DEFAULT NULL,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -243,6 +248,30 @@ CREATE TABLE IF NOT EXISTS `answers` (
     `mark` tinyint(1) NOT NULL DEFAULT 0,
     `answer` varchar(50) NULL DEFAULT NULL,
     `ref` varchar(255) NOT NULL,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS `wallet` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `balance` decimal(25,2) NOT NULL DEFAULT 0.00,
+    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+    `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- create wallet for admin
+INSERT INTO `wallet` (`userid`, `balance`) VALUES (1, 0.00);
+
+
+CREATE TABLE IF NOT EXISTS `earnings` (
+    `id` bigint(20) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `userid` int(11) NOT NULL,
+    `courseid` int(11) NULL DEFAULT NULL,
+    `questionid` int(11) NULL DEFAULT NULL,
+    `type` varchar(255) NOT NULL,
+    `amount` decimal(25,2) NOT NULL DEFAULT 0.00,
     `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
     `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

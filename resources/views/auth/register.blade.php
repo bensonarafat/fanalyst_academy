@@ -53,7 +53,14 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="sign_form">
                         <h2>Welcome to {{ config("app.name") }}</h2>
-                        <p>Sign Up</p>
+                        <p>Sign Up
+
+                            @if (isset($_GET['tutor']))
+                                and Start Teaching
+                            @else
+                                and Start Learning
+                            @endif
+                        </p>
 
                         @include('components.alert')
                         <form action="{{ route("register") }}" method="POSt">
@@ -78,7 +85,7 @@
                                     <input class="prompt srch_explore" type="password" name="password_confirmation" value="" id="id_password" required="" maxlength="64" placeholder="Confirm Password" />
                                 </div>
                             </div>
-                            <input type="hidden" name="type" value="@if($_GET['tutor']) tutor @else student @endif">
+                            <input type="hidden" name="type" value="@if(isset($_GET['tutor'])) tutor @else student @endif">
                             <button class="login-btn" type="submit">Register</button>
                         </form>
                         <p class="sgntrm145">By signing up, you agree to our <a href="terms_of_use.html">Terms of Use</a> and <a href="terms_of_use.html">Privacy Policy</a>.</p>

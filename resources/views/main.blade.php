@@ -174,22 +174,24 @@
                 </div>
 
                 {{-- Quiz here  --}}
-                <div class="row">
-                    @foreach ($topics as $row)
-                    <div class="col-6 col-sm-3">
-                        <div class="fcrse_1 mt-30">
-                            <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="fcrse_img">
-                                <img src="{{ asset($row->image) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
-                                <div class="course-overlay">
-                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
+                <div class="container">
+                    <div class="row">
+                        @foreach ($topics as $row)
+                        <div class="col-6 col-sm-3">
+                            <div class="fcrse_1 mt-30">
+                                <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="fcrse_img">
+                                    <img src="{{ asset($row->image) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
+                                    <div class="course-overlay">
+                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                    </div>
+                                </a>
+                                <div class="fcrse_content">
+                                    <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="crse14s">{{ $row->name }}</a>
                                 </div>
-                            </a>
-                            <div class="fcrse_content">
-                                <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="crse14s">{{ $row->name }}</a>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
                 {{-- Quiz here --}}
             </div>
@@ -209,9 +211,10 @@
                     <div class="feature125">
                         <img src="{{ asset('assets/images/icons/3.png') }}" style="width:100px;"  alt="">
 
-                        <h4>Quality contents</h4>
+                        <h4>Practice test</h4>
                         <p>
-                            Our high-quality and up-to-date course materials are designed to enhance our students success.
+                            Prepare effectively for your exams and interview with a wide range of practice tests.
+
                         </p>
                     </div>
                 </div>
@@ -219,25 +222,26 @@
                     <div class="feature125">
                         <img src="{{ asset('assets/images/icons/1.png') }}" style="width:100px;"  alt="">
 
-                        <h4>Support services</h4>
-                        <p>We provide ample support services, such as online tutoring, academic
-                            advising, and technical assistance.</p>
+                        <h4>Interactive Learning</h4>
+                        <p>Engage in Interactive Learning for Better Results and Experience.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
                         <img src="{{ asset('assets/images/icons/2.png') }}" style="width:100px;"  alt="">
-                        <h4>Personalized learning</h4>
-                        <p>Our personalized and convenient learning
-                            approach offers students a tailored education that is accessible and flexible.</p>
+                        <h4>Experienced Instructors</h4>
+                        <p>
+                            Learn from knowledgeable instructors with real-world experience.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="feature125">
                         <img src="{{ asset('assets/images/icons/4.png') }}" style="width:100px;" alt="">
-                        <h4>Money back guarantee*</h4>
-                        <p>We stand behind our commitment to your success with our pass your
-                            exams or get your money back guarantee</p>
+                        <h4>Budget-friendly Courses</h4>
+                        <p>Access top-quality education without worrying about financial constraints.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -15,9 +15,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-account-tab" data-toggle="pill" href="#pills-account" role="tab" aria-selected="true">Account</a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" id="pills-bllingpayment-tab" data-toggle="pill" href="#pills-bllingpayment" role="tab" aria-selected="false">Billing and Payouts</a>
-                            </li> --}}
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-bllingpayment-tab" data-toggle="pill" href="#pills-bllingpayment" role="tab" aria-selected="false">Bank Details</a>
+                            </li>
                         </ul>
                     </div>
                     @include('components.alert')
@@ -161,94 +161,46 @@
                         </div>
                         <div class="tab-pane fade" id="pills-bllingpayment" role="tabpanel" aria-labelledby="pills-bllingpayment-tab">
                             <div class="account_setting">
-                                <h4>Billing and Payouts</h4>
-                                <p>Want to charge for a course? Provide your payment info and opt in for our promotional programs</p>
-                                <div class="basic_form">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <div class="basic_ptitle mt-30">
-                                                <h4>Billing Address</h4>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="name" value="Joginder" id="id[name1]" required="" maxlength="64" placeholder="First Name" />
+                                <form action="{{ route("update.bank.details") }}" method="post">
+                                    @csrf
+                                    <h4>Bank Details</h4>
+                                    <p>Want to charge for a course? Provide your payment info.</p>
+                                    <div class="basic_form">
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="ui search focus mt-30">
+                                                            <label for="">Account Name</label>
+                                                            <div class="ui left icon input swdh11 swdh19">
+                                                                <input class="prompt srch_explore" type="text" name="account_name" value="{{ auth()->user()->account_name }}" id="Account Name" required="" maxlength="64" placeholder="Account Name" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="surname" value="Singh" id="id[surname1]" required="" maxlength="64" placeholder="Last Name" />
+                                                    <div class="col-lg-6">
+                                                        <div class="ui search focus mt-30">
+                                                            <label for="">Account Number</label>
+                                                            <div class="ui left icon input swdh11 swdh19">
+                                                                <input class="prompt srch_explore" type="text" name="account_number" value="{{ auth()->user()->account_number }}" id="account_number" required="" maxlength="64" placeholder="Account Number" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="academyname" value="Gambolthemes" id="id_academy" required="" maxlength="64" placeholder="Academy Name" />
+                                                    <div class="col-lg-12">
+                                                        <div class="ui search focus mt-30">
+                                                            <label for="">Bank Name</label>
+                                                            <div class="ui left icon input swdh11 swdh19">
+                                                                <input class="prompt srch_explore" type="text" name="bank_name" value="{{ auth()->user()->bank_name }}" id="bank_name" required="" maxlength="64" placeholder="Bank Name" />
+                                                            </div>
                                                         </div>
-                                                        <div class="help-block">If you want your invoices addressed to a academy. Leave blank to use your full name.</div>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input
-                                                                class="prompt srch_explore"
-                                                                type="text"
-                                                                name="addressname"
-                                                                value="#1234, Sks Nagar, Near MBD Mall, 141001 Ludhiana, Punjab, India"
-                                                                id="id_address1"
-                                                                required=""
-                                                                maxlength="64"
-                                                                placeholder="Address Line 1"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="addressname2" id="id_address2" required="" maxlength="64" placeholder="Address Line 2" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="city" value="Ludhiana" id="id_city" required="" maxlength="64" placeholder="City" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="state" value="Punjab" id="id_state" required="" maxlength="64" placeholder="State / Province / Region" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="zip" value="141001" id="id_zip" required="" maxlength="64" placeholder="Zip / Postal Code" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div class="ui search focus mt-30">
-                                                        <div class="ui left icon input swdh11 swdh19">
-                                                            <input class="prompt srch_explore" type="text" name="phone" value="+911234567890" id="id_phone" required="" maxlength="12" placeholder="Phone Number" />
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <button class="save_btn" type="submit">Save Changes</button>
+                                    <button class="save_btn" type="submit">Save Changes</button>
+                                </form>
                             </div>
                         </div>
                     </div>

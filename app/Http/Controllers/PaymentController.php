@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Paystack;
 use Exception;
 use App\Models\Course;
+use App\Models\Wallet;
+use App\Models\Earning;
 use App\Models\Enrolled;
 use App\Models\Question;
 use App\Models\Transaction;
@@ -77,18 +79,91 @@ class PaymentController extends Controller
             );
             //enroll for course
             $carts = getCart();
+
             for ($i=0; $i < count($carts); $i++) {
                 if($carts[$i]['type'] == "quiz") {
+                    $_type = "quiz";
+
                     QuizEnrolled::create([
                         "userid" => auth()->user()->id,
                         "questionid" => $carts[$i]['id']
                     ]);
+
+                    //store amount made in wallet
+                    $question = Question::find($carts[$i]['id']);
+                    $wallet = Wallet::where("userid", $question->userid)->first();
+                    $balance = $wallet->balance;
+                    $price = $question->price;
+                    if(!$carts[$i]['referral']){
+                        $total = 0.7 * floatval($price);
+                    }else{
+                        $total = 0.95 * floatval($price);
+                    }
+
+                    $grand = floatval($balance) + $total;
+                    //update wallet
+                    Wallet::where("id", $wallet->id)->update([
+                        "balance" => $grand
+                    ]);
+                    Earning::create(
+                        [
+                            "userid" => auth()->user()->id,
+                            "type" => "quiz",
+                            "questionid" => $carts[$i]['id'],
+                            "amount" => $grand,
+                        ]
+                    );
+                    $earn = (floatval($price) - floatval($grand));
                 }else{
+                    $_type = "course";
                     Enrolled::create([
                         "userid" => auth()->user()->id,
                         "courseid" => $carts[$i]['id']
                     ]);
+
+                    //store amount made in wallet
+                    $course = Course::find($carts[$i]['id']);
+                    $wallet = Wallet::where("userid", $course->instructor)->first();
+                    $balance = $wallet->balance;
+                    $price = $course->amount;
+                    if(!$carts[$i]['referral']){
+                        $total = 0.7 * floatval($price);
+                    }else{
+                        $total = 0.95 * floatval($price);
+                    }
+
+                    $grand = floatval($balance) + $total;
+                    //update wallet
+                    Wallet::where("id", $wallet->id)->update([
+                        "balance" => $grand
+                    ]);
+
+                    Earning::create(
+                        [
+                            "userid" => auth()->user()->id,
+                            "type" => "course",
+                            "courseid" => $carts[$i]['id'],
+                            "amount" => $grand,
+                        ]
+                    );
+                    $earn = (floatval($price) - floatval($grand));
                 }
+
+                //update admin wallet
+                $adminwallet = Wallet::find(1);
+                $balance = $adminwallet->balance;
+                $grand = floatval($balance) + $earn;
+                Wallet::where("id", $adminwallet->id)->update([
+                    "balance" => $grand
+                ]);
+                Earning::create(
+                    [
+                        "userid" => 1,
+                        "type" => $_type,
+                        "questionid" => $carts[$i]['id'],
+                        "amount" => $earn,
+                    ]
+                );
 
             }
 

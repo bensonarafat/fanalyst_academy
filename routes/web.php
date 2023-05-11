@@ -41,6 +41,11 @@ Route::post('/contact', [ContactController::class, 'contact'])->name('send.conta
 Route::get("/sc/{link}",[PagesController::class, "shareCourse"])->name("share.course");
 Route::get("/su/{link}",[PagesController::class, "shareUser"])->name('share.user');
 
+
+Route::group(["prefix" => "quiz"], function() {
+    Route::get('/take-quiz', [PagesController::class, "takeQuiz"])->name('take.quiz');
+});
+
 Route::group(['middleware' => 'auth'], function (){
 
     Route::post('/add-to-cart', [CheckoutController::class, 'addToCart'])->name('add.cart');
@@ -128,6 +133,7 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/view/{id}', [PagesController::class, 'viewUser'])->name('view.user');
         Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
         Route::post('/update-instructor-status', [UserController::class, 'updateInstructorStatus'])->name('update.instructor.status');
+        Route::post('/update-bank-details', [UserController::class, 'updateBankDetails'])->name('update.bank.details');
     });
 
     //category
@@ -155,7 +161,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::group(["prefix" => "quiz"], function() {
         Route::get('', [PagesController::class, "quiz"])->name('quiz.index');
         Route::get('/result', [PagesController::class, "quizResult"])->name('quiz.result');
-        Route::get('/take-quiz', [PagesController::class, "takeQuiz"])->name('take.quiz');
+        Route::get("/view/{id}", [PagesController::class, "viewTest"])->name("view.test");
         Route::get("/test/{id}", [PagesController::class, "startTest"])->name("start.test");
         Route::post("/submit-quiz", [QuizController::class, "submitQuiz"])->name("submit.quiz");
         Route::get("/result-score/{ref}", [PagesController::class, "resultScore"])->name("result.score");
@@ -186,6 +192,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::post('/update', [QuizController::class, "updateTopic"])->name('update.topic');
             Route::get('/delete/{id}', [QuizController::class, "deleteTopic"])->name('delete.topic');
         });
+        Route::get('/like-quiz/{id}/{status}', [QuizController::class, 'likeQuiz'])->name('like.quiz');
 
     });
 });
