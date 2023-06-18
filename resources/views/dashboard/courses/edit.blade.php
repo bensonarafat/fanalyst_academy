@@ -57,72 +57,88 @@
                                                 <h3 class="title"><i class="uil uil-info-circle"></i>Basic Information</h3>
                                             </div>
                                             <div class="course__form">
-                                                <div class="general_info10">
-                                                    <div class="row">
-                                                        <div class="col-lg-12 col-md-12">
-                                                            <div class="ui search focus mt-30 lbel25">
-                                                                <label>Course Title*</label>
-                                                                <div class="ui left icon input swdh19">
-                                                                    <input class="prompt srch_explore" type="text" placeholder="Course title here" required name="title" data-purpose="edit-course-title" maxlength="60" id="title" value="{{ $course->title }}" />
+                                                <div class="container">
+                                                    <div class="general_info10">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="ui search focus mt-30 lbel25">
+                                                                    <label>Course Title*</label>
+                                                                    <div class="ui left icon input swdh19">
+                                                                        <input class="prompt srch_explore" type="text" placeholder="Course title here" required name="title" data-purpose="edit-course-title" maxlength="60" id="title" value="{{ $course->title }}" />
+                                                                    </div>
+                                                                    <div class="help-block">(Please make this a maximum of 100 characters and unique.)</div>
                                                                 </div>
-                                                                <div class="help-block">(Please make this a maximum of 100 characters and unique.)</div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-12 col-md-12">
-                                                            <div class="ui search focus lbel25 mt-30">
-                                                                <label>Short Description*</label>
-                                                                <div class="ui form swdh30">
-                                                                    <div class="field">
-                                                                        <textarea rows="3" name="short_description" id="short_description" required placeholder="Short description here...">{{ $course->short_description }}</textarea>
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="ui search focus lbel25 mt-30">
+                                                                    <label>Short Description*</label>
+                                                                    <div class="ui form swdh30">
+                                                                        <div class="field">
+                                                                            <textarea rows="3" name="short_description" id="short_description" required placeholder="Short description here...">{{ $course->short_description }}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="help-block">220 words</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="course_des_textarea mt-30 lbel25">
+                                                                    <label>Course Description*</label>
+                                                                    <div class="ui form swdh30">
+                                                                        <div class="field">
+                                                                            {{-- <textarea rows="3" name="description" id="description" required placeholder="description here...">{{ $course->description }}</textarea> --}}
+                                                                            <textarea id="myeditorinstance" class="myeditorinstance" name="description" required>{{ $course->description }}</textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="help-block">220 words</div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-12 col-md-12">
-                                                            <div class="course_des_textarea mt-30 lbel25">
-                                                                <label>Course Description*</label>
-                                                                <div class="ui form swdh30">
-                                                                    <div class="field">
-                                                                        {{-- <textarea rows="3" name="description" id="description" required placeholder="description here...">{{ $course->description }}</textarea> --}}
-                                                                        <textarea id="myeditorinstance" class="myeditorinstance" name="description" required>{{ $course->description }}</textarea>
+                                                            <div class="col-lg-6 col-md-12">
+                                                                <div class="ui search focus lbel25 mt-30">
+                                                                    <label>What will students learn in your course?*</label>
+                                                                    <div class="ui form swdh30">
+                                                                        <div class="field">
+                                                                            <textarea id="will_learn" class="myeditorinstance" name="will_learn" >{{ $course->will_learn }}</textarea>
+                                                                        </div>
                                                                     </div>
+                                                                    <div class="help-block">Student will gain this skills, knowledge after completing this course. (One per line).</div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <div class="ui search focus lbel25 mt-30">
-                                                                <label>What will students learn in your course?*</label>
-                                                                <div class="ui form swdh30">
-                                                                    <div class="field">
-                                                                        <textarea id="will_learn" class="myeditorinstance" name="will_learn" >{{ $course->will_learn }}</textarea>
+                                                            <div class="col-lg-6 col-md-12">
+                                                                <div class="ui search focus lbel25 mt-30">
+                                                                    <label>Requirements*</label>
+                                                                    <div class="ui form swdh30">
+                                                                        <div class="field">
+                                                                            <textarea id="prerequisites" class="myeditorinstance" name="prerequisites" >{{ $course->prerequisites }}</textarea>
+                                                                        </div>
                                                                     </div>
+                                                                    <div class="help-block">What knowledge, technology, tools required by users to start this course. (One per line).</div>
                                                                 </div>
-                                                                <div class="help-block">Student will gain this skills, knowledge after completing this course. (One per line).</div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-12">
-                                                            <div class="ui search focus lbel25 mt-30">
-                                                                <label>Requirements*</label>
-                                                                <div class="ui form swdh30">
-                                                                    <div class="field">
-                                                                        <textarea id="prerequisites" class="myeditorinstance" name="prerequisites" >{{ $course->prerequisites }}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="help-block">What knowledge, technology, tools required by users to start this course. (One per line).</div>
-                                                            </div>
-                                                        </div>
 
-                                                        <div class="col-lg-12 col-md-6">
-                                                            <div class="mt-30 lbel25">
-                                                                <label>Course Category*</label>
+                                                            <div class="col-lg-12 col-md-6">
+                                                                <div class="mt-30 lbel25">
+                                                                    <label>Course Category*</label>
+                                                                </div>
+                                                                <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category" required>
+                                                                    <option value="">Select category</option>
+                                                                    @foreach ($categories as $row)
+                                                                        @php
+                                                                            $subcategories = App\Models\Category::where("parentid", $row->id)->get();
+                                                                        @endphp
+                                                                        <option value="{{ $row->id }}" @if($row->id == $course->category) selected @endif data-json="{{ $subcategories }}">{{ $row->name }}</option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
-                                                            <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category" id="category" required>
-                                                                <option value="">Select category</option>
-                                                                @foreach ($categories as $row)
-                                                                    <option value="{{ $row->id }}" @if($row->id == $course->category) selected @endif>{{ $row->name }}</option>
-                                                                @endforeach
-                                                            </select>
+
+                                                            <div class="col-lg-12 col-md-6">
+                                                                <div class="mt-30 lbel25">
+                                                                    <label>Sub Category*</label>
+                                                                </div>
+                                                                <div class="__subcategoryreplace">
+                                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="subcategory" id="subcategory" required>
+                                                                        <option value="{{ optional($subcategory)->id }}">{{ optional($subcategory)->name }}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -192,67 +208,69 @@
                                                 <h3 class="title"><i class="uil uil-usd-square"></i>Price</h3>
                                             </div>
                                             <div class="course__form">
-                                                <div class="price-block">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="course-main-tabs">
-                                                                <div class="price-require-dt">
-                                                                    <div class="cogs-toggle mb-20">
-                                                                        <label class="switch">
-                                                                            <input type="checkbox" name="is_free" id="is_free" value="" @if($course->is_free) checked @endif />
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label for="require_login" class="lbl-quiz">Course is Paid</label>
+                                                <div class="container">
+                                                    <div class="price-block">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="course-main-tabs">
+                                                                    <div class="price-require-dt">
+                                                                        <div class="cogs-toggle mb-20">
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" name="is_free" id="is_free" value="" @if($course->is_free) checked @endif />
+                                                                                <span></span>
+                                                                            </label>
+                                                                            <label for="require_login" class="lbl-quiz">Course is Paid</label>
+                                                                        </div>
+                                                                        <div class="cogs-toggle cogs-togglex @if($course->is_free) x-hidden @else @endif">
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" id="require_login"  @if($course->require_login) checked @endif  value="" name="require_login" />
+                                                                                <span></span>
+                                                                            </label>
+                                                                            <label for="require_login" class="lbl-quiz">Require Log In</label>
+                                                                        </div>
+                                                                        <div class="cogs-toggle cogs-togglex mt-3 @if($course->is_free) x-hidden @else @endif">
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" id="require_enroll" @if($course->require_enroll) checked @endif value="" name="require_enroll" />
+                                                                                <span></span>
+                                                                            </label>
+                                                                            <label for="require_enroll" class="lbl-quiz">Require Enroll</label>
+                                                                        </div>
+                                                                        <p class="cogs-togglex @if($course->is_free) @else x-hidden @endif">
+                                                                            If the course is free, if student require to enroll your course, if not required enroll, if students required sign in to your website to take this course.
+                                                                        </p>
                                                                     </div>
-                                                                    <div class="cogs-toggle cogs-togglex @if($course->is_free) x-hidden @else @endif">
-                                                                        <label class="switch">
-                                                                            <input type="checkbox" id="require_login"  @if($course->require_login) checked @endif  value="" name="require_login" />
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label for="require_login" class="lbl-quiz">Require Log In</label>
-                                                                    </div>
-                                                                    <div class="cogs-toggle cogs-togglex mt-3 @if($course->is_free) x-hidden @else @endif">
-                                                                        <label class="switch">
-                                                                            <input type="checkbox" id="require_enroll" @if($course->require_enroll) checked @endif value="" name="require_enroll" />
-                                                                            <span></span>
-                                                                        </label>
-                                                                        <label for="require_enroll" class="lbl-quiz">Require Enroll</label>
-                                                                    </div>
-                                                                    <p class="cogs-togglex @if($course->is_free) @else x-hidden @endif">
-                                                                        If the course is free, if student require to enroll your course, if not required enroll, if students required sign in to your website to take this course.
-                                                                    </p>
-                                                                </div>
 
-                                                                <div class="cogs-togglec @if($course->is_free) @else x-hidden @endif">
-                                                                    <div class="license_pricing mt-30">
-                                                                        <label class="label25">Regular Price*</label>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                                                                <div class="loc_group">
-                                                                                    <div class="ui left icon input swdh19">
-                                                                                        <input class="prompt srch_explore" type="number" placeholder="&#8358;0" name="amount" id="amount" value="{{ $course->amount }}" />
+                                                                    <div class="cogs-togglec @if($course->is_free) @else x-hidden @endif">
+                                                                        <div class="license_pricing mt-30">
+                                                                            <label class="label25">Regular Price*</label>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                                                    <div class="loc_group">
+                                                                                        <div class="ui left icon input swdh19">
+                                                                                            <input class="prompt srch_explore" type="number" placeholder="&#8358;0" name="amount" id="amount" value="{{ $course->amount }}" />
+                                                                                        </div>
+                                                                                        <span class="slry-dt">&#8358;</span>
                                                                                     </div>
-                                                                                    <span class="slry-dt">&#8358;</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="license_pricing mt-30 mb-30">
+                                                                            <label class="label25">Discount Price</label>
+                                                                            <div class="row">
+                                                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                                                    <div class="loc_group">
+                                                                                        <div class="ui left icon input swdh19">
+                                                                                            <input class="prompt srch_explore" type="number" placeholder="&#8358;0" name="discount" id="discount" value="{{ $course->discount }}" />
+                                                                                        </div>
+                                                                                        <span class="slry-dt">&#8358;</span>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="license_pricing mt-30 mb-30">
-                                                                        <label class="label25">Discount Price</label>
-                                                                        <div class="row">
-                                                                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                                                                <div class="loc_group">
-                                                                                    <div class="ui left icon input swdh19">
-                                                                                        <input class="prompt srch_explore" type="number" placeholder="&#8358;0" name="discount" id="discount" value="{{ $course->discount }}" />
-                                                                                    </div>
-                                                                                    <span class="slry-dt">&#8358;</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+
+
                                                                 </div>
-
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -321,6 +339,19 @@
 <script src="{{ asset("assets/js/jquery-3.3.1.min.js") }}"></script>
 <script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
 <script>
+
+    $('#category').on("change", function(){
+        let data = $( "#category option:selected" ).attr('data-json');
+        let json = JSON.parse(data);
+        let html = '<select class="form-control hj145 dropdown cntry152 prompt srch_explore" name="subcategory" id="subcategory" required>'
+        json.forEach((item, index) => {
+            html += `<option value=`+item.id+`>`+item.name+`</option>`;
+        });
+
+        html += '</select>';
+        $('.__subcategoryreplace').html(html);
+    });
+
     $('#is_free').on('change', function(){
         if($(this).is(':checked')){
             $('.cogs-togglex').addClass('x-hidden');
@@ -364,6 +395,7 @@
             data.append('will_learn', will_learn_content);
             data.append('prerequisites', prerequisites_content);
             data.append('category', $('#category').val());
+            data.append('subcategory', $('#subcategory').val());
             data.append('courseURL', $('#courseURL').val());
             data.append('courseYoutube', $('#courseYoutube').val());
             data.append('amount', $('#amount').val());

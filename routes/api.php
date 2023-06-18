@@ -36,3 +36,4 @@ Route::group(['prefix' => 'courses'], function(){
 Route::group(["prefix" => "quiz"], function(){
     Route::get("/get/{id}", [QuizController::class, 'getQuiz']);
 });
+

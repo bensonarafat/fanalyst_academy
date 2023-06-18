@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, shrink-to-fit=9" />
 
-        <meta name="author" content="Obi Nnaekeka" />
         <!-- Primary Meta Tags -->
         <title>Login</title>
         <meta name="title" content="Login">
@@ -47,7 +46,7 @@
                 <div class="col-lg-12">
                     <div class="main_logo25" id="logo">
                         <a href="/"><img src="{{ asset("assets/images/logo.png") }}" style="width:100px;" alt="" /></a>
-                        <a href="/"><img class="logo-inverse" style="width:100px;"  src="{{ asset("assets/images/logo.png") }}" alt="" /></a>
+                        <a href="/"><img class="logo-inverse" style="width:100px;"  src="{{ asset("assets/images/logo-dark.png") }}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-8">
@@ -79,7 +78,7 @@
                             </div>
                             <button class="login-btn" type="submit">Sign In</button>
                         </form>
-                        <p class="sgntrm145">Or <a href="forgot_password.html">Forgot Password</a>.</p>
+                        <p class="sgntrm145">Or <a href="{{ route("password.request") }}">Forgot Password</a>.</p>
                         <p class="mb-0 mt-30 hvsng145">Don't have an account? <a href="{{ route("register") }}">Sign Up</a></p>
                     </div>
                     <div class="sign_footer"><img src="{{ asset("assets/images/logo1.png") }}" alt="" />© {{ date('Y') }} <strong>{{ config("app.name") }}</strong>. All Rights Reserved.</div>

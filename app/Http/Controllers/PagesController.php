@@ -68,7 +68,11 @@ class PagesController extends Controller
         $totalEnroll = 0;
         $totalCourse = 0;
         $totalStudents = 0;
+        $wallet = null;
+        $quizEarning = 0;
+        $courseEarning = 0;
         $courses = null;
+        $quiz = null;
         $instructors = null;
         $featured = null;
         $allCourses = null;
@@ -85,11 +89,16 @@ class PagesController extends Controller
                 $totalCourse  = Course::where('instructor',auth()->user()->id)->count();
                 $totalStudents = User::where('type', 'student')->count();
                 $courses = Course::where(['instructor' => auth()->user()->id, 'status' => 'active'])->latest()->limit(5)->get();
+                $quiz = Question::where(['userid' => auth()->user()->id])->latest()->limit(5)->get();
+                $courseEarning = Earning::where(["type" => "course", "userid" => auth()->user()->id])->sum("amount");
+                $quizEarning = Earning::where(["type" => "quiz", "userid" => auth()->user()->id])->sum("amount");
+
             }else{
                 $courses = Course::where('status', 'active')->latest()->limit(5)->get();
                 $featured = Course::where('status', 'active')->orderBy('created_at', 'asc')->limit(5)->get();
                 $instructors = User::where('type', 'instructor')->latest()->limit(5)->get();
             }
+            $wallet = Wallet::where("userid", auth()->user()->id)->first();
         }else{
             if(isset($_GET['cat'])){
                 $allCourses = Course::where(['status' =>  'active', 'category' => $_GET['cat']])->latest()->limit(10)->get();
@@ -101,7 +110,7 @@ class PagesController extends Controller
 
             $topics = Topic::latest()->get();
         }
-        return view("index", compact( 'topics', 'totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses', 'category', 'categoryCoureses'));
+        return view("index", compact('quiz', 'topics', 'totalSales', 'totalEnroll', 'totalCourse', 'totalStudents', 'instructors', 'courses', 'featured', 'allCourses', 'category', 'categoryCoureses', 'wallet', 'quizEarning', 'courseEarning'));
     }
 
     public function about(){
@@ -176,12 +185,15 @@ class PagesController extends Controller
     public function analysis(){
 
         if(auth()->user()->type == "instructor"){
+
             $courses = Course::where(['status' => 'active', 'instructor' => auth()->user()->id])->latest()->get();
+            $quiz = Question::where(["userid" => auth()->user()->id])->latest()->get();
         }else{
             $courses = Course::where('status' , 'active', )->latest()->get();
+            $quiz = Question::latest()->get();
         }
 
-        return view('dashboard.analysis.index', compact('courses'));
+        return view('dashboard.analysis.index', compact('courses', "quiz"));
     }
 
     public function cart(){
@@ -215,7 +227,12 @@ class PagesController extends Controller
         $curriculum = Curriculum::where('courseid', $course->id)->get();
 
         $enrolled = Enrolled::where([ 'courseid' => $id])->count();
-        $isLike = Like::where(['userid' => auth()->user()->id, 'courseid' =>  $id])->count();
+        if(Auth::check()){
+            $isLike = Like::where(['userid' => auth()->user()->id, 'courseid' =>  $id])->count();
+
+        }else{
+            $isLike = 0;
+        }
         if($isLike == 0){
             $like = 'like';
         }else{
@@ -228,7 +245,8 @@ class PagesController extends Controller
     public function editCourse($id){
         $course = Course::find($id);
         $categories = Category::whereNull('parentid')->latest()->get();
-        return view('dashboard.courses.edit', compact('categories', 'course'));
+        $subcategory = Category::find($course->subcategory);
+        return view('dashboard.courses.edit', compact('categories', 'course', "subcategory"));
     }
 
     public function editCurriculum($id){
@@ -260,7 +278,7 @@ class PagesController extends Controller
     public function earnings(){
         $wallet = Wallet::where("userid", auth()->user()->id)->first();
         $earnings = Earning::where("userid", auth()->user()->id)->latest()->get();
-        $total_earns = Earning::where("userid", auth()->user()->id)->sum("amount");
+        $total_earns = Earning::where("userid", auth()->user()->id)->whereNotIn("type", ["withdrawal"])->sum("amount");
         return view('dashboard.earnings.index', compact("wallet", "earnings", "total_earns"));
     }
 
@@ -285,11 +303,14 @@ class PagesController extends Controller
     public function viewUser($id){
         $user = User::find($id);
         if(auth()->user()->type == 'student'){
-            $courses = Enrolled::where('userid', auth()->user()->id)->latest()->get();
+            $courses = Enrolled::where('userid', $id)->latest()->get();
         }else{
-            $courses = Course::where('instructor', auth()->user()->id)->latest()->get();
+            $courses = Course::where('instructor', $id)->latest()->get();
         }
-        return view('dashboard.users.view', compact('user', 'courses'));
+        $earnings = Earning::where("userid", $id)->latest()->get();
+        $wallet = Wallet::where("userid", $id)->first();
+        $total_earns = Earning::where("userid", $id)->whereNotIn("type", ["withdrawal"])->sum("amount");
+        return view('dashboard.users.view', compact('user', 'courses', 'earnings', 'wallet','total_earns'));
     }
     public function settings(){
         return view('dashboard.settings.index');
@@ -338,11 +359,17 @@ class PagesController extends Controller
     }
     public function viewTest($id){
         $question = Question::where("id", $id)->first();
-        $iquizenrolled = QuizEnrolled::where(['userid' => auth()->user()->id, "questionid" => $id])->exists();
+        if(Auth::check()){
+            $iquizenrolled = QuizEnrolled::where(['userid' => auth()->user()->id, "questionid" => $id])->exists();
+            $isLike = Like::where(['userid' => auth()->user()->id, 'questionid' =>  $id])->count();
+        }else{
+            $iquizenrolled = false;
+            $isLike = 0;
+        }
         $students = QuizEnrolled::where(["questionid" => $id])->latest()->get();
         $totalenrolled = count($students);
         $instructor = User::find($question->userid);
-        $isLike = Like::where(['userid' => auth()->user()->id, 'questionid' =>  $id])->count();
+
         if($isLike == 0){
             $like = 'like';
         }else{
@@ -404,6 +431,10 @@ class PagesController extends Controller
     public function importQuestions(){
         $topics = Topic::latest()->get();
         return view("dashboard.quiz.import-questions", compact("topics"));
+    }
+
+    public function messages(){
+        return view("dashboard.messages.index");
     }
 }
 

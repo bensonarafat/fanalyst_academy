@@ -43,6 +43,27 @@
                                                 </div>
                                             </div>
 
+                                            <div class="new-section mt-10">
+                                                <div class="form_group">
+                                                    <label class="label25">Downloadable*</label>
+                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="downloadable" id="downloadable" required>
+                                                        <option value="0" @if($lecture->downloadable == "0") selected @endif>No</option>
+                                                        <option value="1" @if($lecture->downloadable == "1") selected @endif>Yes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="new-section mt-10">
+                                                <div class="form_group">
+                                                    <label class="label25">Is Free*</label>
+                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="is_free" id="is_free" required>
+                                                        <option value="0" @if($lecture->is_free == "0") selected @endif>No</option>
+                                                        <option value="1" @if($lecture->is_free == "1") selected @endif>Yes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
                                             <ul class="nav nav-tabs mt-30" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
                                                   <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Video</button>
@@ -191,6 +212,8 @@
         data.append('courseVideoSpan', $('#courseVideoSpan').val());
         data.append('courseDocumentSpan', $('#courseDocumentSpan').val());
         data.append('lectureType', $('#lectureType').val());
+        data.append('downloadable', $('#downloadable').val());
+        data.append('is_free', $('#is_free').val());
 
         const BASE_URL = "{{ url('/') }}";
         const REQUEST_URL = "<?=Request::url()?>";

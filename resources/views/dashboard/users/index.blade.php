@@ -14,6 +14,7 @@
                 <div class="col-12">
                     <div class="mt-10">
                         <div class="table-cerificate">
+                            @include("components.alert")
                             <div class="table-responsive">
                                 <table class="table ucp-table" id="content-table">
                                     <thead class="thead-s">
@@ -52,6 +53,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="{{ route('view.user', $row->id) }}" title="View" class="gray-s"><i class="uil uil-eye"></i></a>
+                                                    <a href="{{ route('delete.user', $row->id) }}" title="Delete" class="gray-s"><i class="uil uil-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

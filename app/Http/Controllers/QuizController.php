@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Classes\SystemFileManager;
+use App\Models\Earning;
 
 class QuizController extends Controller
 {
@@ -206,6 +207,7 @@ class QuizController extends Controller
     public function deleteQuestion($id){
         Question::where("id", $id)->delete();
         Quiz::where("qid", $id)->delete();
+        Earning::where("questionid", $id)->delete();
         return redirect()->back()->with(["success" => "Question Deleted"]);
     }
 

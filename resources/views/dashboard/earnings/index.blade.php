@@ -32,7 +32,8 @@
                                     <th scope="col">Date</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Earning</th>
+                                    <th scope="col">Gross Earnings</th>
+                                    <th scope="col">Net Earnings</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,15 +42,21 @@
                                     if($row->type == "quiz"){
                                         $question = App\Models\Question::find($row->questionid);
                                         $name = $question->name;
-                                    }else{
+                                        $price = naira() . number_format($question->price, 2);
+                                    }elseif($row->type== "course"){
                                         $course = App\Models\Course::find($row->courseid);
                                         $name = $course->title;
+                                        $price = naira() . number_format(floatval($course->amount) - floatval($course->discount), 2);
+                                    }else{
+                                        $name = "Withdrawal";
+                                        $price = "--";
                                     }
                                 @endphp
                                 <tr>
                                     <td>{{ $row->created_at->format("Y, m d") }}</td>
                                     <td>{{ ucfirst($row->type) }}</td>
                                     <td>{{ $name }}</td>
+                                    <td>{!! $price !!}</td>
                                     <td>{!! naira() . number_format($row->amount, 2) !!}</td>
                                 </tr>
                                 @endforeach

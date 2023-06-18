@@ -2,6 +2,11 @@
 @section('content')
 @section('title', $user->fullname)
 
+
+@include("components.messagemodel", ['id' => $user->id])
+@include("components.withdrawal", ['id' => $user->id])
+
+
 <div class="wrapper _bg4586">
     <div class="_216b01">
         <div class="container">
@@ -22,6 +27,9 @@
                                         <h2>{{ $user->fullname }}</h2> {!! UserStatus($user->status) !!}
                                         <span>{{ ucfirst($user->type) }}</span> <br/> <br/>
                                         @if($user->job_title) <span>{{ $user->job_title }}</span> @endif
+                                        <br/>
+                                        <button class="subscribe-btn" data-toggle="modal" data-target="#startMessage">Start Message</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -46,22 +54,21 @@
 
                                 @if(auth()->user()->type == 'admin')
                                     <div class="_bty149" style="width:70%;float:right;">
-                                        @if($user->type == 'student')
-                                            @if($user->instructor_status == 'pending')
-                                                <form action="{{ route('update.instructor.status') }}" method="post">
-                                                    @csrf
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="status">
-                                                        <option value="">Select option</option>
-                                                        <option value="pending" @if($user->instructor_status == 'pending') selected @endif>Pending</option>
-                                                        <option value="approved" @if($user->instructor_status == 'approved') selected @endif>Approved</option>
-                                                        <option value="declined" @if($user->instructor_status == 'declined') selected @endif>Declined</option>
-                                                    </select>
-                                                    <br/>
-                                                    <input type="hidden" name="id" value="{{ $user->id }}">
-                                                    <button class="subscribe-btn btn500" style="width:100%;margin-top:10px;">Update Status</button>
-                                                </form>
-                                            @endif
+                                        @if($user->instructor_status == 'pending')
+                                            <form action="{{ route('update.instructor.status') }}" method="post">
+                                                @csrf
+                                                <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="status">
+                                                    <option value="">Select option</option>
+                                                    <option value="pending" @if($user->instructor_status == 'pending') selected @endif>Pending</option>
+                                                    <option value="approved" @if($user->instructor_status == 'approved') selected @endif>Approved</option>
+                                                    <option value="declined" @if($user->instructor_status == 'declined') selected @endif>Declined</option>
+                                                </select>
+                                                <br/>
+                                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                                <button class="subscribe-btn btn500" style="width:100%;margin-top:10px;">Update Status</button>
+                                            </form>
                                         @endif
+
                                     </div>
                                 @endif
                             </div>
@@ -83,6 +90,7 @@
                                 @if(auth()->user()->type ==  'admin' || auth()->user()->type == 'instructor')
                                     @if($user->type == 'instructor' || $user->instructor_status == 'pending')<a class="nav-item nav-link" id="nav-documents-tab" data-toggle="tab" href="#nav-documents" role="tab" aria-selected="false">Documents</a> @endif
                                     @if($user->type == 'instructor' || $user->instructor_status == 'pending')<a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-selected="false">Payment Information</a> @endif
+                                    @if($user->type == 'instructor' || $user->instructor_status == 'pending')<a class="nav-item nav-link" id="nav-earnings-tab" data-toggle="tab" href="#nav-earnings" role="tab" aria-selected="false">Earnings</a> @endif
                                 @endif
                                 <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Courses</a>
                             </div>
@@ -99,7 +107,7 @@
                     <div class="course_tab_content">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-personal" role="tabpanel">
-                                <div class="_htg451">
+                                <div class="">
                                     <div class="general_info10">
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12">
@@ -128,14 +136,7 @@
                                                     <option value="female" @if($user->gender == 'female') selected @endif>Female</option>
                                                 </select>
                                             </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="mt-30 lbel25">
-                                                    <label>Town</label>
-                                                </div>
-                                                <div class="ui left icon input swdh19">
-                                                    <input class="prompt srch_explore" type="text" placeholder="Town" name="town" id="town" value="{{ $user->town }}" readonly />
-                                                </div>
-                                            </div>
+
 
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="mt-30 lbel25">
@@ -145,7 +146,7 @@
                                                     <input class="prompt srch_explore" type="date" placeholder="Date of Birth" name="dob" id="dob" value="{{ $user->dob }}" required readonly/>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-12">
+                                            <div class="col-lg-12 col-md-12">
                                                 <div class="mt-30 lbel25">
                                                     <label>Email</label>
                                                 </div>
@@ -154,14 +155,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="mt-30 lbel25">
-                                                    <label>City</label>
-                                                </div>
-                                                <div class="ui left icon input swdh19">
-                                                    <input class="prompt srch_explore" type="text" placeholder="City" name="city" id="city" value="{{ $user->city }}" required  readonly/>
-                                                </div>
-                                            </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="ui search focus lbel25 mt-30">
                                                     <label>Address</label>
@@ -201,7 +194,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="ui search focus mt-30 lbel25">
-                                                    <label>List your skills</label>
+                                                    <label>CV/Resume/Profile</label>
                                                     <div class="ui left icon input swdh19">
                                                         <input class="prompt srch_explore" type="text" placeholder="Skills" name="skills" id="skills" value="{{ $user->skills }}" required readonly/>
                                                     </div>
@@ -234,32 +227,43 @@
                                                 </select>
                                             </div>
 
-
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="mt-30 lbel25">
-                                                    <label>Current Employment title</label>
-                                                </div>
-                                                <div class="ui left icon input swdh19">
-                                                    <input class="prompt srch_explore" type="text" placeholder="Current Employment title" name="employment_title" id="employment_title" value="{{ $user->employment_title }}" required readonly/>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="mt-30 lbel25">
-                                                    <label>Current Employment Company</label>
-                                                </div>
-                                                <div class="ui left icon input swdh19">
-                                                    <input class="prompt srch_explore" type="text" placeholder="Current Employment Company" name="employment_company" id="employment_company" value="{{ $user->employment_company }}" required readonly/>
-                                                </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade " id="nav-documents" role="tabpanel">
+                            <div class="tab-pane fade" id="nav-documents" role="tabpanel">
                                 <div class="_htg451">
+                                    <div class="tpc152">
+                                        <div class="">
+                                        <h3>Download Documents</h3>
+                                    </div>
+                                    <div class="section3126 mt-20">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a href="{{ asset($user->cv) }}" download class="value_props50">
+                                                    <div class="value_icon">
+                                                        <i class="uil uil-wallet"></i>
+                                                    </div>
+                                                    <div class="value_content">
+                                                        <h4>CV/Profile</h4>
+                                                        <i class="uil uil-download-alt" style="font-size: 30px;"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="{{ asset($user->sample_video) }}" download class="value_props50">
+                                                    <div class="value_icon">
+                                                        <i class="uil uil-megaphone"></i>
+                                                    </div>
+                                                    <div class="value_content">
+                                                        <h4>Sample video</h4>
+                                                        <i class="uil uil-download-alt" style="font-size: 30px;"></i>
+                                                    </div>
+                                                </a>
+                                            </div>
 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-payment" role="tabpanel">
@@ -292,6 +296,71 @@
                                                 </div>
                                             </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-earnings" role="tabpanel">
+                                <div class="_htg451">
+                                    <div class="general_info10">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="earning_steps">
+                                                    <p>Sales earnings, after {{ config("app.name") }} fees</p>
+                                                    <h2>{!! naira() !!} {{ number_format($total_earns, 2) }}</h2>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="earning_steps">
+                                                    <p>Your balance:</p>
+                                                    <h2>{!! naira() !!} {{ number_format($wallet->balance, 2) }}</h2>
+                                                    <a href="javascript:void(0)" class="subscribe-btn" data-toggle="modal" data-target="#withdrawal_model">Withdraw Amount</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="table-responsive mt-30">
+                                                    <table class="table ucp-table earning__table">
+                                                        <thead class="thead-s">
+                                                            <tr>
+                                                                <th scope="col">Date</th>
+                                                                <th scope="col">Type</th>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Gross Earnings</th>
+                                                                <th scope="col">Net Earnings</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($earnings as $row)
+                                                            @php
+                                                                if($row->type == "quiz"){
+                                                                    $question = App\Models\Question::find($row->questionid);
+                                                                    $name = $question->name;
+                                                                    $price = naira() . number_format($question->price, 2);
+                                                                }elseif($row->type== "course"){
+                                                                    $course = App\Models\Course::find($row->courseid);
+                                                                    $name = $course->title;
+                                                                    $price = naira() . number_format(floatval($course->amount) - floatval($course->discount), 2);
+                                                                }else{
+                                                                    $name = "Withdrawal";
+                                                                    $price = "--";
+                                                                }
+                                                            @endphp
+                                                            <tr>
+                                                                <td>{{ $row->created_at->format("Y, m d") }}</td>
+                                                                <td>{{ ucfirst($row->type) }}</td>
+                                                                <td>{{ $name }}</td>
+                                                                <td>{!! $price !!}</td>
+                                                                <td>{!! naira() . number_format($row->amount, 2) !!}</td>
+                                                            </tr>
+                                                            @endforeach
+
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

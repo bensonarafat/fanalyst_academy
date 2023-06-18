@@ -141,7 +141,7 @@
                                 <div class="item">
                                     <div class="fcrse_1 mb-20">
                                         <div class="tutor_img">
-                                            <a href="{{ route('view.user', $row->id) }}"><img src="{{ asset($row->photo) }}" alt="{{ $row->fullname }}" /></a>
+                                            <a href="{{ route('view.user', $row->id) }}"><img src="@if(auth()->user()->photo) {{ asset(auth()->user()->photo) }} @else {{ asset("assets/images/hd_dp.jpg") }} @endif" alt="{{ $row->fullname }}" /></a>
                                         </div>
                                         <div class="tutor_content_dt">
                                             <div class="tutor150">

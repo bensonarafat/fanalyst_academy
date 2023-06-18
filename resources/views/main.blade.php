@@ -52,9 +52,9 @@
                     <a href="/" class="__category" style="width:100%">
                         <strong>
                             <span style="background: white;border-radius:100%; padding: 8px 4px;margin-right:5px;">
-                                <img src="{{ asset("assets/images/category.png") }}" style="width:20px; height:20px;object-fit:contain;">
+                                <img src="{{ asset("assets/images/category.png") }}" style="width:25px; height:25px;object-fit:contain;">
                             </span>
-                            <span style="font-size: 12px;">All ({{ $allcourse_count }})</span>
+                            <span style="font-size: 14px;">All ({{ $allcourse_count }})</span>
                         </strong>
                     </a>
                 </div>
@@ -67,12 +67,12 @@
                             <strong>
                                 <span style="background: white;border-radius:100%; padding: 8px 4px;margin-right:5px;">
                                     @if($row->icon == null)
-                                    <img src="{{ asset("assets/images/category.png") }}" style="width:20px;height:20px;object-fit:contain;">
+                                    <img src="{{ asset("assets/images/category.png") }}" style="width:25px;height:25px;object-fit:contain;">
                                     @else
-                                        <img src="{{ asset($row->icon) }}" style="width:20px;height:20px;object-fit:contain;">
+                                        <img src="{{ asset($row->icon) }}" style="width:25px;height:25px;object-fit:contain;">
                                     @endif
                                 </span>
-                                <span style="font-size: 12px;">{{ $row->name }} ({{$course_count }})</span>
+                                <span style="font-size: 14px;">{{ $row->name }} ({{$course_count }})</span>
                             </strong>
                         </a>
                     </div>
@@ -181,9 +181,6 @@
                             <div class="fcrse_1 mt-30">
                                 <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="fcrse_img">
                                     <img src="{{ asset($row->image) }}" style="width:100%;height:150px;object-fit:cover;" alt="" />
-                                    <div class="course-overlay">
-                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                    </div>
                                 </a>
                                 <div class="fcrse_content">
                                     <a href="/quiz/take-quiz?query=true&id={{ $row->id }}" class="crse14s">{{ $row->name }}</a>

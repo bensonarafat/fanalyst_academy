@@ -62,7 +62,7 @@
                             </a>
                             <div class="hs_content">
                                 <div class="eps_dots eps_dots10 more_dropdown">
-                                    <a href="/remove-line-cart/{{ $course->id }}/quiz"><i class="uil uil-times"></i></a>
+                                    <a href="/remove-line-cart/{{ $course->id }}/course"><i class="uil uil-times"></i></a>
                                 </div>
                                 <a href="{{ route('view.course', $course->id) }}" class="crse14s title900 pt-2">{{ $course->title }}</a>
                                 <a href="#" class="crse-cate">{{ $course->short_description }}</a>

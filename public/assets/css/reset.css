@@ -247,6 +247,7 @@ element.style {
 
 .drawer__sidebar {
     /* Take full height */
+    overflow: auto;
     height: 100%;
     left: 0;
     position: fixed;
@@ -310,4 +311,18 @@ element.style {
 
 .edu_social_links .fab{
     font-size: 20px !important;
+}
+
+.ta-right-custom{
+    display: flex;
+    direction: rtl;
+}
+
+.message-dt-custom{
+    display: flex;
+    flex-direction: column;
+}
+
+.message-date-custom{
+    text-align: initial;
 }

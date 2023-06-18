@@ -21,5 +21,6 @@ class Transaction extends Model
         'total',
         "type",
         'payment_method',
+        "referral",
     ];
 }

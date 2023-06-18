@@ -42,10 +42,11 @@
       21 => 'Illuminate\\View\\ViewServiceProvider',
       22 => 'App\\Providers\\AppServiceProvider',
       23 => 'App\\Providers\\AuthServiceProvider',
-      24 => 'App\\Providers\\EventServiceProvider',
-      25 => 'App\\Providers\\RouteServiceProvider',
-      26 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
-      27 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+      24 => 'App\\Providers\\BroadcastServiceProvider',
+      25 => 'App\\Providers\\EventServiceProvider',
+      26 => 'App\\Providers\\RouteServiceProvider',
+      27 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
+      28 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     ),
     'aliases' => 
     array (
@@ -134,15 +135,15 @@
   ),
   'broadcasting' => 
   array (
-    'default' => 'log',
+    'default' => 'pusher',
     'connections' => 
     array (
       'pusher' => 
       array (
         'driver' => 'pusher',
-        'key' => '',
-        'secret' => '',
-        'app_id' => '',
+        'key' => '48a9cd6b6cd0ba2dccab',
+        'secret' => '451dadb0f842073871bd',
+        'app_id' => '1612961',
         'options' => 
         array (
           'host' => 'api-mt1.pusher.com',
@@ -798,9 +799,9 @@
     'cookie' => 'fanalyst_academy_session',
     'path' => '/',
     'domain' => NULL,
-    'secure' => NULL,
+    'secure' => true,
     'http_only' => true,
-    'same_site' => 'lax',
+    'same_site' => NULL,
   ),
   'view' => 
   array (
@@ -809,6 +810,53 @@
       0 => 'C:\\xampp8\\htdocs\\laravel\\fanalyst_academy\\resources\\views',
     ),
     'compiled' => 'C:\\xampp8\\htdocs\\laravel\\fanalyst_academy\\storage\\framework\\views',
+  ),
+  'websockets' => 
+  array (
+    'dashboard' => 
+    array (
+      'port' => 6001,
+    ),
+    'apps' => 
+    array (
+      0 => 
+      array (
+        'id' => '1612961',
+        'name' => 'Fanalyst Academy',
+        'key' => '48a9cd6b6cd0ba2dccab',
+        'secret' => '451dadb0f842073871bd',
+        'path' => NULL,
+        'capacity' => NULL,
+        'enable_client_messages' => false,
+        'enable_statistics' => true,
+      ),
+    ),
+    'app_provider' => 'BeyondCode\\LaravelWebSockets\\Apps\\ConfigAppProvider',
+    'allowed_origins' => 
+    array (
+    ),
+    'max_request_size_in_kb' => 250,
+    'path' => 'laravel-websockets',
+    'middleware' => 
+    array (
+      0 => 'web',
+      1 => 'BeyondCode\\LaravelWebSockets\\Dashboard\\Http\\Middleware\\Authorize',
+    ),
+    'statistics' => 
+    array (
+      'model' => 'BeyondCode\\LaravelWebSockets\\Statistics\\Models\\WebSocketsStatisticsEntry',
+      'logger' => 'BeyondCode\\LaravelWebSockets\\Statistics\\Logger\\HttpStatisticsLogger',
+      'interval_in_seconds' => 60,
+      'delete_statistics_older_than_days' => 60,
+      'perform_dns_lookup' => false,
+    ),
+    'ssl' => 
+    array (
+      'local_cert' => NULL,
+      'local_pk' => NULL,
+      'passphrase' => NULL,
+    ),
+    'channel_manager' => 'BeyondCode\\LaravelWebSockets\\WebSockets\\Channels\\ChannelManagers\\ArrayChannelManager',
   ),
   'flare' => 
   array (

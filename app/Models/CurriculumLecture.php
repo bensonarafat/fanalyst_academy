@@ -21,5 +21,7 @@ class CurriculumLecture extends Model
         'media_thumbnail',
         'lecture_type',
         'document',
+        'is_free',
+        'downloadable'
     ];
 }

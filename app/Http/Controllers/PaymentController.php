@@ -42,8 +42,12 @@ class PaymentController extends Controller
                     $type = "course";
                     $discount = $course->discount;
                     $amount = $course->amount;
-                    $total = $course->total;
                     $courseid = $course->id;
+                }
+                if($carts[$i]['referral']){
+                    $referral = 1;
+                }else{
+                    $referral = 0;
                 }
 
                 Transaction::create([
@@ -55,13 +59,13 @@ class PaymentController extends Controller
                     "discount" => $discount,
                     "total" => $total,
                     "type" => $type,
+                    "referral" => $referral,
                     "payment_method" => 'paystack'
                 ]);
             }
             return Paystack::getAuthorizationUrl()->redirectNow();
         }catch(Exception $e) {
-
-            return redirect()->back()->withMessage(['error'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
+            return redirect()->back()->with(['error'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
         }
     }
 
@@ -78,23 +82,23 @@ class PaymentController extends Controller
                 ['status' => 'success']
             );
             //enroll for course
-            $carts = getCart();
+            $transactions = Transaction::where(["reference" => $paymentDetails['data']['reference']])->get();
 
-            for ($i=0; $i < count($carts); $i++) {
-                if($carts[$i]['type'] == "quiz") {
+            foreach ($transactions as $row) {
+                if($row['type'] == "quiz") {
                     $_type = "quiz";
 
                     QuizEnrolled::create([
                         "userid" => auth()->user()->id,
-                        "questionid" => $carts[$i]['id']
+                        "questionid" => $row['quizid']
                     ]);
 
                     //store amount made in wallet
-                    $question = Question::find($carts[$i]['id']);
+                    $question = Question::find($row['quizid']);
                     $wallet = Wallet::where("userid", $question->userid)->first();
                     $balance = $wallet->balance;
                     $price = $question->price;
-                    if(!$carts[$i]['referral']){
+                    if(!$row['referral']){
                         $total = 0.7 * floatval($price);
                     }else{
                         $total = 0.95 * floatval($price);
@@ -107,26 +111,26 @@ class PaymentController extends Controller
                     ]);
                     Earning::create(
                         [
-                            "userid" => auth()->user()->id,
+                            "userid" => $question->userid,
                             "type" => "quiz",
-                            "questionid" => $carts[$i]['id'],
+                            "questionid" => $row['quizid'],
                             "amount" => $grand,
                         ]
                     );
-                    $earn = (floatval($price) - floatval($grand));
+                    $earn = (floatval($price) - floatval($total));
                 }else{
                     $_type = "course";
                     Enrolled::create([
                         "userid" => auth()->user()->id,
-                        "courseid" => $carts[$i]['id']
+                        "courseid" => $row['courseid']
                     ]);
 
                     //store amount made in wallet
-                    $course = Course::find($carts[$i]['id']);
+                    $course = Course::find($row['courseid']);
                     $wallet = Wallet::where("userid", $course->instructor)->first();
                     $balance = $wallet->balance;
                     $price = $course->amount;
-                    if(!$carts[$i]['referral']){
+                    if(!$row['referral']){
                         $total = 0.7 * floatval($price);
                     }else{
                         $total = 0.95 * floatval($price);
@@ -140,13 +144,13 @@ class PaymentController extends Controller
 
                     Earning::create(
                         [
-                            "userid" => auth()->user()->id,
+                            "userid" => $course->instructor,
                             "type" => "course",
-                            "courseid" => $carts[$i]['id'],
+                            "courseid" => $row['courseid'],
                             "amount" => $grand,
                         ]
                     );
-                    $earn = (floatval($price) - floatval($grand));
+                    $earn = (floatval($price) - floatval($total));
                 }
 
                 //update admin wallet
@@ -160,7 +164,8 @@ class PaymentController extends Controller
                     [
                         "userid" => 1,
                         "type" => $_type,
-                        "questionid" => $carts[$i]['id'],
+                        "courseid" => $row['courseid'],
+                        "questionid" => $row['quizid'] ,
                         "amount" => $earn,
                     ]
                 );
@@ -170,10 +175,10 @@ class PaymentController extends Controller
             //clear session
             session()->forget('cart');
             //redirect to thank you page
-            return redirect()->route('purchased', 'success');
+            return redirect()->route('purchased', 'success')->with(["success" => "Payment Successful"]);
         }else{
             //redirect to error page
-            return redirect()->route('purchased', 'failed');
+            return redirect()->route('purchased', 'failed')->with(["error" => "Payment Failed! There must be an error, try again later"]);
         }
 
     }

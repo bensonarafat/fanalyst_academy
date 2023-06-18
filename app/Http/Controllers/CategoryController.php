@@ -41,10 +41,10 @@ class CategoryController extends Controller
             "icon" => "image|mimes:jpg,png,jpeg|max:2048"
         ]);
         try{
-            if($request->iconspan){
-                $icon = $request->iconspan;
-            }else{
+            if($request->icon){
                 $icon = SystemFileManager::InternalUploader($request->icon, "icons");
+            }else{
+                $icon = $request->iconspan;
             }
 
             Category::where('id', $request->id)->update(

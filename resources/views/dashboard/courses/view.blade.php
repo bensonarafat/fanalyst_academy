@@ -33,7 +33,10 @@
     </div>
 </div>
 
-<div class="wrapper _bg4586">
+@include("components.messagemodel", ['id' => $course->instructor])
+
+
+<div class="wrapper _bg4586 @guest _new89 @endguest">
     <div class="_215b01">
         <div class="container-fluid">
             <div class="row">
@@ -50,13 +53,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                {{-- @if(auth()->user()->id != $course->instructor)
-                                <div class="_215b10">
-                                    <a href="#" class="_215b11">
-                                        <span><i class="uil uil-heart"></i></span>Save
-                                    </a>
-                                </div>
-                                @endif --}}
+
                             </div>
                             <div class="col-xl-8 col-lg-7 col-md-6">
 
@@ -77,8 +74,60 @@
                                 <div class="_215b05">
                                     Last updated {{ \Carbon\Carbon::parse($course->updated_at)->format('d M, Y') }}
                                 </div>
-                                @if(auth()->user()->id != $course->instructor)
+                                @auth
+                                    @if(auth()->user()->id != $course->instructor)
 
+                                        <ul class="_215b31">
+                                            @if($enrolled == 0)
+                                                @if(!$course->is_free)
+
+                                                    <li>
+                                                        <form action="{{ route('enroll.free') }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="type" value="course">
+                                                            <input type="hidden" name="id" value="{{ $course->id }}">
+                                                            <button type="submit" class="btn_adcart">Enroll for Free</button>
+                                                        </form>
+                                                    </li>
+                                                @else
+                                                    <li>
+                                                        @if(inCart($course->id))
+                                                        <form action="{{ route('remove.cart') }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="{{ $course->id }}">
+                                                            <input type="hidden" name="type" value="course">
+                                                            <button class="btn_adcart">Remove from Cart ({!! naira() . number_format($course->amount, 2) !!}) </button>
+                                                        </form>
+                                                        @else
+                                                        <form action="{{ route('add.cart') }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="{{ $course->id }}">
+                                                            <input type="hidden" name="type" value="course">
+                                                            <button class="btn_adcart">Add to Cart ({!! naira() . number_format($course->amount, 2) !!}) </button>
+                                                        </form>
+                                                        @endif
+
+                                                    </li>
+                                                @endif
+                                            @else
+                                                <li><button class="btn_adcart">Enrolled</button></li>
+                                            @endif
+                                        </ul>
+                                    @else
+                                        <ul class="_215b31">
+                                            @if(!$course->is_free)
+
+                                            <li>
+                                                <button type="submit" class="btn_adcart"> Free</button>
+                                            </li>
+                                            @else
+                                                <li><button class="btn_adcart">{!! naira() . number_format($course->amount, 2) !!}</button></li>
+                                            @endif
+                                        </ul>
+                                    @endif
+                                @endauth
+
+                                @guest
                                     <ul class="_215b31">
                                         @if($enrolled == 0)
                                             @if(!$course->is_free)
@@ -115,18 +164,7 @@
                                             <li><button class="btn_adcart">Enrolled</button></li>
                                         @endif
                                     </ul>
-                                @else
-                                    <ul class="_215b31">
-                                        @if(!$course->is_free)
-
-                                        <li>
-                                            <button type="submit" class="btn_adcart"> Free</button>
-                                        </li>
-                                        @else
-                                            <li><button class="btn_adcart">{!! naira() . number_format($course->amount, 2) !!}</button></li>
-                                        @endif
-                                    </ul>
-                                @endif
+                                @endguest
                             </div>
                         </div>
                     </div>
@@ -138,42 +176,85 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    @if(auth()->user()->id != $course->instructor)
-                    <div class="user_dt5">
-                        <div class="user_dt_left">
-                            <div class="live_user_dt">
-                                <div class="user_img5">
-                                    <a href="{{ route('view.user', $instructor->id) }}"><img src="@if($instructor->photo) {{ asset($instructor->photo) }} @else {{ asset('assets/images/left-imgs/img-1.jpg') }} @endif" alt="" /></a>
+                    @auth
+                        @if(auth()->user()->id != $course->instructor)
+                            <div class="user_dt5">
+                                <div class="user_dt_left">
+                                    <div class="live_user_dt">
+                                        <div class="user_img5">
+                                            <a href="{{ route('view.user', $instructor->id) }}"><img src="@if($instructor->photo) {{ asset($instructor->photo) }} @else {{ asset('assets/images/left-imgs/img-1.jpg') }} @endif" alt="" /></a>
+                                        </div>
+                                        <div class="user_cntnt">
+                                            <a href="{{ route('view.user', $instructor->id) }}" class="_df7852">{{ $instructor->fullname }}</a>
+                                            <button class="subscribe-btn">View Profile</button>
+                                            <button class="subscribe-btn" data-toggle="modal" data-target="#startMessage">Start Message</button>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="user_cntnt">
-                                    <a href="{{ route('view.user', $instructor->id) }}" class="_df7852">{{ $instructor->fullname }}</a>
-                                    <button class="subscribe-btn">View Profile</button>
+                                <div class="user_dt_right">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{ $course->enrolled }}</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/courses/like-course/{{$course->id}}/{{ $like }}" class="lkcm152"><i class="uil uil-thumbs-up"></i><span>{{ $course->likes }}</span></a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                        @endif
+                        <div class="course_tabs">
+                            <nav>
+                                <div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
+                                    @if(auth()->user()->id == $course->instructor) <a class="nav-item nav-link @if(auth()->user()->id == $course->instructor) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-curriculum" role="tab" aria-selected="true">Curriculum</a> @endif
+                                    <a class="nav-item nav-link @if(auth()->user()->id != $course->instructor) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="false">About</a>
+                                    <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Courses Content</a>
+                                    <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-enrolled" role="tab" aria-selected="false">Student Enrolled</a>
+                                    {{-- <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Reviews</a> --}}
+                                </div>
+                            </nav>
                         </div>
-                        <div class="user_dt_right">
-                            <ul>
-                                <li>
-                                    <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{ $course->enrolled }}</span></a>
-                                </li>
-                                <li>
-                                    <a href="/courses/like-course/{{$course->id}}/{{ $like }}" class="lkcm152"><i class="uil uil-thumbs-up"></i><span>{{ $course->likes }}</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    @endif
-                    <div class="course_tabs">
-                        <nav>
-                            <div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
-                                @if(auth()->user()->id == $course->instructor) <a class="nav-item nav-link @if(auth()->user()->id == $course->instructor) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-curriculum" role="tab" aria-selected="true">Curriculum</a> @endif
-                                <a class="nav-item nav-link @if(auth()->user()->id != $course->instructor) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="false">About</a>
-                                <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Courses Content</a>
-                                <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-enrolled" role="tab" aria-selected="false">Student Enrolled</a>
-                                {{-- <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Reviews</a> --}}
+                    @endauth
+
+                    @guest
+                        <div class="user_dt5">
+                            <div class="user_dt_left">
+                                <div class="live_user_dt">
+                                    <div class="user_img5">
+                                        <a href="{{ route('view.user', $instructor->id) }}"><img src="@if($instructor->photo) {{ asset($instructor->photo) }} @else {{ asset('assets/images/left-imgs/img-1.jpg') }} @endif" alt="" /></a>
+                                    </div>
+                                    <div class="user_cntnt">
+                                        <a href="{{ route('view.user', $instructor->id) }}" class="_df7852">{{ $instructor->fullname }}</a>
+                                        <button class="subscribe-btn">View Profile</button>
+                                        <button class="subscribe-btn" data-toggle="modal" data-target="#startMessage">Start Message</button>
+                                    </div>
+
+                                </div>
                             </div>
-                        </nav>
-                    </div>
+                            <div class="user_dt_right">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{ $course->enrolled }}</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/courses/like-course/{{$course->id}}/{{ $like }}" class="lkcm152"><i class="uil uil-thumbs-up"></i><span>{{ $course->likes }}</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="course_tabs">
+                            <nav>
+                                <div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
+                                    @auth @if(auth()->user()->id == $course->instructor) <a class="nav-item nav-link @if(auth()->user()->id == $course->instructor) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-curriculum" role="tab" aria-selected="true">Curriculum</a> @endif @endauth
+                                    <a class="nav-item nav-link @auth @if(auth()->user()->id != $course->instructor) active @endif @endauth @guest active @endguest" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="false">About</a>
+                                    <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Courses Content</a>
+                                    <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-enrolled" role="tab" aria-selected="false">Student Enrolled</a>
+                                    {{-- <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Reviews</a> --}}
+                                </div>
+                            </nav>
+                        </div>
+                    @endguest
                 </div>
             </div>
         </div>
@@ -184,7 +265,7 @@
                 <div class="col-lg-12">
                     <div class="course_tab_content">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade @if(auth()->user()->id == $course->instructor) show active @endif" id="nav-curriculum" role="tabpanel">
+                            <div class="tab-pane fade  @auth @if(auth()->user()->id == $course->instructor) show active @endif @endauth" id="nav-curriculum" role="tabpanel">
                                 <div class="_htg451">
                                     @include("components.alert")
                                     <div class="row">
@@ -252,7 +333,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade @if(auth()->user()->id != $course->instructor) show active  @endif" id="nav-about" role="tabpanel">
+                            <div class="tab-pane fade @auth @if(auth()->user()->id != $course->instructor) show active  @endif @endauth @guest show active @endguest" id="nav-about" role="tabpanel">
                                 <div class="_htg451">
                                     <div class="_htg452">
                                         <h3>Requirements</h3>
@@ -311,23 +392,68 @@
                                                             </div>
                                                         </div>
                                                         <div class="details">
-                                                            @if(auth()->user()->id == $course->instructor)
-                                                                @if($x->lecture_type == "video")
-                                                                    <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
-                                                                @else
-                                                                    <a href="{{ asset($x->document) }}" download="">View</a>
-                                                                @endif
-                                                            @else
-                                                                @if($enrolled == 0)
-                                                                    <a href="javascript:void(0)" class="preview-text">--</a>
-                                                                @else
+                                                            @auth
+                                                                @if(auth()->user()->id == $course->instructor)
                                                                     @if($x->lecture_type == "video")
+                                                                        @if($x->downloadable)
+                                                                        <a href="{{ asset($x->media_video) }}" download><i class="uil uil-download-alt icon_142"></i></a>
+                                                                        @endif
                                                                         <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">View</a>
                                                                     @else
-                                                                        <a href="{{ asset($x->document) }}" download="">View</a>
+                                                                        <a href="{{ asset($x->document) }}" download=""><i class="uil uil-download-alt icon_142"></i></a>
+                                                                    @endif
+                                                                @else
+                                                                    @if($enrolled == 0)
+                                                                        @if($x->is_free)
+                                                                            @if($x->lecture_type == "video")
+                                                                                @if($x->downloadable)
+                                                                                    <a href="{{ asset($x->media_video) }}" download><i class="uil uil-download-alt icon_142"></i></a>
+                                                                                @endif
+                                                                                <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">Download</a>
+                                                                            @else
+                                                                                <a href="{{ asset($x->document) }}" download=""><i class="uil uil-download-alt icon_142"></i></a>
+                                                                            @endif
+                                                                        @else
+                                                                            <a href="javascript:void(0)" class="preview-text">--</a>
+                                                                        @endif
+                                                                    @else
+                                                                        @if($x->lecture_type == "video")
+                                                                            @if($x->downloadable)
+                                                                                <a href="{{ asset($x->media_video) }}" download><i class="uil uil-download-alt icon_142"></i></a>
+                                                                            @endif
+                                                                            <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">Download</a>
+                                                                        @else
+                                                                            <a href="{{ asset($x->document) }}" download=""><i class="uil uil-download-alt icon_142"></i></a>
+                                                                        @endif
                                                                     @endif
                                                                 @endif
-                                                            @endif
+                                                            @endauth
+
+                                                            @guest
+                                                                @if($enrolled == 0)
+                                                                    @if($x->is_free)
+                                                                        @if($x->lecture_type == "video")
+                                                                            @if($x->downloadable)
+                                                                                <a href="{{ asset($x->media_video) }}" download><i class="uil uil-download-alt icon_142"></i></a>
+                                                                            @endif
+                                                                            <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">Download</a>
+                                                                        @else
+                                                                            <a href="{{ asset($x->document) }}" download=""><i class="uil uil-download-alt icon_142"></i></a>
+                                                                        @endif
+                                                                    @else
+                                                                        <a href="javascript:void(0)" class="preview-text">--</a>
+                                                                    @endif
+                                                                @else
+                                                                    @if($x->lecture_type == "video")
+                                                                        @if($x->downloadable)
+                                                                            <a href="{{ asset($x->media_video) }}" download><i class="uil uil-download-alt icon_142"></i></a>
+                                                                        @endif
+                                                                        <a href="/courses/stream/{{ $course->id }}/{{ $row->id }}/{{ $x->id }}" class="preview-text">Download</a>
+                                                                    @else
+                                                                        <a href="{{ asset($x->document) }}" download=""><i class="uil uil-download-alt icon_142"></i></a>
+                                                                    @endif
+                                                                @endif
+                                                            @endguest
                                                         </div>
                                                     </div>
                                                    @endforeach

@@ -37,6 +37,26 @@
                                     </div>
                                 </div>
 
+                                <div class="new-section mt-10">
+                                    <div class="form_group">
+                                        <label class="label25">Downloadable*</label>
+                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="downloadable" id="downloadable" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="new-section mt-10">
+                                    <div class="form_group">
+                                        <label class="label25">Is Free*</label>
+                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="is_free" id="is_free" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <ul class="nav nav-tabs mt-30" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                       <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Video</button>
@@ -160,6 +180,8 @@
                                         <th class="text-center" scope="col">SN</th>
                                         <th>Title</th>
                                         <th>Lecture Type</th>
+                                        <th>Downloadable</th>
+                                        <th>Free</th>
                                         <th scope="col">Created Date</th>
                                         <th class="text-center" scope="col">Action</th>
                                     </tr>
@@ -170,6 +192,8 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $row->title }}</td>
                                             <td>{{ ucfirst($row->lecture_type) }}</td>
+                                            <td>@if($row->downloadable == 1) Yes @else NO @endif</td>
+                                            <td>@if($row->is_free == 1) Yes @else NO @endif</td>
                                             <td>{{ \Carbon\Carbon::parse($row->created_at)->format('d M, Y') }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('edit.lecture', $row->id) }}" title="Edit" class="gray-s"><i class="uil uil-edit-alt"></i></a>
@@ -248,6 +272,8 @@
         data.append('courseid', $('#courseid').val());
         data.append('curriculumid', $('#curriculumid').val());
         data.append('lectureType', $('#lectureType').val());
+        data.append('downloadable', $('#downloadable').val());
+        data.append('is_free', $('#is_free').val());
 
         const BASE_URL = "{{ url('/') }}";
         const REQUEST_URL = "<?=Request::url()?>";

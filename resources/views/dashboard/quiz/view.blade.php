@@ -102,7 +102,7 @@
 </form>
 
 
-<div class="wrapper _bg4586">
+<div class="wrapper _bg4586 @guest _new89 @endguest">
     <div class="_215b01">
         <div class="container-fluid">
             <div class="row">
@@ -124,10 +124,7 @@
                                 <div class="_215b03">
                                     <h2>{{ $question->name }}</h2>
                                 </div>
-                                {{-- <div class="_215b05">
-                                    <div class="crse_reviews mr-2"><i class="uil uil-star"></i>{{ $rate }}</div>
-                                    ({{ $course->ratings }} ratings)
-                                </div> --}}
+
                                 <div class="_215b05">
                                     {{ $totalenrolled }} students enrolled
                                 </div>
@@ -135,8 +132,8 @@
                                 <div class="_215b05">
                                     Last updated {{ \Carbon\Carbon::parse($question->updated_at)->format('d M, Y') }}
                                 </div>
-                                @if(auth()->user()->id != $question->userid)
-
+                                @auth
+                                    @if(auth()->user()->id != $question->userid)
                                     <ul class="_215b31">
                                         @if(!$iquizenrolled)
                                             @if($question->isfree)
@@ -165,25 +162,62 @@
                                                         <button class="btn_adcart">Add to Cart ({!! naira() . number_format($question->price, 2) !!}) </button>
                                                     </form>
                                                     @endif
-
                                                 </li>
                                             @endif
                                         @else
                                             <li><button class="btn_adcart">Enrolled</button></li>
                                         @endif
                                     </ul>
-                                @else
-                                    <ul class="_215b31">
-                                        @if($question->isfree)
+                                    @else
+                                        <ul class="_215b31">
+                                            @if($question->isfree)
 
-                                        <li>
-                                            <button type="submit" class="btn_adcart"> Free</button>
-                                        </li>
+                                            <li>
+                                                <button type="submit" class="btn_adcart"> Free</button>
+                                            </li>
+                                            @else
+                                                <li><button class="btn_adcart">{!! naira() . number_format($question->price, 2) !!}</button></li>
+                                            @endif
+                                        </ul>
+                                    @endif
+                                @endauth
+
+                                @guest
+                                    <ul class="_215b31">
+                                        @if(!$iquizenrolled)
+                                            @if($question->isfree)
+                                                <li>
+                                                    <form action="{{ route('enroll.free') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="type" value="quiz">
+                                                        <input type="hidden" name="id" value="{{ $question->id }}">
+                                                        <button type="submit" class="btn_adcart">Enroll for Free</button>
+                                                    </form>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    @if(inCart($question->id, "quiz"))
+                                                    <form action="{{ route('remove.cart') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $question->id }}">
+                                                        <input type="hidden" name="type" value="quiz">
+                                                        <button class="btn_adcart">Remove from Cart ({!! naira() . number_format($question->price, 2) !!}) </button>
+                                                    </form>
+                                                    @else
+                                                    <form action="{{ route('add.cart') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $question->id }}">
+                                                        <input type="hidden" name="type" value="quiz">
+                                                        <button class="btn_adcart">Add to Cart ({!! naira() . number_format($question->price, 2) !!}) </button>
+                                                    </form>
+                                                    @endif
+                                                </li>
+                                            @endif
                                         @else
-                                            <li><button class="btn_adcart">{!! naira() . number_format($question->price, 2) !!}</button></li>
+                                            <li><button class="btn_adcart">Enrolled</button></li>
                                         @endif
                                     </ul>
-                                @endif
+                                @endguest
                             </div>
                         </div>
                     </div>
@@ -195,36 +229,65 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    @if(auth()->user()->id != $question->userid)
-                    <div class="user_dt5">
-                        <div class="user_dt_left">
-                            <div class="live_user_dt">
-                                <div class="user_img5">
-                                    <a href="{{ route('view.user', $question->userid) }}"><img src="@if($instructor->photo) {{ asset($instructor->photo) }} @else {{ asset('assets/images/left-imgs/img-1.jpg') }} @endif" alt="" /></a>
+                    @auth
+                        @if(auth()->user()->id != $question->userid)
+                            <div class="user_dt5">
+                                <div class="user_dt_left">
+                                    <div class="live_user_dt">
+                                        <div class="user_img5">
+                                            <a href="{{ route('view.user', $question->userid) }}"><img src="@if($instructor->photo) {{ asset($instructor->photo) }} @else {{ asset('assets/images/left-imgs/img-1.jpg') }} @endif" alt="" /></a>
+                                        </div>
+                                        <div class="user_cntnt">
+                                            <a href="{{ route('view.user', $instructor->id) }}" class="_df7852">{{ $instructor->fullname }}</a>
+                                            <button class="subscribe-btn">View Profile</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="user_cntnt">
-                                    <a href="{{ route('view.user', $instructor->id) }}" class="_df7852">{{ $instructor->fullname }}</a>
-                                    <button class="subscribe-btn">View Profile</button>
+                                <div class="user_dt_right">
+                                    <ul>
+                                        <li>
+                                            <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{ $totalenrolled }}</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="/quiz/like-quiz/{{$question->id}}/{{ $like }}" class="lkcm152"><i class="uil uil-thumbs-up"></i><span>{{ $question->likes }}</span></a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                        @endif
+                    @endauth
+
+                    @guest
+                        <div class="user_dt5">
+                            <div class="user_dt_left">
+                                <div class="live_user_dt">
+                                    <div class="user_img5">
+                                        <a href="{{ route('view.user', $question->userid) }}"><img src="@if($instructor->photo) {{ asset($instructor->photo) }} @else {{ asset('assets/images/left-imgs/img-1.jpg') }} @endif" alt="" /></a>
+                                    </div>
+                                    <div class="user_cntnt">
+                                        <a href="{{ route('view.user', $instructor->id) }}" class="_df7852">{{ $instructor->fullname }}</a>
+                                        <button class="subscribe-btn">View Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user_dt_right">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{ $totalenrolled }}</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="/quiz/like-quiz/{{$question->id}}/{{ $like }}" class="lkcm152"><i class="uil uil-thumbs-up"></i><span>{{ $question->likes }}</span></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="user_dt_right">
-                            <ul>
-                                <li>
-                                    <a href="#" class="lkcm152"><i class="uil uil-eye"></i><span>{{ $totalenrolled }}</span></a>
-                                </li>
-                                <li>
-                                    <a href="/quiz/like-quiz/{{$question->id}}/{{ $like }}" class="lkcm152"><i class="uil uil-thumbs-up"></i><span>{{ $question->likes }}</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    @endif
+                    @endguest
+
                     <div class="course_tabs">
                         <nav>
                             <div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
-                                @if(auth()->user()->id == $question->userid) <a class="nav-item nav-link @if(auth()->user()->id == $question->userid) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-curriculum" role="tab" aria-selected="true">Add Quiz</a> @endif
-                                <a class="nav-item nav-link @if(auth()->user()->id != $question->userid) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="false">About</a>
+                                @auth @if(auth()->user()->id == $question->userid) <a class="nav-item nav-link @if(auth()->user()->id == $question->userid) active @endif" id="nav-about-tab" data-toggle="tab" href="#nav-curriculum" role="tab" aria-selected="true">Add Quiz</a> @endif @endauth
+                                <a class="nav-item nav-link  @auth   @if(auth()->user()->id != $question->userid) active @endif @endauth @guest active @endguest" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="false">About</a>
                                 <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Quiz</a>
                                 <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-enrolled" role="tab" aria-selected="false">Student Enrolled</a>
                             </div>
@@ -240,7 +303,7 @@
                 <div class="col-lg-12">
                     <div class="course_tab_content">
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade @if(auth()->user()->id == $question->userid) show active @endif" id="nav-curriculum" role="tabpanel">
+                            <div class="tab-pane fade @auth @if(auth()->user()->id == $question->userid) show active @endif @endauth" id="nav-curriculum" role="tabpanel">
                                 <div class="_htg451">
 
                                     <div class="row">
@@ -289,7 +352,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade @if(auth()->user()->id != $question->userid) show active  @endif" id="nav-about" role="tabpanel">
+                            <div class="tab-pane fade @auth @if(auth()->user()->id != $question->userid) show active  @endif @endauth @guest show active @endguest" id="nav-about" role="tabpanel">
                                 <div class="_htg451">
                                     <div class="_htg452 mt-35">
                                         <h3>Description</h3>
@@ -374,5 +437,4 @@
         width: 100% !important;
     }
 </style>
-
 @endsection

@@ -11,7 +11,7 @@
 }
 
 .upload_btn {
-	display: none;
+	/* display: none; */
 }
 
 .header_right ul li:nth-child(2) {
@@ -87,7 +87,7 @@
 	float: left !important;
 	width: 100%;
     margin-top: 30px;
-} 
+}
 
 .user_dt_right ul li {
     width: 24.3%;
@@ -321,7 +321,7 @@
     height: 55vw;
 }
 }
- 
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
 .main_logo {

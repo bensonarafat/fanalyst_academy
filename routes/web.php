@@ -1,15 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,7 @@ use App\Http\Controllers\QuizController;
 
 
 Auth::routes();
-Route::get('/', [PagesController::class, "index"])->name("home");
+Route::get('/', [PagesController::class, "index"])->middleware("unapplied")->name("home");
 Route::get("/about", [PagesController::class, "about"])->name("about");
 Route::get("/contact", [PagesController::class, "contact"])->name("contact");
 Route::get("/students", [PagesController::class, "students"])->name("students");
@@ -41,12 +43,15 @@ Route::post('/contact', [ContactController::class, 'contact'])->name('send.conta
 Route::get("/sc/{link}",[PagesController::class, "shareCourse"])->name("share.course");
 Route::get("/su/{link}",[PagesController::class, "shareUser"])->name('share.user');
 
-
 Route::group(["prefix" => "quiz"], function() {
     Route::get('/take-quiz', [PagesController::class, "takeQuiz"])->name('take.quiz');
+    Route::get("/view/{id}", [PagesController::class, "viewTest"])->name("view.test");
+});
+Route::prefix('courses')->group(function () {
+    Route::get('/course/{id}', [PagesController::class, 'viewCourse'])->name('view.course');
 });
 
-Route::group(['middleware' => 'auth'], function (){
+Route::group(['middleware' => ['auth', 'unapplied']], function (){
 
     Route::post('/add-to-cart', [CheckoutController::class, 'addToCart'])->name('add.cart');
     Route::post('/remove-from-cart', [CheckoutController::class, 'removeFromCart'])->name('remove.cart');
@@ -75,7 +80,6 @@ Route::group(['middleware' => 'auth'], function (){
         Route::get('/', [PagesController::class, 'courses'])->name('courses');
         Route::get('/create', [PagesController::class, 'createCourse'])->name('create.course');
         Route::post('/store', [CourseController::class, 'storeCourse'])->name('store.course');
-        Route::get('/course/{id}', [PagesController::class, 'viewCourse'])->name('view.course');
         Route::get('/edit-course/{id}', [PagesController::class, 'editCourse'])->name('edit.course');
         Route::post('/update-course', [CourseController::class, 'updateCourse'])->name('update.course');
         Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete.course');
@@ -112,6 +116,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::group(['prefix' => 'earnings'], function(){
         Route::get('/', [PagesController::class, 'earnings'])->name('earnings');
+        Route::post("/withdrawl", [UserController::class, "withdrawal"])->name("withdrawal.amount");
     });
 
     Route::group(['prefix' => 'payouts'], function(){
@@ -128,12 +133,13 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [PagesController::class, 'users'])->name('users');
-        Route::get('/instructor-application', [PagesController::class, 'instructorApplication'])->name('instructor.application');
-        Route::post('/instructor-application', [UserController::class, 'instructorApplication'])->name('store.instructor.application');
+        Route::get('/instructor-application', [PagesController::class, 'instructorApplication'])->name('instructor.application')->withoutMiddleware("unapplied")->middleware(["is.instructor"]);
+        Route::post('/instructor-application', [UserController::class, 'instructorApplication'])->name('store.instructor.application')->withoutMiddleware("unapplied");
         Route::get('/view/{id}', [PagesController::class, 'viewUser'])->name('view.user');
         Route::post('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
         Route::post('/update-instructor-status', [UserController::class, 'updateInstructorStatus'])->name('update.instructor.status');
         Route::post('/update-bank-details', [UserController::class, 'updateBankDetails'])->name('update.bank.details');
+        Route::get("/delete-user/{id}", [UserController::class, "deleteUser"])->name("delete.user");
     });
 
     //category
@@ -152,7 +158,6 @@ Route::group(['middleware' => 'auth'], function (){
     });
 
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
-
     Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 
     Route::get('/purchased/{status}', [PagesController::class, 'purchased'])->name('purchased');
@@ -161,7 +166,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::group(["prefix" => "quiz"], function() {
         Route::get('', [PagesController::class, "quiz"])->name('quiz.index');
         Route::get('/result', [PagesController::class, "quizResult"])->name('quiz.result');
-        Route::get("/view/{id}", [PagesController::class, "viewTest"])->name("view.test");
         Route::get("/test/{id}", [PagesController::class, "startTest"])->name("start.test");
         Route::post("/submit-quiz", [QuizController::class, "submitQuiz"])->name("submit.quiz");
         Route::get("/result-score/{ref}", [PagesController::class, "resultScore"])->name("result.score");
@@ -194,5 +198,14 @@ Route::group(['middleware' => 'auth'], function (){
         });
         Route::get('/like-quiz/{id}/{status}', [QuizController::class, 'likeQuiz'])->name('like.quiz');
 
+    });
+
+
+    Route::group(["prefix" => "messages"], function() {
+        Route::get('', [PagesController::class, "messages"])->name('messages.index');
+        Route::get("conversations", [MessageController::class, "conversations"]);
+        Route::get("fetch/{conversationId}", [MessageController::class, "messages"]);
+        Route::post("/chat-message", [MessageController::class, "chatMessage"])->name("chat.message");
+        Route::post("/start-message", [MessageController::class, "startMessage"])->name("new.message");
     });
 });

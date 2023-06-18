@@ -1050,7 +1050,7 @@ i.icon1 {
 .auth1lnkprce {
     float: left;
     width: 100%;
-    margin-top: 18px;
+    /* margin-top: 18px; */
 }
 
 .cr1fot a {
@@ -6611,7 +6611,7 @@ a.rmv-btn i {
 
 .cmtk_group {
     width: 100%;
-    padding: 100px 0;
+    /* padding: 100px 0; */
 }
 
 
@@ -6625,14 +6625,13 @@ a.rmv-btn i {
 }
 
 .cmtk_dt {
-    padding: 106px 0 117px;
+    /* padding: 106px 0 117px; */
 	text-align: center;
 }
 
 .thnk_coming_title {
 	font-size: 10em;
     font-weight: 600;
-    color: #fff;
     font-family: 'Roboto', sans-serif;
     text-align: center;
     line-height: 1em;
@@ -6644,7 +6643,6 @@ a.rmv-btn i {
 .thnk_title1 {
 	font-size: 24px;
 	font-weight: 400;
-	color: #fff;
 	font-family: 'Roboto', sans-serif;
 	text-align: center;
 	line-height: 26px;

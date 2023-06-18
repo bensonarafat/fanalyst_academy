@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Like;
 use App\Models\Course;
+use App\Models\Earning;
 use App\Models\Enrolled;
 use App\Models\Curriculum;
 use App\Models\QuizEnrolled;
@@ -23,6 +24,7 @@ class CourseController extends Controller
                         'will_learn' => 'required',
                         'prerequisites' => 'required',
                         'category' => 'required',
+                        'subcategory' => "required",
                         'courseMediaType' => 'required',
                         'courseThumbnail' =>  'required|image|mimes:jpg,png,jpeg|max:2048',
                         'instructor_id' => 'required',
@@ -99,6 +101,7 @@ class CourseController extends Controller
                 "description" => $request->description,
                 "instructor" => $request->instructor_id,
                 "category" => $request->category,
+                'subcategory' => $request->subcategory,
                 "will_learn" => $request->will_learn,
                 "prerequisites" => $request->prerequisites,
                 "is_free" => $isFree,
@@ -129,6 +132,7 @@ class CourseController extends Controller
                 'will_learn' => 'required',
                 'prerequisites' => 'required',
                 'category' => 'required',
+                'subcategory' => 'required',
                 'courseMediaType' => 'required',
             ]);
 
@@ -214,6 +218,7 @@ class CourseController extends Controller
                 "short_description" => $request->short_description,
                 "description" => $request->description,
                 "category" => $request->category,
+                'subcategory' => $request->subcategory,
                 "will_learn" => $request->will_learn,
                 "prerequisites" => $request->prerequisites,
                 "is_free" => $isFree,
@@ -237,6 +242,7 @@ class CourseController extends Controller
             Course::where('id',$id)->delete();
             Curriculum::where('courseid', $id)->delete();
             CurriculumLecture::where('courseid', $id)->delete();
+            Earning::where("courseid", $id)->delete();
             return redirect()->back()->with(["success" => "Course Deleted"]);
         } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Oops, there was an error"]);
@@ -312,7 +318,7 @@ class CourseController extends Controller
         try {
 
             $video = null;
-
+            $courseDocument = null;
             if($request->lectureType == "video"){
                 if($request->courseMediaType == 'mp4'){
                     if( $request->courseVideo == 'null'){
@@ -383,7 +389,9 @@ class CourseController extends Controller
                     'document' => $courseDocument,
                     'media_type' => $request->courseMediaType,
                     'media_thumbnail'=> $thumbnail,
-                    "lecture_type" => $request->lectureType
+                    "lecture_type" => $request->lectureType,
+                    "is_free" => $request->is_free,
+                    "downloadable" => $request->downloadable,
                 ]
             );
             return response()->json(['status' => true, 'data' => $CurriculumLecture], 200);
@@ -410,7 +418,7 @@ class CourseController extends Controller
         try {
 
             $video = null;
-
+            $courseDocument = null;
             if($request->lectureType == "video"){
                 if($request->courseMediaType == 'mp4'){
                     if($request->courseVideo == 'null'){
@@ -491,6 +499,8 @@ class CourseController extends Controller
                     'media_thumbnail'=> $thumbnail,
                     'document' => $courseDocument,
                     "lecture_type" => $request->lectureTyp,
+                    "is_free" => $request->is_free,
+                    "downloadable" => $request->downloadable,
                 ]
             );
             $lecture = CurriculumLecture::find($request->id);

@@ -15,6 +15,7 @@ class Course extends Model
         'description',
         'instructor',
         'category',
+        'subcategory',
         'will_learn',
         'prerequisites',
         'is_free',
@@ -25,5 +26,6 @@ class Course extends Model
         'media_video',
         'media_type',
         'media_thumbnail',
+        'link',
     ];
 }

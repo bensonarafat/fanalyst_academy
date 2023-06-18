@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Wallet;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\StudentSignUp;
+use App\Mail\StudentSignUpAdmin;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -67,12 +69,26 @@ class RegisterController extends Controller
     {
 
         session()->put("type", trim($data['type']));
+        if($data['type'] == "tutor"){
+            $role = "2";
+            $type = "instructor";
+        }else{
+            $role = "3";
+            $type = "student";
+        }
         $user = User::create([
             'fullname' => $data['fullname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             "link" => generateRandomString(10),
+            "type" => $type,
+            "roleid" => $role,
         ]);
+
+        if($data['type'] == "student"){
+            // Mail::to($data['email'])->send(new StudentSignUp($data));
+            Mail::to('support@fanalystacademy.org')->send(new StudentSignUpAdmin($data));
+        }
 
         //create wallet
         Wallet::create(

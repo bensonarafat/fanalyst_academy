@@ -46,6 +46,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset("assets/vendor/semantic/semantic.min.css") }}" />
         <link rel="stylesheet" href="{{ asset("assets/css/reset.css") }}">
         <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
+        <link href="{{ asset("assets/css/jquery.mCustomScrollbar.min.css") }}" rel="stylesheet" />
         <x-head.tinymce-config/>
     </head>
 
@@ -62,7 +63,7 @@
 
         <div class="main_logo" id="logo">
             <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:100px;"/></a>
-            <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:100px;" alt="" /></a>
+            <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo-dark.png") }}" style="width:100px;" alt="" /></a>
         </div>
 
             <div class="top-category">
@@ -170,13 +171,12 @@
     </header>
 
     <header class="mobile_header header" style="display:none;">
-        <a href="javascripit:void(0)" class="option_links text-center click_menu" title="menu">
+        <a href="javascript:void(0)" class="option_links text-center @guest click_menu @endguest @auth authClickMenu @endauth" title="menu">
             <div class="d-flex flex-column">
                 <i class="uil uil-bars"></i>
                 <span style="font-size:11px;">Menu</span>
             </div>
         </a>
-
         <a href="{{ route('contact') }}" class="option_links text-center" title="cart">
             <div class="d-flex flex-column">
                 <i class="uil uil-phone"></i>
@@ -185,7 +185,7 @@
         </a>
         <div class="main_logo" id="logo">
             <a href="/"><img src="{{ asset("assets/images/logo.png") }}" alt="" style="width:110px;"/></a>
-            <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo.png") }}" style="width:110px;" alt="" /></a>
+            <a href="/"><img class="logo-inverse" src="{{ asset("assets/images/logo-dark.png") }}" style="width:110px;" alt="" /></a>
 
         </div>
         <a href="{{ route('cart') }}" class="option_links text-center" title="cart">
@@ -218,6 +218,9 @@
 
     @include("layouts.drawer")
 
+    @include("layouts.vertical_nav")
+
+
     @yield('content')
 
     <script data-cfasync="false" src="{{ asset("assets/cloudflare-static/email-decode.min.js") }}"></script>
@@ -231,11 +234,14 @@
     <script src="{{ asset("assets/js/night-mode.js") }}"></script>
     <script src="{{ asset('assets/js/jquery-steps.min.js') }}"></script>
     <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
+    <script src="{{ asset("assets/js/jquery.mCustomScrollbar.js") }}"></script>
     <script>
         $(".add-instructor-tab").steps({
             onFinish: function () {
                 $('#instructor-application').submit();
             },
+
+
         });
 
         $("#add-course-tab").steps({
@@ -249,12 +255,23 @@
                 $('.drawer').css("display", "block");
             });
 
+            $('.authClickMenu').on("click", function() {
+                $('.vertical_nav').hasClass("vertical_nav__opened");
+                if ($( ".vertical_nav" ).hasClass('vertical_nav__opened')) {
+                    $( ".vertical_nav" ).removeClass( 'vertical_nav__opened');
+                } else {
+                $( ".vertical_nav" ).addClass( 'vertical_nav__opened');
+                }
+            })
+
             $('.drawer__close').on("click", function() {
                 $('.drawer').css("display", "none");
             });
             $(function () {
-                $(".sortable").sortable();
-                $(".sortable").disableSelection();
+                if (document.querySelector('.sortable') !== null) {
+                    $(".sortable").sortable();
+                    $(".sortable").disableSelection();
+                }
             });
     </script>
 </body>

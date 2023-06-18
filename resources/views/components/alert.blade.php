@@ -10,6 +10,14 @@
   </div>
 @endif
 
+
+@if(Session::has("status"))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   {{ session::get("status") }}.
+  </div>
+@endif
+
+
 @if($errors->any())
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Error!</strong> Opps Something went wrong
