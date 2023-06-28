@@ -1,10 +1,10 @@
-## fanalyst_academy Edtech Application
+## LearnLabs Edtech Application
 
 ## Technology
 This project was built with Laravel PHP.
 
 ## About 
-Fanalyst Academy, the premier online learning platform where you can access top-quality education at affordable prices. Our mission is to empower individuals from all walks of life to learn and grow by offering a comprehensive and flexible learning experience.
+LearnLabs, the premier online learning platform where you can access top-quality education at affordable prices. Our mission is to empower individuals from all walks of life to learn and grow by offering a comprehensive and flexible learning experience.
 At Fanalyst Academy, we believe that education is a lifelong journey, and we are committed to helping our students achieve their goals.
 
 
